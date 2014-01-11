@@ -1,10 +1,9 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
 *.DS_Store
-*/out/*
+/out/*
 */classes/*
