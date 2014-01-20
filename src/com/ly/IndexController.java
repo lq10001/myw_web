@@ -2,13 +2,32 @@ package com.ly;
 
 import com.jfinal.core.Controller;
 import com.ly.tool.MenuTree;
+import com.ly.model.Webmenu;
 
 import java.util.List;
 
 public class IndexController extends Controller {
     public void index() {
-
+        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
+        setAttr("webmenu_list",list_menu);
+        setAttr("selmenu","index");
         render("index/index3.jsp");
+    }
+
+    public void mudi() {
+        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
+        setAttr("webmenu_list",list_menu);
+        setAttr("selmenu","mudi");
+
+        render("index/mudi.jsp");
+    }
+
+    public void down() {
+        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
+        setAttr("webmenu_list",list_menu);
+        setAttr("selmenu","down");
+
+        render("index/down.jsp");
     }
 
     public void ok() {

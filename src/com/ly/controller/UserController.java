@@ -1,8 +1,8 @@
-package com.ly.sys.controller;
+package com.ly.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
-import com.ly.sys.model.User;
+import com.ly.model.User;
 import com.ly.tool.Dwz;
 
 

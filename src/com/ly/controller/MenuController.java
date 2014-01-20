@@ -1,8 +1,8 @@
-package com.ly.sys.controller;
+package com.ly.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
-import com.ly.sys.model.Menu;
+import com.ly.model.Menu;
 import com.ly.tool.Dwz;
 
 
@@ -31,13 +31,13 @@ public class MenuController extends Controller {
     {
         Menu menu = getModel(Menu.class);
         boolean ok = Menu.menuDao.saveOrUpdate(menu);
-        renderJson(Dwz.jsonRtn(ok,"menu","closeCurrent"));
+        renderJson(Dwz.jsonRtn(ok, "menu", "closeCurrent"));
     }
 
     public void del()
     {
         boolean ok =  Menu.menuDao.deleteById(getParaToInt());
         CacheKit.removeAll("menu");
-        renderJson(Dwz.jsonRtn(ok,"menu",""));
+        renderJson(Dwz.jsonRtn(ok, "menu", ""));
     }
 }

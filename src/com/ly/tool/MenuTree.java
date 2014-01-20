@@ -1,7 +1,6 @@
 package com.ly.tool;
 
-import com.alibaba.fastjson.JSONObject;
-import com.ly.sys.model.Menu;
+import com.ly.model.Menu;
 
 import java.util.List;
 

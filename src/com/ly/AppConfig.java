@@ -6,13 +6,8 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
-import com.ly.info.model.Dic;
-import com.ly.info.model.Expert;
-import com.ly.info.model.Unit;
-import com.ly.pg.model.Project;
-import com.ly.pg.model.Protocal;
-import com.ly.sys.model.Menu;
-import com.ly.sys.model.User;
+import com.ly.controller.*;
+import com.ly.model.*;
 
 public class AppConfig extends JFinalConfig {
     public void configConstant(Constants me) {
@@ -25,20 +20,28 @@ public class AppConfig extends JFinalConfig {
 
     public void configRoute(Routes me) {
         me.add("/", IndexController.class);
+        me.add("/ad", AdController.class);
+
+        me.add("/comment", CommentController.class);
+        me.add("/info", InfoController.class);
+
+        me.add("/job", JobController.class);
+        me.add("/link", LinkController.class);
+        me.add("/menu", MenuController.class);
+        me.add("/news", NewsController.class);
+        me.add("/newstype", NewstypeController.class);
+
+        me.add("/user", UserController.class);
+        me.add("/webmenu", WebmenuController.class);
+
+        me.add("/manage", ManageController.class);
+
 //        AutoBindRoutes routes = new AutoBindRoutes();
 //        me.add(routes);
     }
 
     public void configPlugin(Plugins me) {
-        /*
-        DruidPlugin druidPlugin = new DruidPlugin(
-                getProperty("jdbcUrl"),
-                getProperty("username"),
-                getProperty("password"),
-                getProperty("driverClass"));
-        druidPlugin.setInitialSize(3).setMaxActive(10);
-        me.add(druidPlugin);
-        */
+
         C3p0Plugin c3p0Plugin = new C3p0Plugin(getProperty("jdbcurl"), getProperty("username"), getProperty("password").trim());
         me.add(c3p0Plugin);
 
@@ -49,18 +52,23 @@ public class AppConfig extends JFinalConfig {
         atbp.setShowSql(true);
         me.add(atbp);
         */
-               /*
         ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
         me.add(arp);
 
-        arp.addMapping("dic", Dic.class);
         arp.addMapping("menu", Menu.class);
         arp.addMapping("user", User.class);
-        arp.addMapping("project", Project.class);
-        arp.addMapping("protocal", Protocal.class);
-        arp.addMapping("unit", Unit.class);
-        arp.addMapping("expert", Expert.class);
-          */
+        arp.addMapping("ad", Ad.class);
+        arp.addMapping("comment", Comment.class);
+        arp.addMapping("info", Info.class);
+        arp.addMapping("job", Job.class);
+
+        arp.addMapping("link", Link.class);
+        arp.addMapping("news", News.class);
+        arp.addMapping("newstype", Newstype.class);
+
+        arp.addMapping("product", Product.class);
+        arp.addMapping("webmenu", Webmenu.class);
+
 
         // 缓存插件
         me.add(new EhCachePlugin());

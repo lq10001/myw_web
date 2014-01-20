@@ -7,8 +7,6 @@ import com.jfinal.plugin.activerecord.TableInfoMapping;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Cnd {
       public static Boolean getSql(Model model,StringBuffer sb)

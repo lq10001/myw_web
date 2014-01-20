@@ -1,4 +1,4 @@
-package com.ly.sys.model;
+package com.ly.model;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
