@@ -34,10 +34,40 @@ public class UserController extends Controller {
         renderJson(Dwz.jsonRtn(ok,"user","closeCurrent"));
     }
 
+
     public void del()
     {
         boolean ok =  User.userDao.deleteById(getParaToInt());
         CacheKit.removeAll("user");
         renderJson(Dwz.jsonRtn(ok,"user",""));
     }
+
+
+    public void register()
+    {
+        User user = getModel(User.class);
+        boolean ok = User.userDao.saveOrUpdate(user);
+        if (ok)
+        {
+            redirect("/index");
+        }else{
+            redirect("/register");
+        }
+
+    }
+
+    public void login()
+    {
+        User user = getModel(User.class);
+        boolean ok = User.userDao.login(user.getStr("email"),user.getStr("password"));
+        if (ok)
+        {
+            getSession().setAttribute("email",user.getStr("email"));
+            redirect("/index");
+        }else{
+            redirect("/login");
+        }
+
+    }
+
 }

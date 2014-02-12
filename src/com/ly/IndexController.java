@@ -4,14 +4,21 @@ import com.jfinal.core.Controller;
 import com.ly.tool.MenuTree;
 import com.ly.model.Webmenu;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class IndexController extends Controller {
-    public void index() {
+
+
+    private void getMenu()
+    {
         List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
         setAttr("webmenu_list",list_menu);
-        setAttr("selmenu","index");
-        render("index/index3.jsp");
+    }
+
+    public void index() {
+        getMenu();
+        render("index/index.jsp");
     }
 
     public void mudi() {
@@ -30,6 +37,14 @@ public class IndexController extends Controller {
         render("index/down.jsp");
     }
 
+    public void xing() {
+        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
+        setAttr("webmenu_list",list_menu);
+        setAttr("selmenu","xing");
+
+        render("index/xing.jsp");
+    }
+
     public void ok() {
         String name = getPara("username");
         String pwd = getPara("password");
@@ -45,6 +60,31 @@ public class IndexController extends Controller {
 
     }
 
+    public void login()
+    {
+        getMenu();
+        render("index/login.jsp");
+    }
+
+    public void register()
+    {
+        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
+        setAttr("webmenu_list",list_menu);
+        render("index/register.jsp");
+    }
+
+    public void my()
+    {
+        getMenu();
+        HttpSession session = getSession();
+        Object o = session.getAttribute("email");
+        if (o == null)
+        {
+            this.login();
+        }else{
+            render("index/my.jsp");
+        }
+    }
 
 
 }

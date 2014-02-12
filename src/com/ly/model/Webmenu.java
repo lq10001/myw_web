@@ -14,7 +14,7 @@ public class Webmenu extends Model<Webmenu> {
 
     public List<Webmenu> getListMenu()
     {
-        return webmenuDao.find("select * from webmenu order by id");
+        return webmenuDao.find("select * from webmenu order by sort");
     }
 
     public Webmenu getWebmenu(Integer id)

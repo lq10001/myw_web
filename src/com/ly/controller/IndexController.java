@@ -16,7 +16,7 @@ public class IndexController extends Controller {
         setAttr("product_list", list_product);
         setAttr("webmenu_list",list_menu);
         setAttr("selmenu","index");
-        render("index/index3.jsp");
+        render("index/index.jsp");
     }
 
     public void webproduct()

@@ -5,6 +5,8 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.ly.tool.Cnd;
 
+import java.util.List;
+
 
 public class User extends Model<User> {
 
@@ -37,5 +39,11 @@ public class User extends Model<User> {
         }
         CacheKit.removeAll("user");
         return ok;
+    }
+
+    public  boolean login(String email,String pwd)
+    {
+        List<User> list =  userDao.find("select * from user where email = '"+email+"' and password = '"+pwd+"' order by id");
+        return list.size() > 0 ? true : false;
     }
 }
