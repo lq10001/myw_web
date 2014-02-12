@@ -25,9 +25,7 @@
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
 </head>
-
 <body>
-
 
 
 <jsp:include page="top.jsp"></jsp:include>
@@ -35,32 +33,9 @@
 
 <div class="container" style="margin-top: 20;">
 
-    <div class="row row-offcanvas row-offcanvas-right">
+    <div class="row">
 
-        <div class="col-xs-12 col-sm-9">
-
-            <div class="row">
-                <div class="col-xs-4 col-md-4">
-                    <h4>国际</h4>
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <h4>国内</h4>
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <h4>周边</h4>
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-            </div><!--/row-->
-
-            <div class="row">
+        <div class="col-xs-12 col-md-12">
 
                 <!-- Carousel
 ================================================== -->
@@ -76,8 +51,8 @@
                             <img src="<%=path%>/img/12.jpg" alt="First slide">
                             <div class="container">
                                 <div class="carousel-caption">
-                                    <h1>客户端下载</h1>
-                                    <p>iOS android 客户端下载，随时随地都能更新旅游信息。</p>
+                                    <h1>热门线路</h1>
+                                    <p>热门线路，跟随旅游达人...。</p>
                                     <p><a class="btn btn-lg btn-primary" href="#" role="button">下载</a></p>
                                 </div>
                             </div>
@@ -107,9 +82,9 @@
 
             </div>
 
-
+            <h2>随我行</h2>
             <div class="row">
-                <h3>热门线路</h3>
+
                 <div class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail">
                         <img src="<%=path%>/img/1.jpg" alt="">
@@ -155,162 +130,66 @@
                 </div>
             </div><!--/row-->
 
-            <h3>推荐线路</h3>
-            <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
-            </div><!--/row-->
-            <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
-            </div><!--/row-->
+        <h2>在路上</h2>
 
+        <div class="row">
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/1.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/2.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/3.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/4.jpg" alt="">
+                </a>
+            </div>
+        </div><!--/row-->
 
+        <div class="row">
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/1.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/2.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/3.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="<%=path%>/img/4.jpg" alt="">
+                </a>
+            </div>
+        </div><!--/row-->
 
-        </div><!--/span-->
-
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-
-
-
-            <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">热门国家动态</div>
-
-            <!-- Table -->
-            <table class="table">
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-
-            </table>
+        <div class="row">
+             <div style="text-align: center"> 加载更多.... </div>
         </div>
-
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">热门城市动态</div>
-
-                <!-- Table -->
-                <table class="table">
-                    <tr>
-                        <td>厦门</td>
-                        <td>成都</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-
-                </table>
-            </div>
-
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">微博介绍信息</h3>
-                </div>
-                <div class="panel-body">
-
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">微博地址：</span>********** </h4>
-                    </div>
-
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">联系电话：</span>189888888 </h4>
-                    </div>
-
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">联系QQ：&nbsp;</span>8888888</h4>
-                    </div>
-
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">联系Email：</span>8888888@qq.com </h4>
-                    </div>
-                </div>
-            </div>
-
-
+        <br/>
 
         </div><!--/span-->
+
     </div><!--/row-->
 
-    <div class="footer">
+
+    <div class="container">
         <div class="row">
-
-
             <div class="col-md-12">
                 合作伙伴:
                 <span style="margin-left: 20px;">青年旅行社</span>
@@ -342,13 +221,9 @@
             </div>
         </div>
     </div>
-</div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="<%=path%>/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=path%>/js/offcanvas.js"></script>
 
 

@@ -18,11 +18,22 @@
 				<input name="webmenu.name"  type="text" size="30" value="${webmenu.name}" alt=""/>
 			</p>
 
-									
-			<p>
+
+            <p>
+                <label>中文名称</label>
+                <input name="webmenu.cnname"  type="text" size="30" value="${webmenu.cnname}" alt=""/>
+            </p>
+
+
+            <p>
 				<label>url</label>
 				<input name="webmenu.url"  type="text" size="30" value="${webmenu.url}" alt=""/>
 			</p>
+
+            <p>
+                <label>排序(默认1000)</label>
+                <input name="webmenu.sort"  type="text" size="30" value="${webmenu.sort}" alt=""/>
+            </p>
 
 									
 			<p>

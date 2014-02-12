@@ -6,21 +6,21 @@
     String path = request.getContextPath();
 %>
 
-<html lang="en">
+<!DOCTYPE html>
+<html style="" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap, from Twitter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+          rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
-    <title>CMS</title>
-
-    <link href="<%=path%>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<%=path%>/css/starter-template.css" rel="stylesheet">
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
-
 </head>
 <body>
 

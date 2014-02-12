@@ -32,6 +32,9 @@
         <!-- Carousel
     ================================================== -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+
+
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -72,10 +75,32 @@
             </div>
             <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
             <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+
+
         </div><!-- /.carousel -->
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <input type="text" placeholder="搜索" class="form-control">
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
 
 
 <div class="container marketing">
+
 
 <div class="row row-offcanvas row-offcanvas-right">
 

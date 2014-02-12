@@ -33,9 +33,9 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<l1><a class="add" href="<%=path %>/webmenu/edit" target="dialog" rel="dlg_form" mask="true" title="添加web菜单" width="400" height="460"><span>添加</span></a></l1>
+			<l1><a class="add" href="<%=path %>/webmenu/edit" target="dialog" rel="dlg_form" mask="true" title="添加web菜单" width="400" height="320"><span>添加</span></a></l1>
 			<li><a class="delete" href="<%=path %>/webmenu/del/{sid_webmenu}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
-            <l1><a class="edit" href="<%=path %>/webmenu/edit/{sid_webmenu}" target="dialog" rel="dlg_form" mask="true" title="修改web菜单" width="320" height="480"><span>修改</span></a></l1>
+            <l1><a class="edit" href="<%=path %>/webmenu/edit/{sid_webmenu}" target="dialog" rel="dlg_form" mask="true" title="修改web菜单" width="400" height="320"><span>修改</span></a></l1>
 		
 			<li class="line">line</li>
 		</ul>
@@ -47,12 +47,17 @@
 				<th>编号</th>
 									
 				<th>名称</th>
-									
+
+                <th>中文名称</th>
+
 				<th>url</th>
-									
-				<th>激活</th>
-										
-			</tr>
+
+                <th>排序</th>
+
+                <th>激活</th>
+
+
+            </tr>
 		</thead>
 		<tbody>
 			<c:forEach var="webmenu" items="${page.list}">
@@ -65,10 +70,19 @@
 				<td>
 					 ${webmenu.name} 
 				</td>
+
+                <td>
+                    ${webmenu.cnname}
+                </td>
 									
 				<td>
 					 ${webmenu.url} 
 				</td>
+
+                <td>
+                    ${webmenu.sort}
+
+                </td>
 									
 				<td>
 					 ${webmenu.action} 
