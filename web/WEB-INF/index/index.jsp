@@ -83,12 +83,8 @@
 
         <div class="row">
             <div class="container">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4" style="text-align: center">
-                    <a class="btn btn-primary">加入慕游网活动</a>
-                </div>
-                <div class="col-md-4">
+                <div class="col col-md-12">
+                    <img src="http://lorempixel.com/1024/100/nightlife/4" class="img-responsive" >
                 </div>
             </div>
         </div>

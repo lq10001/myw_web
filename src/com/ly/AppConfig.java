@@ -43,6 +43,8 @@ public class AppConfig extends JFinalConfig {
     public void configPlugin(Plugins me) {
 
         C3p0Plugin c3p0Plugin = new C3p0Plugin(getProperty("jdbcurl"), getProperty("username"), getProperty("password").trim());
+        c3p0Plugin.setMaxPoolSize(getPropertyToInt("maxpool"));
+        c3p0Plugin.setMinPoolSize(getPropertyToInt("minpool"));
         me.add(c3p0Plugin);
 
 

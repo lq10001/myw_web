@@ -8,6 +8,8 @@ jdbcurl=jdbc:mysql://115.28.2.33:3306/myw?useUnicode=true&characterEncoding=utf-
 username=root
 password=liliang8
 #password=asdf
+maxpool=10
+minpool=5
 
 
 #--------------- other config -------------

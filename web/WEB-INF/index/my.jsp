@@ -53,19 +53,70 @@
                         <span style="font-size: 21px;">
                             Dongfangx
                         </span>
+                        <br/>
                         <span>
                             关注 100 | 粉丝 10
                         </span>
 
                     </div>
                     <!--留言-->
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <br/>
                         <br/>
                         <blockquote>
                             <p>爱生活，爱旅游</p>
                         </blockquote>
                     </div>
+
+                    <div class="col-md-1">
+                        <br/>
+                        <br/>
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            +创建我的行程
+                        </button>
+                         <!--
+                        <button type="button" class="btn btn-success" onclick="onCreate()"> +创建我的行程</button>
+                        -->
+                    </div>
+
+
+                    <!-- Button trigger modal -->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">创建新的旅程</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <form class="form-horizontal"  id="form1" action="/" role="form">
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">旅程名称</label>
+                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-primary">保存</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
 
                 </div>
 
@@ -279,3 +330,11 @@
 
 </body>
 </html>
+
+
+<script type="text/javascript">
+    function onCreate()
+    {
+        location.href = '<%=path%>/down';
+    }
+</script>
