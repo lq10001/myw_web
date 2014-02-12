@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="myw exploded" />
+      <artifact name="myw" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
@@ -80,11 +80,31 @@
       <list>
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/config.txt" />
+        <option value="$PROJECT_DIR$/src/com/ly/info/model/Webmenu.java" />
+        <option value="$PROJECT_DIR$/src/com/ly/info/controller/WebmenuController.java" />
+        <option value="$PROJECT_DIR$/src/com/ly/tool/MenuTree.java" />
         <option value="$PROJECT_DIR$/src/com/ly/AppConfig.java" />
-        <option value="$PROJECT_DIR$/src/com/ly/IndexController.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/manage/index.jsp" />
+        <option value="$PROJECT_DIR$/web/css/carousel.css" />
+        <option value="$PROJECT_DIR$/src/com/ly/controller/IndexController.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/index/index3.jsp" />
+        <option value="$PROJECT_DIR$/src/config.txt" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/webmenu/webmenu_list.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/webmenu/webmenu.jsp" />
+        <option value="$PROJECT_DIR$/src/com/ly/model/Webmenu.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/xing.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/mudi.jsp" />
+        <option value="$PROJECT_DIR$/src/com/ly/model/Menu.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/rigister.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/login.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/register.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/index.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/index/top.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/down.jsp" />
+        <option value="$PROJECT_DIR$/src/com/ly/model/User.java" />
+        <option value="$PROJECT_DIR$/src/com/ly/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/com/ly/IndexController.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/index/my.jsp" />
       </list>
     </option>
   </component>
@@ -205,6 +225,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -227,6 +279,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myw_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -240,20 +336,34 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="FullScreen" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/lib" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="SearchEverywhereHistory" value="G" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ly.tool" />
+      <recent name="com.ly.model" />
+      <recent name="com.ly.info.model" />
+      <recent name="com.ly.info.controller" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/WEB-INF/index" />
+      <recent name="$PROJECT_DIR$/web" />
+      <recent name="$PROJECT_DIR$/web/img" />
       <recent name="$PROJECT_DIR$/web/WEB-INF" />
-      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/com/ly" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/js" />
+      <recent name="$PROJECT_DIR$/web/img" />
+      <recent name="$PROJECT_DIR$/web/css" />
       <recent name="$PROJECT_DIR$/web/WEB-INF" />
+      <recent name="$PROJECT_DIR$/web" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 7.0">
@@ -576,11 +686,23 @@
       <workItem from="1389495740618" duration="3390000" />
       <workItem from="1389499321292" duration="962000" />
       <workItem from="1389538384765" duration="108000" />
+      <workItem from="1389617653190" duration="7674000" />
+      <workItem from="1389789893123" duration="365000" />
+      <workItem from="1389869010655" duration="1226000" />
+      <workItem from="1389873910390" duration="3816000" />
+      <workItem from="1389879598781" duration="1455000" />
+      <workItem from="1390223175609" duration="7050000" />
+      <workItem from="1390480948516" duration="5015000" />
+      <workItem from="1390747436128" duration="3940000" />
+      <workItem from="1391912399143" duration="4382000" />
+      <workItem from="1391935978766" duration="14158000" />
+      <workItem from="1391957823217" duration="629000" />
+      <workItem from="1392115276975" duration="6140000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7507000" />
+    <option name="totallyTimeSpent" value="63357000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -610,13 +732,13 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951653" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951653" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951653" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37277353" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -626,8 +748,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23082706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951653" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2150376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37277353" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -646,7 +768,11 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -655,9 +781,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="53" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="11" column="53" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index3.jsp">
@@ -681,14 +805,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="17" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1185">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/Cnd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="42" selection-start="393" selection-end="393" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="945" />
+        <state line="51" column="17" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1185" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/web/WEB-INF/lib/JFinal-bin-1.5.jar!/com/jfinal/core/JFinalFilter.class">
@@ -698,24 +815,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/IndexController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="26" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/Dwz.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="42" selection-start="61" selection-end="61" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="435" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/MenuTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="49" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="675" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/pg/model/Project.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="12" selection-start="530" selection-end="530" vertical-scroll-proportion="0.52469134" vertical-offset="0" max-vertical-offset="645" />
+        <state line="8" column="26" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="540" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ehcache.xml">
@@ -730,21 +830,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="499" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/Dwz.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="42" selection-start="61" selection-end="61" vertical-scroll-proportion="0.039577838" vertical-offset="0" max-vertical-offset="758" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/MenuTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="49" selection-start="92" selection-end="92" vertical-scroll-proportion="0.08053691" vertical-offset="0" max-vertical-offset="745" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="26" selection-start="214" selection-end="214" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="32" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
@@ -757,68 +842,258 @@
         <state line="26" column="0" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="480" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/Cnd.java">
+    <entry file="file://$PROJECT_DIR$/web/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="20" selection-start="1804" selection-end="1804" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="945" />
+        <state line="14" column="44" selection-start="149" selection-end="149" vertical-scroll-proportion="0.4516129" vertical-offset="0" max-vertical-offset="1440" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="35" selection-start="202" selection-end="202" vertical-scroll-proportion="0.22479564" vertical-offset="0" max-vertical-offset="734">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/ad/ad.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/tool/MenuTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="86" selection-end="86" vertical-scroll-proportion="0.12345679" vertical-offset="0" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/dwz/js/dwz.ui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="56" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4530" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index3副本.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1245" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/starter-template.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="758" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ly/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="17" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1185">
+        <state line="37" column="0" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1200">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index.jsp">
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/ProductController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="104.333336" vertical-offset="2504" max-vertical-offset="3225">
+        <state line="8" column="13" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ly/IndexController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/WebmenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="28" selection-start="211" selection-end="211" vertical-scroll-proportion="0.22580644" vertical-offset="0" max-vertical-offset="495">
+        <state line="13" column="36" selection-start="245" selection-end="292" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/manage/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="0" selection-start="7027" selection-end="7027" vertical-scroll-proportion="2.933426" vertical-offset="0" max-vertical-offset="3150" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0" vertical-offset="131" max-vertical-offset="630">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index2.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/carousel.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="45" selection-start="421" selection-end="421" vertical-scroll-proportion="-1.8893442" vertical-offset="1668" max-vertical-offset="2400" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/offcanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="758" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="81" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/webmenu/webmenu_list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="34" selection-start="2113" selection-end="2113" vertical-scroll-proportion="-13.166667" vertical-offset="914" max-vertical-offset="1725" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/webmenu/webmenu.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="47" selection-start="967" selection-end="967" vertical-scroll-proportion="-14.375" vertical-offset="150" max-vertical-offset="945" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index3.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="281" column="60" selection-start="9396" selection-end="9396" vertical-scroll-proportion="-99.416664" vertical-offset="1829" max-vertical-offset="5160">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/bootstrap3-validation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="40" selection-start="6967" selection-end="6969" vertical-scroll-proportion="0.33240613" vertical-offset="1501" max-vertical-offset="4695" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/mudi.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="1" selection-end="976" vertical-scroll-proportion="-2.7997274" vertical-offset="2070" max-vertical-offset="5415">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/menu/menu.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="38" selection-start="506" selection-end="521" vertical-scroll-proportion="0.35367545" vertical-offset="0" max-vertical-offset="915" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/model/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="13" selection-start="218" selection-end="218" vertical-scroll-proportion="0.10067114" vertical-offset="0" max-vertical-offset="745">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/model/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="41" selection-start="905" selection-end="905" vertical-scroll-proportion="0.40633246" vertical-offset="112" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/model/Webmenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="70" selection-start="428" selection-end="428" vertical-scroll-proportion="0.22147651" vertical-offset="0" max-vertical-offset="745">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="37" selection-start="527" selection-end="527" vertical-scroll-proportion="0.3364116" vertical-offset="0" max-vertical-offset="758">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/register.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="97" selection-start="3282" selection-end="3282" vertical-scroll-proportion="0.60431653" vertical-offset="945" max-vertical-offset="2385">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/link.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2640">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2640">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/css/main.css">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/login.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="44" selection-start="149" selection-end="149" vertical-scroll-proportion="0.4516129" vertical-offset="0" max-vertical-offset="1440" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index3副本.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="35" selection-start="202" selection-end="202" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index3.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="26" selection-start="734" selection-end="734" vertical-scroll-proportion="-5.0" vertical-offset="255" max-vertical-offset="1515">
+        <state line="48" column="0" selection-start="1457" selection-end="1499" vertical-scroll-proportion="0.4964029" vertical-offset="375" max-vertical-offset="2040">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/top.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="52" selection-start="746" selection-end="746" vertical-scroll-proportion="0.35367545" vertical-offset="0" max-vertical-offset="721">
+        <state line="24" column="81" selection-start="835" selection-end="835" vertical-scroll-proportion="0.37586686" vertical-offset="89" max-vertical-offset="930">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="926" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="4920">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/down.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="55" selection-start="1053" selection-end="1053" vertical-scroll-proportion="0.6948229" vertical-offset="0" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/tomcat7037/lib/servlet-api.jar!/javax/servlet/http/HttpSession.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="54" selection-start="556" selection-end="556" vertical-scroll-proportion="0.35227272" vertical-offset="190" max-vertical-offset="900">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/web/WEB-INF/lib/JFinal-bin-1.5.jar!/com/jfinal/core/Controller.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="42" selection-start="4110" selection-end="4110" vertical-scroll-proportion="-6.48" vertical-offset="1098" max-vertical-offset="3945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/web/WEB-INF/lib/JFinal-bin-1.5.jar!/com/jfinal/core/ActionInvocation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="16" selection-start="589" selection-end="589" vertical-scroll-proportion="-8.56" vertical-offset="26" max-vertical-offset="525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="41" selection-start="2040" selection-end="2040" vertical-scroll-proportion="0.0" vertical-offset="592" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/xing.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="63" selection-start="5940" selection-end="5940" vertical-scroll-proportion="-91.875" vertical-offset="0" max-vertical-offset="3540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="0" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0" vertical-offset="592" max-vertical-offset="1140">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ly/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="52" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/index/my.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="56" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.366485" vertical-offset="511" max-vertical-offset="4290">
           <folding />
         </state>
       </provider>
@@ -828,8 +1103,15 @@
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
-          <artifact-editor />
-          <last-edited>myw exploded</last-edited>
+          <artifact-editor>
+            <show-content>
+              <type id="artifact" />
+              <type id="library" />
+              <type id="javaee-facet-resources" />
+              <type id="jpa-descriptors" />
+            </show-content>
+          </artifact-editor>
+          <last-edited>myw</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -878,7 +1160,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Web|myw_web</last-edited>
+          <last-edited>myw_web</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
