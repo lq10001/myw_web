@@ -59,10 +59,11 @@ public class UserController extends Controller {
     public void login()
     {
         User user = getModel(User.class);
-        boolean ok = User.userDao.login(user.getStr("email"),user.getStr("password"));
-        if (ok)
+        User rtnUser = User.userDao.login(user.getStr("email"),user.getStr("password"));
+        if (rtnUser != null)
         {
             getSession().setAttribute("email",user.getStr("email"));
+            getSession().setAttribute("userid",rtnUser.getInt("id"));
             redirect("/index");
         }else{
             redirect("/login");

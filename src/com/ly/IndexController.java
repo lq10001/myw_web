@@ -37,7 +37,7 @@ public class IndexController extends Controller {
         render("index/down.jsp");
     }
 
-    public void xing() {
+    public void travel() {
         List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
         setAttr("webmenu_list",list_menu);
         setAttr("selmenu","xing");
@@ -84,6 +84,12 @@ public class IndexController extends Controller {
         }else{
             render("index/my.jsp");
         }
+    }
+
+    public void upload()
+    {
+        getMenu();
+        render("index/upload.jsp");
     }
 
 

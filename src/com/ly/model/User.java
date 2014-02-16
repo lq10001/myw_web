@@ -41,9 +41,9 @@ public class User extends Model<User> {
         return ok;
     }
 
-    public  boolean login(String email,String pwd)
+    public  User login(String email,String pwd)
     {
         List<User> list =  userDao.find("select * from user where email = '"+email+"' and password = '"+pwd+"' order by id");
-        return list.size() > 0 ? true : false;
+        return list.size() > 0 ? list.get(0) : null;
     }
 }
