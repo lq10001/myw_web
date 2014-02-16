@@ -3,11 +3,13 @@
 
 #--------------- data source -------------
 driverClass = com.mysql.jdbc.Driver
-jdbcurl=jdbc:mysql://115.28.2.33:3306/myw
-#jdbcurl=jdbc:mysql://localhost:3306/myw
+jdbcurl=jdbc:mysql://115.28.2.33:3306/myw?useUnicode=true&characterEncoding=utf-8
+#jdbcurl=jdbc:mysql://localhost:3306/myw?useUnicode=true&characterEncoding=utf-8
 username=root
 password=liliang8
 #password=asdf
+maxpool=10
+minpool=5
 
 
 #--------------- other config -------------
