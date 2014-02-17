@@ -40,7 +40,7 @@
     <script type="text/javascript">
         function onDown()
         {
-            location.href = '<%=path%>/down';
+            location.href = '<%=path%>/linkimg';
         }
 
         function onLogin()

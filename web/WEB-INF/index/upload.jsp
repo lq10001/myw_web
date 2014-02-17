@@ -121,6 +121,13 @@
                 <option value="Asia/Makassar">GMT+08:00 马卡萨</option>
             </select>
 
+            <br/>
+            <br/>
+
+            <button class="btn btn-primary" onclick="onNext()">
+                下一步
+            </button>
+
 
 
         </div>
@@ -133,6 +140,9 @@
         </div><!--/span-->
 
     </div><!--/row-->
+
+    <br/>
+    <br/>
 
 
     <div class="container">
@@ -247,6 +257,7 @@
 {% } %}
 </script>
 
+
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
@@ -279,6 +290,13 @@
 <script src="<%=path%>/fileupload/js/jquery.fileupload-ui.js"></script>
 <!-- The main application script -->
 <script src="<%=path%>/fileupload/js/main.js"></script>
+
+<script type="text/javascript">
+    function onNext()
+    {
+        location.href = '<%=path%>/linkimg';
+    }
+</script>
 
 
 
