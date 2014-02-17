@@ -8,12 +8,15 @@ import com.jfinal.upload.UploadFile;
 import com.ly.model.Img;
 import com.ly.tool.Dwz;
 import com.ly.vo.FileUploadInfo;
+import net.coobird.thumbnailator.Thumbnails;
 import org.nutz.lang.Files;
 import org.nutz.lang.random.StringGenerator;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -43,8 +46,7 @@ public class ImgController extends Controller {
         render("img.jsp");
     }
 
-    public void save()
-    {
+    public void save() throws IOException {
 
         PathKit pk = new PathKit();
         String contextPath = pk.getWebRootPath();
@@ -67,16 +69,23 @@ public class ImgController extends Controller {
             File f = uploadFile.getFile();
             String type = Files.getSuffixName(f);
 
-            StringGenerator sg = new StringGenerator(3);
-            String fileName = sg.next() + System.currentTimeMillis() + "." + type;
+            StringGenerator sg = new StringGenerator(5);
+            String name = sg.next() + System.currentTimeMillis();
+            String fileName = name + "." + type;
+            String s_fileName = name + "_80*80." + type;
+
+            Thumbnails.of(f).size(80,80).toFile(uploadFile.getSaveDirectory() + "/" + s_fileName);
+
             Files.rename(f, fileName);
+
+            DecimalFormat df = new DecimalFormat("#.00");
 
             fileInfo.setName(fileName);
             fileInfo.setUrl("/upload/"+fileName);
-            fileInfo.setThumbnailUrl("/upload/"+fileName);
+            fileInfo.setThumbnailUrl("/upload/"+s_fileName);
             fileInfo.setDeleteType("DELETE");
             fileInfo.setDeleteUrl("");
-            fileInfo.setSize(f.getFreeSpace());
+            fileInfo.setSize( df.format((double) f.getTotalSpace() / 1024) + "K");
             fileInfos.add(fileInfo);
         }
 

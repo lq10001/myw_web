@@ -13,7 +13,7 @@ public class FileUploadInfo {
 
     private String type;
 
-    private Long size;
+    private String size;
 
     private String deleteUrl;
 
@@ -51,11 +51,11 @@ public class FileUploadInfo {
         this.type = type;
     }
 
-    public Long getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Long size) {
+    public void setSize(String size) {
         this.size = size;
     }
 

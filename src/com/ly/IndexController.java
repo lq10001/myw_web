@@ -92,5 +92,11 @@ public class IndexController extends Controller {
         render("index/upload.jsp");
     }
 
+    public void linkimg()
+    {
+        getMenu();
+        render("index/linkimg.jsp");
+    }
+
 
 }
