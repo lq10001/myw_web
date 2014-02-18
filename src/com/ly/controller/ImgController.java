@@ -5,6 +5,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.upload.UploadFile;
+import com.ly.Global;
 import com.ly.model.Img;
 import com.ly.tool.Dwz;
 import com.ly.vo.FileUploadInfo;
@@ -48,18 +49,16 @@ public class ImgController extends Controller {
 
     public void save() throws IOException {
 
+        HttpSession session = getSession();
+        Object userid = session.getAttribute(Global.USER_ID);
+        Object tripid = session.getAttribute(Global.TRIP_ID);
+
         PathKit pk = new PathKit();
         String contextPath = pk.getWebRootPath();
         String path = "/upload";
         String pathUrl = contextPath + path;
         int maxSize = 200 * 1024 * 1024;              //10M
 
-        /*
-        UploadFile upFile = getFile("upload_file", pathUrl, maxSize, "utf-8");
-        String fileName = upFile.getFileName();
-        String real_path = upFile.getSaveDirectory();
-        String  pathAndName = real_path + fileName;
-          */
         List<FileUploadInfo> fileInfos = new LinkedList<FileUploadInfo>();
         List<UploadFile> files = getFiles(pathUrl, maxSize, "utf-8");
         for (UploadFile uploadFile : files)
@@ -78,11 +77,23 @@ public class ImgController extends Controller {
 
             Files.rename(f, fileName);
 
+            String url = "/upload/"+fileName;
+            String s_url  = "/upload/"+s_fileName;
+
+            Img img = new Img();
+            img.set("userid",userid);
+            img.set("tripid",tripid);
+            img.set("adddate",new Date());
+            img.set("imgpath",url);
+            img.set("smallimgpath",s_url);
+
+            boolean ok = Img.imgDao.saveOrUpdate(img);
+
             DecimalFormat df = new DecimalFormat("#.00");
 
             fileInfo.setName(fileName);
-            fileInfo.setUrl("/upload/"+fileName);
-            fileInfo.setThumbnailUrl("/upload/"+s_fileName);
+            fileInfo.setUrl(url);
+            fileInfo.setThumbnailUrl(s_url);
             fileInfo.setDeleteType("DELETE");
             fileInfo.setDeleteUrl("");
             fileInfo.setSize( df.format((double) f.getTotalSpace() / 1024) + "K");
@@ -92,14 +103,6 @@ public class ImgController extends Controller {
 
         System.out.println(" ---- " + files.size() + "        " + JSON.toJSONString(fileInfos));
 
-        HttpSession session = getSession();
-        Object o = session.getAttribute("userid");
-
-
-        Img img = getModel(Img.class);
-        img.set("userid",o);
-        img.set("adddate",new Date());
-        boolean ok = Img.imgDao.saveOrUpdate(img);
 
         StringBuffer sb = new StringBuffer();
         sb.append("{\"files\":");

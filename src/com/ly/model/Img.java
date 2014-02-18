@@ -16,6 +16,11 @@ public class Img extends Model<Img> {
         return imgDao.find("select * from img");
     }
 
+    public List<Img> getListImgByTripid(Integer userid,Integer tripid)
+    {
+        return imgDao.find("select * from img where userid = " + userid + " and tripid =" + tripid);
+    }
+
     public Img getImg(Integer id)
     {
         return imgDao.findById(id);

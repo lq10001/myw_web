@@ -89,6 +89,8 @@ public class IndexController extends Controller {
     public void upload()
     {
         getMenu();
+        HttpSession session = getSession();
+        setAttr("tripid",session.getAttribute(Global.TRIP_ID));
         render("index/upload.jsp");
     }
 
