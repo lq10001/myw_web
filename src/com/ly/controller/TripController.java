@@ -9,6 +9,7 @@ import com.ly.model.Webmenu;
 import com.ly.tool.Dwz;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 
@@ -38,9 +39,11 @@ public class TripController extends Controller {
     public void save()
     {
         HttpSession session = getSession();
-        Object o = session.getAttribute(Global.USER_ID);
+        Object userid = session.getAttribute(Global.USER_ID);
         Trip trip = getModel(Trip.class);
-        trip.set("userid",o);
+        trip.set("userid",userid);
+        trip.set("adddate",new Date());
+        System.out.println(trip.get("name"));
         boolean ok = Trip.tripDao.saveOrUpdate(trip);
         if (ok)
         {
@@ -58,14 +61,20 @@ public class TripController extends Controller {
 
     public void show()
     {
+        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
+        setAttr("webmenu_list",list_menu);
+
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
 
         Integer tripid = Integer.parseInt(getPara(0));
+        session.setAttribute(Global.TRIP_ID,tripid);
         setAttr("trip", Trip.tripDao.getTrip(tripid));
 
         List<Img> list_img = Img.imgDao.getListImgByTripid(Integer.parseInt(userid.toString()),tripid);
         setAttr("list_img",list_img);
+
+        render("/WEB-INF/index/show.jsp");
     }
 
 }

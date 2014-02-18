@@ -1,6 +1,7 @@
 package com.ly;
 
 import com.jfinal.core.Controller;
+import com.ly.model.Trip;
 import com.ly.tool.MenuTree;
 import com.ly.model.Webmenu;
 
@@ -77,11 +78,13 @@ public class IndexController extends Controller {
     {
         getMenu();
         HttpSession session = getSession();
-        Object o = session.getAttribute("email");
-        if (o == null)
+        Object userid = session.getAttribute(Global.USER_ID);
+        if (userid == null)
         {
             this.login();
         }else{
+            List<Trip> listTrip = Trip.tripDao.getListTrip(Integer.parseInt(userid.toString()));
+            setAttr("list_trip",listTrip);
             render("index/my.jsp");
         }
     }
@@ -97,7 +100,7 @@ public class IndexController extends Controller {
     public void linkimg()
     {
         getMenu();
-        render("index/linkimg.jsp");
+        render("index/show.jsp");
     }
 
 

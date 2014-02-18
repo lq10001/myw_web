@@ -17,6 +17,13 @@ public class Trip extends Model<Trip> {
         return tripDao.find("select * from trip");
     }
 
+
+    public List<Trip> getListTrip(Integer userid)
+    {
+        return tripDao.find("select * from trip where userid =" + userid);
+    }
+
+
     public Trip getTrip(Integer id)
     {
         return tripDao.findById(id);

@@ -64,7 +64,7 @@ public class UserController extends Controller {
         {
             getSession().setAttribute("email",user.getStr("email"));
             getSession().setAttribute("userid",rtnUser.getInt("id"));
-            redirect("/index");
+            redirect("/my");
         }else{
             redirect("/login");
         }
