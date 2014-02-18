@@ -35,11 +35,38 @@
 
     <div class="row">
 
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-10 col-md-10">
 
-            <h3>1 : 选择照片  2: 关联地点  3：完善资料</h3>
+            <h3>行程名称：${trip.name}</h3>
+            <h3>创建时间：${trip.adddate}</h3>
+
+            <hr/>
+
+            <h3>行程图片</h3>
+            <c:forEach var="img" items="${list_img}">
+                <div class="row">
+                    <div class="col col-md-12">
+                        <img src="<%=path%>${img.imgpath}" alt="">
+                        <p>添加日期:${img.adddate}</p>
+                    </div>
+                </div>
+
+                <br/>
+            </c:forEach>
 
         </div>
+
+        <div class="col-xs-2 col-md-2">
+            <br/>
+            <br/>
+            <button class="btn btn-primary btn-lg" onclick="onAddPhoto()">
+                +添加照片
+            </button>
+        </div>
+
+
+
+
 
     </div><!--/row-->
 
@@ -93,6 +120,13 @@
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
+
+    <script type="text/javascript">
+        function onAddPhoto()
+        {
+            location.href = '<%=path%>/upload';
+        }
+    </script>
 
 
 </body>

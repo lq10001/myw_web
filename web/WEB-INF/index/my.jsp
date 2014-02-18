@@ -8,7 +8,7 @@
 
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -87,7 +87,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
 
-                                <form class="form-horizontal"  id="form1" action="<%=path%>/trip/save" role="form">
+                                <form class="form-horizontal" method="post" id="form1" action="<%=path%>/trip/save" role="form">
 
 
                                 <div class="modal-header">
@@ -188,26 +188,14 @@
         <h2>我创建的行程</h2>
 
         <div class="row">
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/1.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/2.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/3.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/4.jpg" alt="">
-                </a>
-            </div>
+            <c:forEach var="trip" items="${list_trip}">
+                <div class="col-xs-6 col-md-3">
+                    <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
+                        <img src="<%=path%>/img/1.jpg" alt="">
+                        <p style="text-align: center;">${trip.name}</p>
+                    </a>
+                </div>
+            </c:forEach>
         </div><!--/row-->
 
         <h2>想去</h2>
@@ -340,6 +328,6 @@
 <script type="text/javascript">
     function onCreate()
     {
-        location.href = '<%=path%>/down';
+        location.href = '<%=path%>/';
     }
 </script>
