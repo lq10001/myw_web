@@ -1,6 +1,8 @@
 package com.ly;
 
 import com.jfinal.core.Controller;
+import com.ly.model.Img;
+import com.ly.model.Place;
 import com.ly.model.Trip;
 import com.ly.tool.MenuTree;
 import com.ly.model.Webmenu;
@@ -89,11 +91,30 @@ public class IndexController extends Controller {
         }
     }
 
+    public void showPlace()
+    {
+        getMenu();
+        HttpSession session = getSession();
+        Integer tripid = Integer.parseInt(session.getAttribute(Global.TRIP_ID).toString());
+        setAttr("tripid",tripid);
+
+        List<Place> list_place = Place.placeDao.getListPlaceByTripid(tripid);
+        setAttr("list_place",list_place);
+
+        render("index/place.jsp");
+    }
+
     public void upload()
     {
         getMenu();
         HttpSession session = getSession();
-        setAttr("tripid",session.getAttribute(Global.TRIP_ID));
+        Integer placeid = Integer.parseInt(getPara(0));
+
+        session.setAttribute(Global.PLACE_ID,placeid);
+
+        setAttr(Global.TRIP_ID, session.getAttribute(Global.TRIP_ID));
+        List<Img> list_img = Img.imgDao.getListImgByPlaceid(placeid);
+        setAttr("list_img",list_img);
         render("index/upload.jsp");
     }
 
@@ -101,6 +122,16 @@ public class IndexController extends Controller {
     {
         getMenu();
         render("index/show.jsp");
+    }
+
+    public void loginOut()
+    {
+        getMenu();
+        HttpSession session = getSession();
+        session.removeAttribute(Global.USER_ID);
+        Object userid = session.getAttribute(Global.USER_ID);
+        System.out.println(" ---- "+userid);
+        render("index/index.jsp");
     }
 
 

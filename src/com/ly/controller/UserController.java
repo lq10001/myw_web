@@ -58,6 +58,7 @@ public class UserController extends Controller {
 
     public void login()
     {
+
         User user = getModel(User.class);
         User rtnUser = User.userDao.login(user.getStr("email"),user.getStr("password"));
         if (rtnUser != null)

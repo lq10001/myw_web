@@ -48,7 +48,7 @@ public class TripController extends Controller {
         if (ok)
         {
             session.setAttribute("tripid",trip.get("id"));
-            redirect("/upload");
+            redirect("/showPlace");
         }
     }
 

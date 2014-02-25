@@ -9,5 +9,7 @@ public class Global {
 
     public static String TRIP_ID = "tripid";
 
+    public static String PLACE_ID = "placeid";
+
 
 }

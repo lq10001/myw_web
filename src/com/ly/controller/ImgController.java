@@ -52,6 +52,7 @@ public class ImgController extends Controller {
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
         Object tripid = session.getAttribute(Global.TRIP_ID);
+        Object placeid = session.getAttribute(Global.PLACE_ID);
 
         PathKit pk = new PathKit();
         String contextPath = pk.getWebRootPath();
@@ -71,9 +72,9 @@ public class ImgController extends Controller {
             StringGenerator sg = new StringGenerator(5);
             String name = sg.next() + System.currentTimeMillis();
             String fileName = name + "." + type;
-            String s_fileName = name + "_80*80." + type;
+            String s_fileName = name + "_200_200." + type;
 
-            Thumbnails.of(f).size(80,80).toFile(uploadFile.getSaveDirectory() + "/" + s_fileName);
+            Thumbnails.of(f).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + s_fileName);
 
             Files.rename(f, fileName);
 
@@ -83,6 +84,7 @@ public class ImgController extends Controller {
             Img img = new Img();
             img.set("userid",userid);
             img.set("tripid",tripid);
+            img.set("placeid",placeid);
             img.set("adddate",new Date());
             img.set("imgpath",url);
             img.set("smallimgpath",s_url);

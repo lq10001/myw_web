@@ -21,6 +21,12 @@ public class Img extends Model<Img> {
         return imgDao.find("select * from img where userid = " + userid + " and tripid =" + tripid);
     }
 
+    public List<Img> getListImgByPlaceid(Integer placeid)
+    {
+        return imgDao.find("select * from img where placeid = " + placeid);
+    }
+
+
     public Img getImg(Integer id)
     {
         return imgDao.findById(id);
