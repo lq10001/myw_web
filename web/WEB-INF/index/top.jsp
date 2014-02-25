@@ -27,8 +27,17 @@
                 <button type="button" class="btn btn-success" onclick="onRigister()">搜索</button>
                 <button type="button" class="btn btn-success" onclick="onDown()">客户端下载</button>
 
-                <button type="button" class="btn btn-success" onclick="onRigister()">注册</button>
-                <button type="button" class="btn btn-success" onclick="onLogin()">登录</button>
+                <c:choose>
+                    <c:when test="${userid == null}">
+                        <button type="button" class="btn btn-success" onclick="onRigister()">注册</button>
+                        <button type="button" class="btn btn-success" onclick="onLogin()">登录</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="button" class="btn btn-success" onclick="onLoginOut()">注销</button>
+                    </c:otherwise>
+                </c:choose>
+
+
             </form>
         </div><!-- /.nav-collapse -->
 
@@ -51,5 +60,9 @@
         function onRigister()
         {
             location.href='<%=path%>/register';
+        }
+        function onLoginOut()
+        {
+            location.href='<%=path%>/loginOut';
         }
     </script>

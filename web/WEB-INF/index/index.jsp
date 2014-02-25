@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>myw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -263,39 +263,7 @@
 
     <br/>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                合作伙伴:
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-            </div>
-
-            <div class="col-md-12">
-                <p>友情链接
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-
-            </div>
-
-            <div class="col-md-12">
-                <p>&copy; 募游网 2013</p>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="foot.jsp"></jsp:include>
 
 
 </body>

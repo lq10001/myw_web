@@ -282,39 +282,7 @@
     </div><!--/row-->
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                合作伙伴:
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-            </div>
-
-            <div class="col-md-12">
-                <p>友情链接
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-
-            </div>
-
-            <div class="col-md-12">
-                <p>&copy; 募游网 2013</p>
-            </div>
-        </div>
-    </div>
+<jsp:include page="foot.jsp"></jsp:include>
 
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -59,8 +59,8 @@
         <div class="col-xs-2 col-md-2">
             <br/>
             <br/>
-            <button class="btn btn-primary btn-lg" onclick="onAddPhoto()">
-                +添加照片
+            <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
+                编辑行程
             </button>
         </div>
 
@@ -122,9 +122,9 @@
     <script src="<%=path%>/js/offcanvas.js"></script>
 
     <script type="text/javascript">
-        function onAddPhoto()
+        function onEditPlace()
         {
-            location.href = '<%=path%>/upload';
+            location.href = '<%=path%>/showPlace';
         }
     </script>
 
