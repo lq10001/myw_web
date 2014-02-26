@@ -35,12 +35,29 @@
 
     <div class="row">
 
-        <div class="col-xs-10 col-md-10">
+        <div class="col-md-6">
 
             <h3>行程名称：${trip.name}</h3>
             <h3>创建时间：${trip.adddate}</h3>
+        </div>
 
-            <hr/>
+        <div class="col-md-4">
+            <br/>
+            <br/>
+            <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
+                编辑行程
+            </button>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div><!--/row-->
+
+    <hr/>
+
+
+    <div class="row">
+
+        <div class="col-xs-12 col-md-12">
 
             <h3>行程图片</h3>
             <c:forEach var="img" items="${list_img}">
@@ -54,25 +71,7 @@
                 <br/>
             </c:forEach>
 
-        </div>
 
-        <div class="col-xs-2 col-md-2">
-            <br/>
-            <br/>
-            <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
-                编辑行程
-            </button>
-        </div>
-
-
-
-
-
-    </div><!--/row-->
-
-    <div class="row">
-
-        <div class="col-xs-12 col-md-12">
 
 
         </div>

@@ -52,20 +52,23 @@
     <div id="listfile" class="row">
         <c:forEach var="img" items="${list_img}">
             <div class="col-md-2">
-                <a href="<%=path%>/trip/show/" class="thumbnail" style="text-align: center">
-                    <img src="<%=path%>${img.imgpath}" alt="">
-                    <button type="button" class="btn btn-primary" onclick="">
+                <div class="thumbnail" style="text-align: center;width: 200px;height: 220px;">
+                    <img style="margin-left: 5px;margin-top: 5px; width: 180px;height: 180px;" src="<%=path%>${img.imgpath}" alt="">
+
+                    <button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onEditPlace()">
                         删除
                     </button>
-                </a>
+                </div>
             </div>
         </c:forEach>
     </div><!--/row-->
 
     <!-- The global progress bar -->
+    <!--
     <div id="progress" class="progress">
         <div class="progress-bar progress-bar-success"></div>
     </div>
+    -->
     <!-- The container for the uploaded files -->
     <div id="files" class="files"></div>
     <br>
@@ -79,6 +82,7 @@
 <script src="<%=path%>/fileupload/js/jquery.fileupload.js"></script>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
 <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
 
 
 <script>
@@ -101,23 +105,16 @@
             dataType: 'json',
             done: function (e, data) {
                 $.each(data.result.files, function (index, file) {
-
                     var content = '<div class="col-md-2">'
-                            + '<a href="<%=path%>/trip/show/" class="thumbnail" style="text-align: center">'
-                            +  '<img src="<%=path%>'+file.url+'" alt="">'
-                            + '<button type="button" class="btn btn-primary" onclick="">删除 </button>'
-                            + '</a>'
+                            + '<div class="thumbnail" style="text-align: center;width: 200px;height: 220px;">'
+                            +  '<img style="margin-left: 5px;margin-top: 5px; width: 180px;height: 180px;" src="<%=path%>'+file.url+'" alt="">'
+                            + '<button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="">删除 </button>'
+                            + '</div>'
                             + '</div>';
-                    alert(content);
                     $(content).appendTo('#listfile');
                 });
             },
             progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css(
-                        'width',
-                        progress + '%'
-                );
             }
         }).prop('disabled', !$.support.fileInput)
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');

@@ -28,24 +28,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-
     <script type="text/javascript" src="<%=path%>/js/gmaps.js"></script>
-    <script type="text/javascript" src="<%=path%>/js/prettify.js"></script>
-
-    <script type="text/javascript">
-
-        var map;
-        $(document).ready(function(){
-            prettyPrint();
-            map = new GMaps({
-                div: '#map',
-                lat: -12.043333,
-                lng: -77.028333
-            });
-        });
-
-    </script>
-
 
 </head>
 <body>
@@ -71,9 +54,6 @@
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-
-
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -99,10 +79,11 @@
                                                 <label for="name">GPS</label>
                                                 <input type="text" name="place.gps" class="form-control" id="gps" placeholder="" check-type="required">
 
+                                                <div id="map" style="width: 400px;height: 400px;">
+
+                                                </div>
 
                                             </div>
-
-
 
                                         </div>
 
@@ -171,12 +152,10 @@
 
     </div>
 
-
-
 </div>
 
 
-<jsp:include page="foot.jsp"></jsp:include>
+    <jsp:include page="foot.jsp"></jsp:include>
 
 
 
