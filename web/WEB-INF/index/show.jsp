@@ -59,12 +59,32 @@
 
         <div class="col-xs-12 col-md-12">
 
-            <h3>行程图片</h3>
+
+
+
             <c:forEach var="img" items="${list_img}">
                 <div class="row">
-                    <div class="col col-md-12">
-                        <img src="<%=path%>${img.imgpath}" alt="">
-                        <p>添加日期:${img.adddate}</p>
+
+
+                    <div class="col col-md-8">
+                        <div class="thumbnail">
+                            <img src="<%=path%>${img.imgpath}" alt="">
+                            <div style="text-align: center">
+                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                    设为封面
+                                </button>
+                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                    删除
+                                </button>
+                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                    喜欢
+                                </button>
+                                <p>添加日期:${img.adddate}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
                     </div>
                 </div>
 

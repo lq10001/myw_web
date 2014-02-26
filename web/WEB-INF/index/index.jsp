@@ -102,81 +102,17 @@
 
                 <!-- right -->
                 <div class="col-md-8">
-
-
                     <div class="row">
-                        <!--big-->
-                        <div class="col-md-6">
-                            <div style="width:350px;height: 350px; background-image:url(<%=path%>/img/1.jpg);background-repeat:repeat">
+
+                        <c:forEach var="trip" items="${list_trip}">
+                            <div class="col-xs-6 col-md-4">
+                                <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
+                                    <img src="<%=path%>${trip.imgpath}" alt="">
+                                    <p style="text-align: center;">${trip.name}</p>
+                                </a>
                             </div>
-                        </div>
+                        </c:forEach>
 
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr/>
-
-
-                    <div class="row">
-                        <!--big-->
-                        <div class="col-md-6">
-                            <div style="width:350px;height: 350px; background-image:url(<%=path%>/img/1.jpg);background-repeat:repeat">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="#" class="thumbnail">
-                                        <img src="<%=path%>/img/3.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <hr/>

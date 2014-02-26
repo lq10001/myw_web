@@ -27,7 +27,7 @@
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=true&language=zh"></script>
 
     <script type="text/javascript" src="<%=path%>/js/gmaps.js"></script>
     <script type="text/javascript" src="<%=path%>/js/prettify.js"></script>
@@ -66,7 +66,6 @@
                     <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
                         +添加地点
                     </button>
-
                 </div>
 
                 <!-- Modal -->
@@ -98,9 +97,8 @@
                                             <div class="form-group">
                                                 <label for="name">GPS</label>
                                                 <input type="text" name="place.gps" class="form-control" id="gps" placeholder="" check-type="required">
-
-
                                             </div>
+
 
 
 
@@ -146,7 +144,7 @@
                                 <td>${place.adddate}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" onclick="addImg(${place.id})">照片管理</button>
-                                    <button type="button" class="btn btn-primary">编辑</button>
+                                    <button type="button" class="btn btn-primary" onclick="editPlace(${place.id})">编辑</button>
                                     <!--
                                     <button type="button" class="btn btn-primary">删除</button>
                                     -->
@@ -171,15 +169,17 @@
 
     </div>
 
+    <div id="map">
+
+    </div>
+
+
 
 
 </div>
 
 
 <jsp:include page="foot.jsp"></jsp:include>
-
-
-
 
 
 </body>
@@ -195,15 +195,10 @@
     {
         location.href='<%=path%>/upload/'+placeid;
     }
+    function editPlace(placeid)
+    {
+        alert(placeid);
+        $('#myModal').modal('show');
 
-    var map;
-    $(document).ready(function(){
-        prettyPrint();
-        map = new GMaps({
-            div: '#map',
-            lat: -12.043333,
-            lng: -77.028333
-        });
-    });
-
+    }
 </script>

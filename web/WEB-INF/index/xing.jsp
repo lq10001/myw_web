@@ -85,98 +85,32 @@
             <h2>随我行</h2>
             <div class="row">
 
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
+                <c:forEach var="trip" items="${list_trip}">
+                    <div class="col-xs-6 col-md-3">
+                        <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
+                            <img src="<%=path%>${trip.imgpath}" alt="">
+                            <p style="text-align: center;">${trip.name}</p>
+                        </a>
+                    </div>
+                </c:forEach>
+
+
             </div><!--/row-->
 
-            <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
-            </div><!--/row-->
 
         <h2>在路上</h2>
 
         <div class="row">
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/1.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/2.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/3.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/4.jpg" alt="">
-                </a>
-            </div>
+            <c:forEach var="trip" items="${list_trip}">
+                <div class="col-xs-6 col-md-3">
+                    <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
+                        <img src="<%=path%>${trip.imgpath}" alt="">
+                        <p style="text-align: center;">${trip.name}</p>
+                    </a>
+                </div>
+            </c:forEach>
         </div><!--/row-->
 
-        <div class="row">
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/1.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/2.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/3.jpg" alt="">
-                </a>
-            </div>
-            <div class="col-xs-6 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="<%=path%>/img/4.jpg" alt="">
-                </a>
-            </div>
-        </div><!--/row-->
 
         <div class="row">
              <div style="text-align: center"> 加载更多.... </div>
