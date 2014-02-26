@@ -20,8 +20,14 @@ public class Trip extends Model<Trip> {
 
     public List<Trip> getListTrip(Integer userid)
     {
-        return tripDao.find("select * from trip where userid =" + userid);
+        return tripDao.find("select * from trip join img where trip.id = img.tripid and img.isdefault = 1 and trip.userid =" + userid);
     }
+
+    public List<Trip> getListTripTop10()
+    {
+        return tripDao.find("select  * from trip join img where trip.id = img.tripid and img.isdefault = 1 LIMIT 10 ");
+    }
+
 
 
     public Trip getTrip(Integer id)

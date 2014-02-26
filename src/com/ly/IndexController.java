@@ -21,6 +21,8 @@ public class IndexController extends Controller {
 
     public void index() {
         getMenu();
+        List<Trip> listTrip = Trip.tripDao.getListTripTop10();
+        setAttr("list_trip",listTrip);
         render("index/index.jsp");
     }
 
@@ -41,10 +43,10 @@ public class IndexController extends Controller {
     }
 
     public void travel() {
-        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
-        setAttr("webmenu_list",list_menu);
         setAttr("selmenu","xing");
-
+        getMenu();
+        List<Trip> listTrip = Trip.tripDao.getListTripTop10();
+        setAttr("list_trip",listTrip);
         render("index/xing.jsp");
     }
 
