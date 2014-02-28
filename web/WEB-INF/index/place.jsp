@@ -27,24 +27,8 @@
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
-    <script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=true&language=zh"></script>
-
-    <script type="text/javascript" src="<%=path%>/js/gmaps.js"></script>
-    <script type="text/javascript" src="<%=path%>/js/prettify.js"></script>
-
-    <script type="text/javascript">
-
-        var map;
-        $(document).ready(function(){
-            prettyPrint();
-            map = new GMaps({
-                div: '#map',
-                lat: -12.043333,
-                lng: -77.028333
-            });
-        });
-
-    </script>
+    <script src="http://ditu.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
+    <script type="text/javascript" src="<%=path%>/js/maplace.min.js"></script>
 
 
 </head>
@@ -73,7 +57,7 @@
 
 
 
-                    <div class="modal-dialog">
+                    <div class="modal-dialog" style="width: 800px;height: 600px;">
                         <div class="modal-content">
 
                             <form class="form-horizontal" method="post" id="form1" action="<%=path%>/place/save" role="form">
@@ -98,15 +82,16 @@
                                                 <label for="name">GPS</label>
                                                 <input type="text" name="place.gps" class="form-control" id="gps" placeholder="" check-type="required">
                                             </div>
-
-
-
-
                                         </div>
 
                                         <div class="col-md-2">
                                         </div>
                                     </div>
+                                    <div class="container" style="margin-left: 50px;">
+
+                                        <div id="gmap" style="width: 600px;height: 400px;"></div>
+                                    </div>
+
 
                                 </div>
                                 <div class="modal-footer">
@@ -169,13 +154,6 @@
 
     </div>
 
-    <div id="map">
-
-    </div>
-
-
-
-
 </div>
 
 
@@ -187,6 +165,51 @@
 
 
 <script type="text/javascript">
+
+    var marker;
+
+    new Maplace({
+        show_markers: false,
+        locations: [{
+            lat: 39.92,
+            lon: 116.46,
+            zoom: 8
+        }],
+        listeners: {
+            click: function(map, e) {
+                alert(e.latLng);
+
+                var point = e.latLng;
+
+                if (marker) {
+                    marker.setAnimation(google.maps.Animation.DROP);
+                    marker.setPosition(e.latLng);
+                } else {
+                    marker = new google.maps.Marker({
+                        position: e.latLng,
+                        animation: google.maps.Animation.DROP,
+                        map: map});
+                }
+
+
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'latLng':point},function(result,status){
+                    alert(result[0].formatted_address +'   ' + result[1].formatted_address + '  ' + result[2].formatted_address + ' ' + result[3].formatted_address + ' ');
+                    var pos = "";
+                    if (status != google.maps.GeocoderStatus.OK) {
+                        pos = "位置信息不可用("+retvalue[ncount].Latitude+","+retvalue[ncount].Longitude+")";
+                    }
+                    else{
+                        pos = result[0].formatted_address;
+                    }
+                    alert(pos);
+                });
+
+            }
+        }
+    }).Load();
+
+
     function onCreate()
     {
         location.href = '<%=path%>/';

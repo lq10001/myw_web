@@ -165,8 +165,17 @@
 
                 <c:forEach var="trip" items="${list_trip}">
                     <div class="col-xs-6 col-md-3">
-                        <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
-                            <img src="<%=path%>${trip.imgpath}" alt="">
+                        <a href="<%=path%>/trip/show/${trip.id}">
+                            <div class="image-box">
+                            <c:choose>
+                                <c:when test="${trip.defaultimg == ''}">
+                                    <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:otherwise>
+                            </c:choose>
+                            </div>
                             <p style="text-align: center;">${trip.name}</p>
                         </a>
                     </div>
@@ -176,10 +185,20 @@
         <h2>我创建的行程</h2>
 
         <div class="row">
+
             <c:forEach var="trip" items="${list_trip}">
                 <div class="col-xs-6 col-md-3">
-                    <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
-                        <img src="<%=path%>${trip.imgpath}" alt="">
+                    <a href="<%=path%>/trip/show/${trip.id}">
+                        <div class="image-box">
+                            <c:choose>
+                                <c:when test="${trip.defaultimg == ''}">
+                                    <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                         <p style="text-align: center;">${trip.name}</p>
                     </a>
                 </div>
@@ -189,10 +208,20 @@
         <h2>想去</h2>
 
         <div class="row">
+
             <c:forEach var="trip" items="${list_trip}">
                 <div class="col-xs-6 col-md-3">
-                    <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
-                        <img src="<%=path%>${trip.imgpath}" alt="">
+                    <a href="<%=path%>/trip/show/${trip.id}">
+                        <div class="image-box">
+                            <c:choose>
+                                <c:when test="${trip.defaultimg == ''}">
+                                    <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                         <p style="text-align: center;">${trip.name}</p>
                     </a>
                 </div>
@@ -203,10 +232,20 @@
         <h2>收藏</h2>
 
         <div class="row">
+
             <c:forEach var="trip" items="${list_trip}">
                 <div class="col-xs-6 col-md-3">
-                    <a href="<%=path%>/trip/show/${trip.id}" class="thumbnail">
-                        <img src="<%=path%>${trip.imgpath}" alt="">
+                    <a href="<%=path%>/trip/show/${trip.id}">
+                        <div class="image-box">
+                            <c:choose>
+                                <c:when test="${trip.defaultimg == ''}">
+                                    <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                         <p style="text-align: center;">${trip.name}</p>
                     </a>
                 </div>

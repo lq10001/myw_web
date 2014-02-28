@@ -152,3 +152,50 @@ body {
     margin-bottom: 30px;
 }
 
+.image-box {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    border:1px solid #ddd;
+    float:left;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+    position:relative;
+}
+
+.image-box img {
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    max-width:250px;
+    max-height: 200px;
+    /* for IE */
+    *width: 200px;
+    *height: auto;
+}
+
+
+.image-box-b {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    border:1px solid #ddd;
+    float:left;
+    position:relative;
+}
+
+.image-box-b img {
+    width: 250px;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+}
