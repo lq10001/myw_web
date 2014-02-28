@@ -87,7 +87,7 @@ public class IndexController extends Controller {
         {
             this.login();
         }else{
-            List<Trip> listTrip = Trip.tripDao.getListTrip(Integer.parseInt(userid.toString()));
+            List<Trip> listTrip = Trip.tripDao.getListTripByUser(Integer.parseInt(userid.toString()));
             setAttr("list_trip",listTrip);
             render("index/my.jsp");
         }

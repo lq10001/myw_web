@@ -18,9 +18,9 @@ public class Trip extends Model<Trip> {
     }
 
 
-    public List<Trip> getListTrip(Integer userid)
+    public List<Trip> getListTripByUser(Integer userid)
     {
-        return tripDao.find("select * from trip join img where trip.id = img.tripid and img.isdefault = 1 and trip.userid =" + userid);
+        return tripDao.find("select * from trip  where trip.userid =" + userid);
     }
 
     public List<Trip> getListTripTop10()
@@ -28,7 +28,10 @@ public class Trip extends Model<Trip> {
         return tripDao.find("select  * from trip join img where trip.id = img.tripid and img.isdefault = 1 LIMIT 10 ");
     }
 
-
+    public List<Trip> getListMyTrip10(Integer userid)
+    {
+        return tripDao.find("select * from trip join img where trip.id = img.tripid and trip.userid =" + userid);
+    }
 
     public Trip getTrip(Integer id)
     {
@@ -58,4 +61,13 @@ public class Trip extends Model<Trip> {
 //        CacheKit.removeAll("trip");
         return ok;
     }
+
+    public boolean updateDefalutImg(Object tripid,String imgpath)
+    {
+        Trip trip = new Trip();
+        trip.set("id",tripid);
+        trip.set("defaultimg",imgpath);
+         return trip.update();
+    }
+
 }

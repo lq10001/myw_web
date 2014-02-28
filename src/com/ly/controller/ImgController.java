@@ -7,6 +7,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.upload.UploadFile;
 import com.ly.Global;
 import com.ly.model.Img;
+import com.ly.model.Trip;
 import com.ly.tool.Dwz;
 import com.ly.vo.FileUploadInfo;
 import net.coobird.thumbnailator.Thumbnails;
@@ -89,7 +90,9 @@ public class ImgController extends Controller {
             img.set("imgpath",url);
             img.set("smallimgpath",s_url);
 
-            boolean ok = Img.imgDao.saveOrUpdate(img);
+            Img.imgDao.saveOrUpdate(img);
+
+            Trip.tripDao.updateDefalutImg(tripid,s_url);
 
             DecimalFormat df = new DecimalFormat("#.00");
 
