@@ -122,9 +122,9 @@ public class ImgController extends Controller {
 
     public void del()
     {
-        boolean ok =  Img.imgDao.deleteById(getParaToInt());
-        CacheKit.removeAll("img");
-        renderJson(Dwz.jsonRtn(ok,"img",""));
+        int id = getParaToInt("id");
+        boolean ok =  Img.imgDao.deleteById(id);
+        renderJson(ok ? "1" : "0");
     }
 
 }
