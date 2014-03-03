@@ -19,6 +19,9 @@
           rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="<%=path%>/fileupload/css/jquery.fileupload.css">
+
+    <link href="<%=path%>/css/carousel.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -49,16 +52,16 @@
     <br>
     <br>
 
+
     <div id="listfile" class="row">
         <c:forEach var="img" items="${list_img}">
-            <div class="col-md-2">
-                <div class="thumbnail" style="text-align: center;width: 200px;height: 220px;">
-                    <img style="margin-left: 5px;margin-top: 5px; width: 180px;height: 180px;" src="<%=path%>${img.imgpath}" alt="">
-
-                    <button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onEditPlace()">
-                        删除
-                    </button>
+            <div id="img_${img.id}" class="col-md-3" style="text-align: center;height: 260px;">
+                <div class="image-box">
+                    <img style=" vertical-align:middle;width: 260px; " alt="" src="<%=path%>${img.imgpath}" alt="">
                 </div>
+                <button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
+                    删除
+                </button>
             </div>
         </c:forEach>
     </div><!--/row-->
@@ -94,6 +97,15 @@
     function onEditPlace()
     {
         location.href = '<%=path%>/showPlace';
+    }
+
+    function onDelImg(imgId)
+    {
+        $.post("<%=path%>/img/del", { id: imgId },
+                function(data){
+                    var divName = "#img_"+imgId;
+                    $(divName).remove();
+                },"json");
     }
 
     /*jslint unparam: true */
