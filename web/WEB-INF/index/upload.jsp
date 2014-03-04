@@ -116,12 +116,13 @@
             url: '<%=path%>/img/save',
             dataType: 'json',
             done: function (e, data) {
+
                 $.each(data.result.files, function (index, file) {
-                    var content = '<div class="col-md-2">'
-                            + '<div class="thumbnail" style="text-align: center;width: 200px;height: 220px;">'
-                            +  '<img style="margin-left: 5px;margin-top: 5px; width: 180px;height: 180px;" src="<%=path%>'+file.url+'" alt="">'
-                            + '<button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="">删除 </button>'
+                    var content = '<div id="img_'+file.deleteUrl+'" class="col-md-3" style="text-align: center;height: 260px;">'
+                            + '<div class="image-box">'
+                            +  '<img style="vertical-align:middle;width: 260px;" src="<%=path%>'+file.url+'" alt="">'
                             + '</div>'
+                            + '<button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onDelImg('+file.deleteUrl+')">删除 </button>'
                             + '</div>';
                     $(content).appendTo('#listfile');
                 });

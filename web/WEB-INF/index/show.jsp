@@ -19,9 +19,16 @@
 
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
           rel="stylesheet" type="text/css">
+    <link href="<%=path%>/datepicker/css/datepicker.css" rel="stylesheet">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
+
+    <script src="http://ditu.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
+    <script type="text/javascript" src="<%=path%>/js/maplace.min.js"></script>
+
+    <script src="<%=path%>/datepicker/js/bootstrap-datepicker-zh_CN.js"></script>
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
 </head>
@@ -79,14 +86,19 @@
 
 
     <div class="row">
+        <div class="col-xs-12 col-md-8">
 
-        <div class="col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="gmap" style="height: 400px;"></div>
+                </div>
+            </div>
+            <br/>
+
 
             <c:forEach var="img" items="${list_img}">
                 <div class="row">
-
-
-                    <div class="col col-md-8">
+                    <div class="col col-md-12">
                         <div class="thumbnail">
                             <img src="<%=path%>${img.imgpath}" alt="">
                             <div style="text-align: center">
@@ -103,19 +115,58 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-
-                    </div>
                 </div>
-
-                <br/>
             </c:forEach>
-
-
-
-
         </div>
 
+        <div class="col-md-4">
+            <h3 style="margin-top:0px;">
+                航班&住宿
+            </h3>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">航班信息</div>
+
+                <ul id="flightList" class="list-group">
+
+                    <c:forEach var="flight" items="${flight_list}">
+                        <li class="list-group-item">
+                            <p>${flight.todate} ${flight.start} -> ${flight.arrival}</p>
+                            <p>${flight.name}</p>
+                        </li>
+                    </c:forEach>
+                </ul>
+
+
+                <div class="panel-footer" style="text-align: center">
+                    <button id="addFlight" class="btn btn-success btn-xs" data-toggle="modal">
+                        +添加航班信息
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">住宿信息</div>
+
+                <ul id="hotelList" class="list-group">
+
+                    <c:forEach var="hotel" items="${hotel_list}">
+                        <li class="list-group-item">
+                            <p>${hotel.date1} -> ${hotel.date2}</p>
+                            <p>${hotel.name}</p>
+                        </li>
+                    </c:forEach>
+                </ul>
+
+                <div class="panel-footer" style="text-align: center">
+                    <button id="addHotel" class="btn btn-success btn-xs" data-toggle="modal">
+                        +添加住宿信息
+                    </button>
+                </div>
+            </div>
+
+        </div>
     </div><!--/row-->
 
 
@@ -156,14 +207,214 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="flightModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" id="flightForm" action="<%=path%>/flight/save" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">添加航班信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="fname" class="col-md-2 control-label">航班号</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="flight.name" class="form-control" id="fname" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="start" class="col-md-2 control-label">出发地</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="flight.start" class="form-control" id="start" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="arrival" class="col-md-2 control-label">到达地</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="flight.arrival" class="form-control" id="arrival" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="todate" class="col-md-2 control-label">航班日期</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="flight.todate" class="form-control" id="todate" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button id="flightSubmit" type="button" class="btn btn-primary" onclick="onSaveFlight()">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="hotelModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" id="hotelForm" action="<%=path%>/hotel/save" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加住宿信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="name" class="col-md-2 control-label">旅店名称</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="hotel.name" class="form-control" id="name" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="date1" class="col-md-2 control-label">入住时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="hotel.date1" class="form-control" id="date1" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="date2" class="col-md-2 control-label">离开时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="hotel.date2" class="form-control" id="date2" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="price" class="col-md-2 control-label">价格</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="hotel.price" class="form-control" id="price" placeholder="" check-type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" id="hotelSubmit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
 
     <script type="text/javascript">
+
+        new Maplace({
+            show_markers: false,
+            locations: [{
+                lat: 39.92,
+                lon: 116.46,
+                zoom: 8
+            }]
+        }).Load();
+
+        $(function(){
+            window.prettyPrint && prettyPrint();
+            $('#date1').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('#date2').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('#todate').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+
+            $("#addFlight").on('click',function(event){
+                $("#fname").val("");
+                $("#start").val("");
+                $("#arrival").val("");
+                $("#todate").val("");
+                $("#flightForm").validation();
+                $('#flightModel').modal('show');
+            });
+
+            $("#addHotel").on('click',function(event){
+                $("#name").val("");
+                $("#date1").val("");
+                $("#date2").val("");
+                $("#price").val("");
+                $("#hotelForm").validation();
+                $('#hotelModel').modal('show');
+            });
+
+
+
+            //flight
+            $("#flightForm").validation();
+            $("#flightSubmit").on('click',function(event){
+                if ($("#flightForm").valid()==false){
+                    $("#error-text").text("填写信息不完整。")
+                    return false;
+                }else{
+                    $.post("<%=path%>/flight/save", $("#flightForm").serialize(),
+                            function(data){
+                                $('#flightModel').modal('hide');
+
+                                var content = ' <li class="list-group-item">'
+                                        + '<p>'+ $("#todate").val()+ "  " + $("#start").val()+' - '+$("#arrival").val()+'</p>'
+                                        + '<p>'+$("#fname").val()+'</p>'
+                                        + '</li>';
+                                $(content).appendTo('#flightList');
+
+                            },"json");
+                }
+            });
+
+            //hotel
+            $("#hotelForm").validation();
+            $("#hotelSubmit").on('click',function(event){
+                if ($("#hotelForm").valid()==false){
+                    $("#error-text").text("填写信息不完整。")
+                    return false;
+                }else{
+                    $.post("<%=path%>/hotel/save", $("#hotelForm").serialize(),
+                            function(data){
+                                $('#hotelModel').modal('hide');
+
+                                var content = ' <li class="list-group-item">'
+                                        + '<p>'+$("#date1").val()+' - '+$("#date2").val()+'</p>'
+                                        + '<p>'+$("#name").val()+'</p>'
+                                        + '</li>';
+                                $(content).appendTo('#hotelList');
+                            },"json");
+                }
+            });
+
+        });
+
+
         function onEditPlace()
         {
             location.href = '<%=path%>/showPlace';
+        }
+
+        function addFlight()
+        {
+
+        }
+
+        function addHotel()
+        {
+
         }
     </script>
 
