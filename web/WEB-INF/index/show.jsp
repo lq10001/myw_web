@@ -25,7 +25,7 @@
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
 
-    <script src="http://ditu.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
+    <script src="http://ditu.google.cn/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
     <script type="text/javascript" src="<%=path%>/js/maplace.min.js"></script>
 
     <script src="<%=path%>/datepicker/js/bootstrap-datepicker-zh_CN.js"></script>
@@ -317,13 +317,22 @@
 
     <script type="text/javascript">
 
+        var LocsS = [
+            <c:forEach var="place1" items="${place_list}">
+            {
+                lat: ${place1.lat},
+                lon: ${place1.lon},
+                zoom:8
+
+            },
+            </c:forEach>
+        ];
+
         new Maplace({
-            show_markers: false,
-            locations: [{
-                lat: 39.92,
-                lon: 116.46,
-                zoom: 8
-            }]
+            locations: LocsS,
+            show_markers: true,
+            type: 'polyline',
+            controls_on_map: false
         }).Load();
 
         $(function(){
