@@ -3,9 +3,7 @@ package com.ly.controller;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.ly.Global;
-import com.ly.model.Img;
-import com.ly.model.Trip;
-import com.ly.model.Webmenu;
+import com.ly.model.*;
 import com.ly.tool.Dwz;
 
 import javax.servlet.http.HttpSession;
@@ -66,13 +64,19 @@ public class TripController extends Controller {
 
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
-
         Integer tripid = Integer.parseInt(getPara(0));
+
         session.setAttribute(Global.TRIP_ID,tripid);
         setAttr("trip", Trip.tripDao.getTrip(tripid));
 
         List<Img> list_img = Img.imgDao.getListImgByTripid(Integer.parseInt(userid.toString()),tripid);
         setAttr("list_img",list_img);
+
+        List<Flight> flight_list = Flight.flightDao.getListFlightByUserAndTrip(Integer.parseInt(userid.toString()),tripid);
+        setAttr("flight_list",flight_list);
+
+        List<Hotel> hotel_list = Hotel.hotelDao.getListHotelByUserAndTrip(Integer.parseInt(userid.toString()),tripid);
+        setAttr("hotel_list",hotel_list);
 
         render("/WEB-INF/index/show.jsp");
     }

@@ -100,7 +100,7 @@ public class ImgController extends Controller {
             fileInfo.setUrl(url);
             fileInfo.setThumbnailUrl(s_url);
             fileInfo.setDeleteType("DELETE");
-            fileInfo.setDeleteUrl("");
+            fileInfo.setDeleteUrl(img.getInt("id").toString());
             fileInfo.setSize( df.format((double) f.getTotalSpace() / 1024) + "K");
             fileInfos.add(fileInfo);
         }
