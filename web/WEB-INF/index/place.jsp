@@ -177,56 +177,47 @@
 <script type="text/javascript">
 
 
-    var marker;
+    var map;
+    var myCenter=new google.maps.LatLng(39.92, 116.46);
+    var marker=new google.maps.Marker({
+        position:myCenter
+    });
 
-    new Maplace({
-        show_markers: false,
-        locations: [{
-            lat: 39.92,
-            lon: 116.46,
-            zoom: 8
-        }],
-        listeners: {
-            click: function(map, e) {
-                var point = e.latLng;
-                $("#gps").val(point);
-                $("#lat").val(e.latLng.lat());
-                $("#lon").val(e.latLng.lng());
+    function initialize() {
+        var mapProp = {
+            center:myCenter,
+            zoom: 14,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
 
-                if (marker) {
-                    marker.setAnimation(google.maps.Animation.DROP);
-                    marker.setPosition(e.latLng);
-                } else {
-                    marker = new google.maps.Marker({
-                        position: e.latLng,
-                        animation: google.maps.Animation.DROP,
-                        map: map});
-                }
+        map=new google.maps.Map(document.getElementById("gmap"),mapProp);
+        marker.setMap(map);
 
+        google.maps.event.addListener(map, 'click', function(e) {
+            var point = e.latLng;
 
-//                var geocoder = new google.maps.Geocoder();
-//                geocoder.geocode({'latLng':point},function(result,status){
-//                    alert(result[0].formatted_address +'   ' + result[1].formatted_address + '  ' + result[2].formatted_address + ' ' + result[3].formatted_address + ' ');
-//                    var pos = "";
-//                    if (status != google.maps.GeocoderStatus.OK) {
-//                        pos = "位置信息不可用("+retvalue[ncount].Latitude+","+retvalue[ncount].Longitude+")";
-//                    }
-//                    else{
-//                        pos = result[0].formatted_address;
-//                    }
-//                    alert(pos);
-//                });
-
+            if (marker) {
+                marker.setAnimation(google.maps.Animation.DROP);
+                marker.setPosition(e.latLng);
+            } else {
+                marker = new google.maps.Marker({
+                    position: e.latLng,
+                    animation: google.maps.Animation.DROP,
+                    map: map});
             }
-        }
-    }).Load();
-
+        });
+    };
 
     $(function(){
         $("#addPlace").on('click',function(event){
             $('#place').val();
             $('#gps').val();
             $('#placeModal').modal('show');
+        });
+
+        $("#placeModal").on("shown.bs.modal", function () {
+            initialize();
+            google.maps.event.trigger(map, "resize");
         });
 
         //flight
