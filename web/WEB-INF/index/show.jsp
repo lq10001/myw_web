@@ -77,11 +77,19 @@
         <div class="col-md-4">
             <br/>
             <br/>
-            <c:if test="${userid == trip.userid}">
-                <button class="btn btn-primary btn-lg" type="button" onclick="onEditPlace()">
-                    编辑行程
-                </button>
-            </c:if>
+
+            <c:choose>
+                <c:when test="${userid == trip.userid}">
+                    <button class="btn btn-primary btn-lg" type="button" onclick="onEditPlace()">
+                        编辑行程
+                    </button>
+                </c:when>
+                <c:when test="${userid > 0}">
+                    <button class="btn btn-primary btn-lg" type="button" onclick="onFollowTrip()">
+                        Follow行程
+                    </button>
+                </c:when>
+            </c:choose>
         </div>
     </div><!--/row-->
 
@@ -111,6 +119,9 @@
                                 </button>
                                 <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
                                     删除
+                                </button>
+                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
+                                    修改描述
                                 </button>
                                 </c:if>
                                 <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
