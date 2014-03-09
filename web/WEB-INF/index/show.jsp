@@ -17,11 +17,11 @@
 
     <title>CMS</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css">
-    <link href="<%=path%>/datepicker/css/datepicker.css" rel="stylesheet">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
+    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
+
+
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
 
@@ -29,6 +29,7 @@
     <script type="text/javascript" src="<%=path%>/js/maplace.min.js"></script>
 
     <script src="<%=path%>/datepicker/js/bootstrap-datepicker-zh_CN.js"></script>
+    <link href="<%=path%>/datepicker/css/datepicker.css" rel="stylesheet">
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
 </head>
@@ -76,9 +77,11 @@
         <div class="col-md-4">
             <br/>
             <br/>
-            <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
-                编辑行程
-            </button>
+            <c:if test="${userid == trip.userid}">
+                <button class="btn btn-primary btn-lg" type="button" onclick="onEditPlace()">
+                    编辑行程
+                </button>
+            </c:if>
         </div>
     </div><!--/row-->
 
@@ -97,17 +100,19 @@
 
 
             <c:forEach var="img" items="${list_img}">
-                <div class="row">
+                <div id="img_${img.id}" class="row">
                     <div class="col col-md-12">
                         <div class="thumbnail">
                             <img src="<%=path%>${img.imgpath}" alt="">
                             <div style="text-align: center">
-                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                <c:if test="${userid == trip.userid}">
+                                <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
                                     设为封面
                                 </button>
-                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
                                     删除
                                 </button>
+                                </c:if>
                                 <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
                                     喜欢
                                 </button>
@@ -139,9 +144,11 @@
 
 
                 <div class="panel-footer" style="text-align: center">
+                    <c:if test="${userid == trip.userid}">
                     <button id="addFlight" class="btn btn-success btn-xs" data-toggle="modal">
                         +添加航班信息
                     </button>
+                    </c:if>
                 </div>
             </div>
 
@@ -160,9 +167,11 @@
                 </ul>
 
                 <div class="panel-footer" style="text-align: center">
+                    <c:if test="${userid == trip.userid}">
                     <button id="addHotel" class="btn btn-success btn-xs" data-toggle="modal">
                         +添加住宿信息
                     </button>
+                    </c:if>
                 </div>
             </div>
 
@@ -317,24 +326,6 @@
 
     <script type="text/javascript">
 
-        var LocsS = [
-            <c:forEach var="place1" items="${place_list}">
-            {
-                lat: ${place1.lat},
-                lon: ${place1.lon},
-                zoom:8
-
-            },
-            </c:forEach>
-        ];
-
-        new Maplace({
-            locations: LocsS,
-            show_markers: true,
-            type: 'polyline',
-            controls_on_map: false
-        }).Load();
-
         $(function(){
             window.prettyPrint && prettyPrint();
             $('#date1').datepicker({
@@ -416,6 +407,26 @@
             location.href = '<%=path%>/showPlace';
         }
 
+
+        function onDelImg(imgId)
+        {
+            $.post("<%=path%>/img/del", { id: imgId },
+                    function(data){
+                        var divName = "#img_"+imgId;
+                        $(divName).remove();
+                    },"json");
+        }
+
+        function onDefaultImg(imgId)
+        {
+            $.post("<%=path%>/img/defaultImg", { id: imgId },
+                    function(data){
+                        var divName = "#btnDefault_"+imgId;
+                        $(divName).text("封面图片");
+                    },"json");
+
+        }
+
         function addFlight()
         {
 
@@ -425,6 +436,25 @@
         {
 
         }
+
+
+        var LocsS = [
+            <c:forEach var="place1" items="${place_list}">
+            {
+                lat: ${place1.lat},
+                lon: ${place1.lon},
+                zoom:8
+            },
+            </c:forEach>
+        ];
+
+        new Maplace({
+            locations: LocsS,
+            show_markers: true,
+            type: 'polyline',
+            controls_on_map: false
+        }).Load();
+
     </script>
 
 

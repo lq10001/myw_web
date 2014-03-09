@@ -22,7 +22,7 @@
 
             <form class="navbar-form navbar-right">
 
-                <input type="email" class="form-control" id="search" placeholder="城市|景点">
+                <input  id="search" type="email" class="form-control" placeholder="城市|景点" style="width:150px;">
 
                 <button type="button" class="btn btn-success" onclick="onRigister()">搜索</button>
                 <button type="button" class="btn btn-success" onclick="onDown()">客户端下载</button>
@@ -49,7 +49,7 @@
     <script type="text/javascript">
         function onDown()
         {
-            location.href = '<%=path%>/linkimg';
+            location.href = '<%=path%>/down';
         }
 
         function onLogin()

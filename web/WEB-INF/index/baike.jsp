@@ -80,14 +80,6 @@
 
     <div class="container">
 
-        <div class="row">
-            <div class="container">
-                <div class="col col-md-12">
-                    <img src="http://lorempixel.com/1024/100/nightlife/4" class="img-responsive" >
-                </div>
-            </div>
-        </div>
-
         <div class="container">
 
             <div class="row">
@@ -97,56 +89,32 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>热门景点</h2>
+                            <h2>慕友百科</h2>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <c:forEach var="trip" items="${list_trip}">
-                            <div class="col-xs-6 col-md-3">
-                                <a href="<%=path%>/trip/show/${trip.id}">
-                                    <div class="image-box-a">
-                                        <c:choose>
-                                            <c:when test="${trip.defaultimg == ''}">
-                                                <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
-                                        </c:when>
-                                            <c:otherwise>
-                                                <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                    <p style="text-align: center;">${trip.name}</p>
-                                </a>
-                            </div>
-                        </c:forEach>
+                    <div class="row" style="font-size: 18px;">
+                            <ol>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Consectetur adipiscing elit</li>
+                                <li>Integer molestie lorem at massa</li>
+                                <li>Facilisis in pretium nisl aliquet</li>
+                                <li>Nulla volutpat aliquam velit</li>
+                                <li>Faucibus porta lacus fringilla vel</li>
+                                <li>Aenean sit amet erat nunc</li>
+                                <li>Eget porttitor lorem</li>
+                                <li>Nulla volutpat aliquam velit</li>
+                                <li>Faucibus porta lacus fringilla vel</li>
+                                <li>Aenean sit amet erat nunc</li>
+                                <li>Eget porttitor lorem</li>
+
+                                <li>Nulla volutpat aliquam velit</li>
+                                <li>Faucibus porta lacus fringilla vel</li>
+                                <li>Aenean sit amet erat nunc</li>
+                                <li>Eget porttitor lorem</li>
+
+                            </ol>
                     </div><!--/row-->
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>热门城市</h2>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                    <c:forEach var="trip" items="${list_trip}">
-                        <div class="col-xs-6 col-md-3">
-                            <a href="<%=path%>/trip/show/${trip.id}">
-                                <div class="image-box-a">
-                                    <c:choose>
-                                        <c:when test="${trip.defaultimg == ''}">
-                                            <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <p style="text-align: center;">${trip.name}</p>
-                            </a>
-                        </div>
-                    </c:forEach>
-                </div><!--/row-->
 
 
 
@@ -176,14 +144,6 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">广告3</h3>
-                        </div>
-                        <div class="panel-body">
-                            <img src="<%=path%>/img/21.jpg" alt="">
-                        </div>
-                    </div>
 
                 </div>
 

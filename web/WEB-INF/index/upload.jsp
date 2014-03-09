@@ -41,7 +41,7 @@
     </span>
 
     <button type="button" class="btn btn-primary" onclick="onNext()">
-        预览效果
+        查看行程
     </button>
 
     <button type="button" class="btn btn-primary" onclick="onEditPlace()">

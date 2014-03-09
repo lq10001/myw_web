@@ -17,10 +17,9 @@
 
     <title>CMS</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
+    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
@@ -63,6 +62,11 @@
                     <button id="addPlace" class="btn btn-success" data-toggle="modal">
                         +添加地点
                     </button>
+
+                    <button id="showTrip" type="button" class="btn btn-primary">
+                        查看行程
+                    </button>
+
                 </div>
 
 
@@ -89,7 +93,7 @@
                                 <td>${place.adddate}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" onclick="addImg(${place.id})">照片管理</button>
-                                    <button type="button" class="btn btn-primary" onclick="editPlace(${place.id})">编辑</button>
+                                    <button type="button" class="btn btn-primary" onclick="editPlace(${place.id},'${place.name}','${place.gps}',${place.lat},${place.lon})">编辑</button>
                                     <!--
                                     <button type="button" class="btn btn-primary">删除</button>
                                     -->
@@ -125,6 +129,7 @@
 
                 <input id="lat" type="hidden" name="place.lat" value="">
                 <input id="lon" type="hidden" name="place.lon" value="">
+                <input id="placeid" type="hidden" name="place.id" value="">
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -195,6 +200,10 @@
 
         google.maps.event.addListener(map, 'click', function(e) {
             var point = e.latLng;
+            $("#gps").val(e.latLng);
+            $("#lat").val(e.latLng.lat());
+            $("#lon").val(e.latLng.lng());
+
 
             if (marker) {
                 marker.setAnimation(google.maps.Animation.DROP);
@@ -210,9 +219,14 @@
 
     $(function(){
         $("#addPlace").on('click',function(event){
-            $('#place').val();
+            $('#placeid').val();
+            $('#name').val();
             $('#gps').val();
             $('#placeModal').modal('show');
+        });
+
+        $("#showTrip").on('click',function(event){
+            location.href = '<%=path%>/trip/show/${tripid}';
         });
 
         $("#placeModal").on("shown.bs.modal", function () {
@@ -241,10 +255,13 @@
     {
         location.href='<%=path%>/upload/'+placeid;
     }
-    function editPlace(placeid)
+    function editPlace(placeid,name,gps,lat,lon)
     {
-        alert(placeid);
-        $('#myModal').modal('show');
-
+        $('#placeid').val(placeid);
+        $('#name').val(name);
+        $('#gps').val(gps);
+        $('#lat').val(lat);
+        $('#lon').val(lon);
+        $('#placeModal').modal('show');
     }
 </script>

@@ -107,101 +107,59 @@
 
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>热门线路</h2>
+                </div>
+            </div>
+
 
             <div class="row">
-                <h3>热门线路</h3>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
+                <c:forEach var="trip" items="${list_trip}">
+                    <div class="col-xs-6 col-md-3">
+                        <a href="<%=path%>/trip/show/${trip.id}">
+                            <div class="image-box-a">
+                                <c:choose>
+                                    <c:when test="${trip.defaultimg == ''}">
+                                        <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <p style="text-align: center;">${trip.name}</p>
+                        </a>
+                    </div>
+                </c:forEach>
             </div><!--/row-->
 
             <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
+                <div class="col-md-12">
+                    <h2>推荐线路</h2>
                 </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
-            </div><!--/row-->
+            </div>
 
-            <h3>推荐线路</h3>
+
             <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
+                <c:forEach var="trip" items="${list_trip}">
+                    <div class="col-xs-6 col-md-3">
+                        <a href="<%=path%>/trip/show/${trip.id}">
+                            <div class="image-box-a">
+                                <c:choose>
+                                    <c:when test="${trip.defaultimg == ''}">
+                                        <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <p style="text-align: center;">${trip.name}</p>
+                        </a>
+                    </div>
+                </c:forEach>
             </div><!--/row-->
-            <div class="row">
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/1.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/2.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/3.jpg" alt="">
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%=path%>/img/4.jpg" alt="">
-                    </a>
-                </div>
-            </div><!--/row-->
-
-
 
         </div><!--/span-->
 
