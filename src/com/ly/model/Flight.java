@@ -22,10 +22,17 @@ public class Flight extends Model<Flight> {
         return flightDao.find("select * from flight  where flight.userid =" + userid);
     }
 
+    public List<Flight> getListFlightByTrip(Integer tripid)
+    {
+        return flightDao.find("select * from flight  where tripid = "+tripid);
+    }
+
+
     public List<Flight> getListFlightByUserAndTrip(Integer userid,Integer tripid)
     {
         return flightDao.find("select * from flight  where flight.userid =" + userid + " and tripid = "+tripid);
     }
+
 
     public List<Flight> getListFlightTop10()
     {

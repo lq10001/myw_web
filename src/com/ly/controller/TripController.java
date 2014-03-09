@@ -63,23 +63,21 @@ public class TripController extends Controller {
         setAttr("webmenu_list",list_menu);
 
         HttpSession session = getSession();
-        Object o_userid = session.getAttribute(Global.USER_ID);
-        Integer userid =  Integer.parseInt(o_userid.toString());
         Integer tripid = Integer.parseInt(getPara(0));
 
         session.setAttribute(Global.TRIP_ID,tripid);
         setAttr("trip", Trip.tripDao.getTrip(tripid));
 
-        List<Img> list_img = Img.imgDao.getListImgByTripid(userid,tripid);
+        List<Img> list_img = Img.imgDao.getListImgByTripid(tripid);
         setAttr("list_img",list_img);
 
-        List<Flight> flight_list = Flight.flightDao.getListFlightByUserAndTrip(userid,tripid);
+        List<Flight> flight_list = Flight.flightDao.getListFlightByTrip(tripid);
         setAttr("flight_list",flight_list);
 
-        List<Hotel> hotel_list = Hotel.hotelDao.getListHotelByUserAndTrip(userid,tripid);
+        List<Hotel> hotel_list = Hotel.hotelDao.getListHotelByTrip(tripid);
         setAttr("hotel_list",hotel_list);
 
-        List<Place> place_list = Place.placeDao.getListPlace(userid);
+        List<Place> place_list = Place.placeDao.getListPlaceByTripid(tripid);
         setAttr("place_list",place_list);
 
         render("/WEB-INF/index/show.jsp");

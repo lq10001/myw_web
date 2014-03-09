@@ -25,7 +25,7 @@ public class Trip extends Model<Trip> {
 
     public List<Trip> getListTripTop10()
     {
-        return tripDao.find("select  * from trip join img where trip.id = img.tripid and img.isdefault = 1 LIMIT 10 ");
+        return tripDao.find("select * from trip LIMIT 10 ");
     }
 
     public List<Trip> getListMyTrip10(Integer userid)

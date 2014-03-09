@@ -127,4 +127,13 @@ public class ImgController extends Controller {
         renderJson(ok ? "1" : "0");
     }
 
+    public void defaultImg()
+    {
+        int id = getParaToInt("id");
+        Img img = Img.imgDao.findById(id);
+        Boolean ok =  Trip.tripDao.updateDefalutImg(img.getInt("tripid"),img.getStr("imgpath"));
+        renderJson(ok ? "1" : "0");
+
+    }
+
 }

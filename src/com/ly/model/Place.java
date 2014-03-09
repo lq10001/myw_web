@@ -29,6 +29,13 @@ public class Place extends Model<Place> {
     }
 
 
+    public List<Place> getListPlaceTop10()
+    {
+        return placeDao.find("select * from place limit 10");
+    }
+
+
+
     public Place getPlace(Integer id)
     {
         return placeDao.findById(id);

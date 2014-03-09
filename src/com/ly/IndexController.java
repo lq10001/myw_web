@@ -23,22 +23,22 @@ public class IndexController extends Controller {
         getMenu();
         List<Trip> listTrip = Trip.tripDao.getListTripTop10();
         setAttr("list_trip",listTrip);
+
         render("index/index.jsp");
+
     }
 
     public void mudi() {
-        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
-        setAttr("webmenu_list",list_menu);
-        setAttr("selmenu","mudi");
+        getMenu();
 
+        List<Trip> listTrip = Trip.tripDao.getListTripTop10();
+        setAttr("list_trip",listTrip);
+
+        setAttr("selmenu","mudi");
         render("index/mudi.jsp");
     }
 
     public void down() {
-        List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
-        setAttr("webmenu_list",list_menu);
-        setAttr("selmenu","down");
-
         render("index/down.jsp");
     }
 
@@ -82,13 +82,17 @@ public class IndexController extends Controller {
     {
         getMenu();
         HttpSession session = getSession();
-        Object userid = session.getAttribute(Global.USER_ID);
-        if (userid == null)
+        Object o_userid = session.getAttribute(Global.USER_ID);
+        if (o_userid == null)
         {
             this.login();
         }else{
-            List<Trip> listTrip = Trip.tripDao.getListTripByUser(Integer.parseInt(userid.toString()));
+            Integer userid = Integer.parseInt(o_userid.toString());
+            List<Trip> listTrip = Trip.tripDao.getListTripByUser(userid);
             setAttr("list_trip",listTrip);
+
+            List<Img> listImg = Img.imgDao.getListImgByUserId(userid);
+            setAttr("list_img",listImg);
             render("index/my.jsp");
         }
     }
@@ -124,6 +128,13 @@ public class IndexController extends Controller {
     {
         getMenu();
         render("index/show.jsp");
+    }
+
+    public void baike()
+    {
+        getMenu();
+        setAttr("selmenu","baike");
+        render("index/baike.jsp");
     }
 
     public void loginOut()

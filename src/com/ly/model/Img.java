@@ -16,14 +16,19 @@ public class Img extends Model<Img> {
         return imgDao.find("select * from img");
     }
 
-    public List<Img> getListImgByTripid(Integer userid,Integer tripid)
+    public List<Img> getListImgByTripid(Integer tripid)
     {
-        return imgDao.find("select * from img where userid = " + userid + " and tripid =" + tripid);
+        return imgDao.find("select * from img where  tripid =" + tripid);
     }
 
     public List<Img> getListImgByPlaceid(Integer placeid)
     {
         return imgDao.find("select * from img where placeid = " + placeid);
+    }
+
+    public List<Img> getListImgByUserId(Integer userid)
+    {
+        return imgDao.find("select * from img where userid = " + userid + " limit 10");
     }
 
 

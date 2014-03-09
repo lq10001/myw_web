@@ -22,6 +22,12 @@ public class Hotel extends Model<Hotel> {
         return hotelDao.find("select * from hotel  where hotel.userid =" + userid);
     }
 
+    public List<Hotel> getListHotelByTrip(Integer tripid)
+    {
+        return hotelDao.find("select * from hotel  where  tripid = "+tripid);
+    }
+
+
     public List<Hotel> getListHotelByUserAndTrip(Integer userid,Integer tripid)
     {
         return hotelDao.find("select * from hotel  where hotel.userid =" + userid + " and tripid = "+tripid);
