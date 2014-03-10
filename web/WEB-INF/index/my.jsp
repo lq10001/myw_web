@@ -1,6 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
     String path = request.getContextPath();
@@ -128,10 +129,10 @@
                     <div class="col-md-12">
                         <ul class="nav nav-justified nav-stacked nav-tabs">
                             <li class="col-md-2">
-                                <a href="#">旅程1</a>
+                                <a href="#">Follow<c:out value="${fn:length(list_follow)}"></c:out></a>
                             </li>
                             <li class="col-md-2">
-                                <a href="#">想去</a>
+                                <a href="#">行程<c:out value="${fn:length(list_trip)}"></c:out></a>
                             </li>
                             <li class="col-md-2">
                                 <a href="#">喜欢</a>
@@ -160,48 +161,74 @@
         </div>
 
             <h2>我follow的行程</h2>
+
             <div class="row">
 
-                <c:forEach var="trip" items="${list_trip}">
-                    <div class="col-xs-6 col-md-3">
-                        <a href="<%=path%>/trip/show/${trip.id}">
-                            <div class="image-box">
-                            <c:choose>
-                                <c:when test="${trip.defaultimg == ''}">
-                                    <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
-                                </c:when>
-                                <c:otherwise>
-                                    <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
-                                </c:otherwise>
-                            </c:choose>
+                <c:choose>
+                    <c:when test="${fn:length(list_follow) > 0}">
+
+                        <c:forEach var="trip" items="${list_follow}">
+                            <div class="col-xs-6 col-md-3">
+                                <a href="<%=path%>/trip/show/${trip.id}">
+                                    <div class="image-box">
+                                        <c:choose>
+                                            <c:when test="${trip.defaultimg == ''}">
+                                                <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                    <p style="text-align: center;">${trip.name}</p>
+                                </a>
                             </div>
-                            <p style="text-align: center;">${trip.name}</p>
-                        </a>
-                    </div>
-                </c:forEach>
+                        </c:forEach>
+
+                    </c:when>
+                    <c:otherwise>
+                        <div class="thumbnail col-md-12" style="text-align: center;">
+                            <h3>没有Follow行程</h1>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
+
             </div><!--/row-->
 
         <h2>我创建的行程</h2>
 
         <div class="row">
 
-            <c:forEach var="trip" items="${list_trip}">
-                <div class="col-xs-6 col-md-3">
-                    <a href="<%=path%>/trip/show/${trip.id}">
-                        <div class="image-box">
-                            <c:choose>
-                                <c:when test="${trip.defaultimg == ''}">
-                                    <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
-                                </c:when>
-                                <c:otherwise>
-                                    <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
-                                </c:otherwise>
-                            </c:choose>
+            <c:choose>
+                <c:when test="${fn:length(list_trip) > 0}">
+
+                    <c:forEach var="trip" items="${list_trip}">
+                        <div class="col-xs-6 col-md-3">
+                            <a href="<%=path%>/trip/show/${trip.id}">
+                                <div class="image-box">
+                                    <c:choose>
+                                        <c:when test="${trip.defaultimg == ''}">
+                                            <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <p style="text-align: center;">${trip.name}</p>
+                            </a>
                         </div>
-                        <p style="text-align: center;">${trip.name}</p>
-                    </a>
-                </div>
-            </c:forEach>
+                    </c:forEach>
+
+                </c:when>
+                <c:otherwise>
+                    <div class="thumbnail col-md-12" style="text-align: center;">
+                        <h3>没有创建行程</h1>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
         </div><!--/row-->
 
         <h2>想去</h2>

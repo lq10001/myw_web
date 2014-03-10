@@ -85,7 +85,7 @@
                     </button>
                 </c:when>
                 <c:when test="${userid > 0}">
-                    <button class="btn btn-primary btn-lg" type="button" onclick="onFollowTrip()">
+                    <button class="btn btn-primary btn-lg" type="button" onclick="onFollowTrip(${trip.id})">
                         Follow行程
                     </button>
                 </c:when>
@@ -186,6 +186,56 @@
                 </div>
             </div>
 
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">餐厅信息</div>
+
+                <ul id="restaurantList" class="list-group">
+
+                    <c:forEach var="restaurant" items="${restaurant_list}">
+                        <li class="list-group-item">
+                            <p>${restaurant.name}</p>
+                            <p>消费金额: ${restaurant.price} &nbsp;人民币</p>
+                        </li>
+                    </c:forEach>
+                </ul>
+
+                <div class="panel-footer" style="text-align: center">
+                    <c:if test="${userid == trip.userid}">
+                        <button id="addRestaurant" class="btn btn-success btn-xs" data-toggle="modal">
+                            +添加餐厅信息
+                        </button>
+                    </c:if>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">向导信息</div>
+
+                <ul id="guideList" class="list-group">
+
+                    <c:forEach var="guide" items="${guide_list}">
+                        <li class="list-group-item">
+                            <p>姓名：${guide.name} </p>
+                            <p>电话：${guide.phone}</p>
+                        </li>
+                    </c:forEach>
+                </ul>
+
+                <div class="panel-footer" style="text-align: center">
+                    <c:if test="${userid == trip.userid}">
+                        <button id="addGuide" class="btn btn-success btn-xs" data-toggle="modal">
+                            +添加向导信息
+                        </button>
+                    </c:if>
+                </div>
+            </div>
+
+
+
         </div>
     </div><!--/row-->
 
@@ -227,7 +277,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- flightModel -->
     <div class="modal fade" id="flightModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 600px;height: 400px;">
             <div class="modal-content">
@@ -279,7 +329,7 @@
     </div><!-- /.modal -->
 
 
-    <!-- Modal -->
+    <!-- HotelModal -->
     <div class="modal fade" id="hotelModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 600px;height: 400px;">
             <div class="modal-content">
@@ -331,6 +381,86 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+
+
+    <!-- GuideModal -->
+    <div class="modal fade" id="guideModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" id="guideForm" action="<%=path%>/guide/save" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加向导信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="guideName" class="col-md-2 control-label">向导名称</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="guide.name" class="form-control" id="guideName" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="guidePhone" class="col-md-2 control-label">向导电话</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="guide.phone" class="form-control" id="guidePhone" placeholder="" check-type="phone">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" id="guideSubmit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- RestaurantModal -->
+    <div class="modal fade" id="restaurantModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" id="restaurantForm" action="<%=path%>/restaurant/save" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加餐厅信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="restaurantName" class="col-md-2 control-label">餐厅名称</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="restaurant.name" class="form-control" id="restaurantName" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="restaurantPrice" class="col-md-2 control-label">消费金额</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="restaurant.price" class="form-control" id="restaurantPrice" placeholder="" check-type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" id="restaurantSubmit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
@@ -365,6 +495,20 @@
                 $("#price").val("");
                 $("#hotelForm").validation();
                 $('#hotelModel').modal('show');
+            });
+
+            $("#addGuide").on('click',function(event){
+                $("#guideName").val("");
+                $("#guidePhone").val("");
+                $("#guideForm").validation();
+                $('#guideModel').modal('show');
+            });
+
+            $("#addRestaurant").on('click',function(event){
+                $("#restaurantName").val("");
+                $("#restaurantPrice").val("");
+                $("#restaurantForm").validation();
+                $('#restaurantModel').modal('show');
             });
 
 
@@ -410,12 +554,60 @@
                 }
             });
 
+            //Guide
+            $("#guideForm").validation();
+            $("#guideSubmit").on('click',function(event){
+                if ($("#guideForm").valid()==false){
+                    $("#error-text").text("填写信息不完整。")
+                    return false;
+                }else{
+                    $.post("<%=path%>/guide/save", $("#guideForm").serialize(),
+                            function(data){
+                                $('#guideModel').modal('hide');
+                                var content = ' <li class="list-group-item">'
+                                        + '<p>姓名： ' + $("#guideName").val() + '</p>'
+                                        + '<p>电话： ' + $("#guidePhone").val() +'</p>'
+                                        + '</li>';
+                                $(content).appendTo('#guideList');
+                            },"json");
+                }
+            });
+
+
+            //Restaurant
+            $("#restaurantForm").validation();
+            $("#restaurantSubmit").on('click',function(event){
+                if ($("#restaurantForm").valid()==false){
+                    $("#error-text").text("填写信息不完整。")
+                    return false;
+                }else{
+                    $.post("<%=path%>/restaurant/save", $("#restaurantForm").serialize(),
+                            function(data){
+                                $('#restaurantModel').modal('hide');
+
+                                var content = ' <li class="list-group-item">'
+                                        + '<p>' + $("#restaurantName").val() + '</p>'
+                                        + '<p>消费金额:' + $("#restaurantPrice").val() + ' &nbsp;人民币</p>'
+                                        + '</li>';
+                                $(content).appendTo('#restaurantList');
+                            },"json");
+                }
+            });
+
         });
 
 
         function onEditPlace()
         {
             location.href = '<%=path%>/showPlace';
+        }
+
+        function onFollowTrip(tripid)
+        {
+            $.post("<%=path%>/trip/follow", { id: tripid },
+                    function(data){
+                        alert(data);
+                    },"json");
         }
 
 
@@ -437,17 +629,6 @@
                     },"json");
 
         }
-
-        function addFlight()
-        {
-
-        }
-
-        function addHotel()
-        {
-
-        }
-
 
         var LocsS = [
             <c:forEach var="place1" items="${place_list}">

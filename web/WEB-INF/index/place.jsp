@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <%
     String path = request.getContextPath();
@@ -31,6 +33,10 @@
     <script src="<%=path%>/js/offcanvas.js"></script>
     <script src="http://ditu.google.cn/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
     <script type="text/javascript" src="<%=path%>/js/maplace.min.js"></script>
+
+    <script src="<%=path%>/datepicker/js/bootstrap-datepicker-zh_CN.js"></script>
+    <link href="<%=path%>/datepicker/css/datepicker.css" rel="stylesheet">
+
 
     <style>
         #gmap {
@@ -148,14 +154,37 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="tripdate" class="col-md-2 control-label">旅游时间</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="place.tripdate" class="form-control span2" id="tripdate" placeholder=""  data-date-format="yyyy-mm-dd" check-type="required">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label  class="col-md-2 control-label">地点类型</label>
+                                <div class="col-md-6">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="type1" name="place.type" value="1" checked>城市
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="type2" name="place.type" value="2">景点
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="type3" name="place.type" value="3">酒店
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="type4" name="place.type" value="4">餐厅
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
 
                                 <label for="gps" class="col-md-2 control-label">GPS</label>
                                 <div class="col-md-6">
                                     <input type="text" readonly="readonly" name="place.gps" class="form-control" id="gps" placeholder="" check-type="required">
                                     <label>请点击地图确定GPS位置</label>
                                 </div>
-
-
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -218,6 +247,13 @@
     };
 
     $(function(){
+        window.prettyPrint && prettyPrint();
+        $('#tripdate').val('${nowDate}');
+        $('#tripdate').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+
         $("#addPlace").on('click',function(event){
             $('#placeid').val();
             $('#name').val();
