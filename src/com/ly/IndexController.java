@@ -8,6 +8,8 @@ import com.ly.tool.MenuTree;
 import com.ly.model.Webmenu;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class IndexController extends Controller {
@@ -88,8 +90,14 @@ public class IndexController extends Controller {
             this.login();
         }else{
             Integer userid = Integer.parseInt(o_userid.toString());
+
+
+            List<Trip> listFollow = Trip.tripDao.getListFollowTripByUser(userid);
+            setAttr("list_follow",listFollow);
+
             List<Trip> listTrip = Trip.tripDao.getListTripByUser(userid);
             setAttr("list_trip",listTrip);
+
 
             List<Img> listImg = Img.imgDao.getListImgByUserId(userid);
             setAttr("list_img",listImg);
@@ -106,6 +114,10 @@ public class IndexController extends Controller {
 
         List<Place> list_place = Place.placeDao.getListPlaceByTripid(tripid);
         setAttr("list_place",list_place);
+
+        Date d=new Date();
+        SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
+        setAttr("nowDate",sf.format(d));
 
         render("index/place.jsp");
     }

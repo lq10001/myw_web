@@ -80,7 +80,26 @@ public class TripController extends Controller {
         List<Place> place_list = Place.placeDao.getListPlaceByTripid(tripid);
         setAttr("place_list",place_list);
 
+        List<Guide> guide_list = Guide.guideDao.getListGuideByTrip(tripid);
+        setAttr("guide_list",guide_list);
+
+        List<Restaurant> res_list = Restaurant.restaurantDao.getListRestaurantByTrip(tripid);
+        setAttr("restaurant_list",res_list);
+
         render("/WEB-INF/index/show.jsp");
+    }
+
+    public void follow()
+    {
+        int id = getParaToInt("id");
+
+        HttpSession session = getSession();
+        Object userid = session.getAttribute(Global.USER_ID);
+        Follow follow = new Follow();
+        follow.set("tripid",id);
+        follow.set("userid",userid);
+        boolean ok =  Follow.followDao.saveOrUpdate(follow);
+        renderJson(ok ? "1" : "0");
     }
 
 }

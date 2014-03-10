@@ -63,6 +63,8 @@ public class UserController extends Controller {
         User rtnUser = User.userDao.login(user.getStr("email"),user.getStr("password"));
         if (rtnUser != null)
         {
+            System.out.println(rtnUser.getInt("id"));
+
             getSession().setAttribute("email",user.getStr("email"));
             getSession().setAttribute("userid",rtnUser.getInt("id"));
             redirect("/my");

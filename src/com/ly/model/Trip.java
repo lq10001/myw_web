@@ -23,6 +23,15 @@ public class Trip extends Model<Trip> {
         return tripDao.find("select * from trip  where trip.userid =" + userid);
     }
 
+
+    public List<Trip> getListFollowTripByUser(Integer userid)
+    {
+        return tripDao.find("select trip.*,follow.userid fuserid from follow inner join trip on follow.tripid = trip.id where follow.userid=" + userid);
+    }
+
+
+
+
     public List<Trip> getListTripTop10()
     {
         return tripDao.find("select * from trip LIMIT 10 ");

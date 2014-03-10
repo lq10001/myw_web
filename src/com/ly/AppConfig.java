@@ -42,6 +42,8 @@ public class AppConfig extends JFinalConfig {
         me.add("/hotel",HotelController.class);
         me.add("/flight",FlightController.class);
 
+        me.add("/guide",GuideController.class);
+        me.add("/restaurant",RestaurantController.class);
 
 //        AutoBindRoutes routes = new AutoBindRoutes();
 //        me.add(routes);
@@ -84,6 +86,10 @@ public class AppConfig extends JFinalConfig {
         arp.addMapping("hotel",Hotel.class);
         arp.addMapping("flight",Flight.class);
 
+        arp.addMapping("guide",Guide.class);
+        arp.addMapping("restaurant",Restaurant.class);
+
+        arp.addMapping("follow",Follow.class);
 
         // 缓存插件
         me.add(new EhCachePlugin());
