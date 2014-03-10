@@ -6,6 +6,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.upload.UploadFile;
 import com.ly.Global;
+import com.ly.model.Hotel;
 import com.ly.model.Img;
 import com.ly.model.Trip;
 import com.ly.tool.Dwz;
@@ -132,6 +133,24 @@ public class ImgController extends Controller {
         int id = getParaToInt("id");
         Img img = Img.imgDao.findById(id);
         Boolean ok =  Trip.tripDao.updateDefalutImg(img.getInt("tripid"),img.getStr("imgpath"));
+        renderJson(ok ? "1" : "0");
+
+    }
+
+    public void mark()
+    {
+        /*
+        int id = getParaToInt("id");
+        String mark = getPara("img.mark");
+        Img img = new Img();
+        img.set("id",id);
+        img.set("mark",mark);
+        */
+
+//        Img.imgDao.saveOrUpdate(img);
+//
+        Img img = getModel(Img.class);
+        Boolean ok = Img.imgDao.saveOrUpdate(img);
         renderJson(ok ? "1" : "0");
 
     }
