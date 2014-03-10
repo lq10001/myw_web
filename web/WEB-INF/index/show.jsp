@@ -112,6 +112,7 @@
                     <div class="col col-md-12">
                         <div class="thumbnail">
                             <img src="<%=path%>${img.imgpath}" alt="">
+                            <p style="text-align: center;" id="mark_${img.id}">${img.mark}</p>
                             <div style="text-align: center">
                                 <c:if test="${userid == trip.userid}">
                                 <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
@@ -120,7 +121,7 @@
                                 <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
                                     删除
                                 </button>
-                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
+                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onMark(${img.id},'${img.mark}')">
                                     修改描述
                                 </button>
                                 </c:if>
@@ -461,6 +462,29 @@
     </div><!-- /.modal -->
 
 
+    <!-- RestaurantModal -->
+    <div class="modal fade" id="markModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" id="markForm" action="<%=path%>/img/mark" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">编辑描述信息</h4>
+                    </div>
+                    <div class="modal-body">
+                            <input id="imgid" type="hidden" name="img.id" value="">
+                            <textarea class="form-control" name="img.mark" id="mark" rows="3" placeholder="请收入描述信息"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" id="markSubmit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
@@ -594,6 +618,20 @@
                 }
             });
 
+            $("#markSubmit").on('click',function(event){
+                if ($("#mark").val().length > 0 ){
+                    $.post("<%=path%>/img/mark", $("#markForm").serialize(),
+                            function(data){
+                                $('#markModel').modal('hide');
+                                var divName = "#mark_"+$('#imgid').val();
+                                $(divName).html($('#mark').val());
+                            },"json");
+                }else{
+                    $("#error-text").text("填写信息不完整。")
+                    return false;
+                }
+            });
+
         });
 
 
@@ -606,9 +644,10 @@
         {
             $.post("<%=path%>/trip/follow", { id: tripid },
                     function(data){
-                        alert(data);
                     },"json");
         }
+
+
 
 
         function onDelImg(imgId)
@@ -628,6 +667,13 @@
                         $(divName).text("封面图片");
                     },"json");
 
+        }
+
+        function onMark(id,mark)
+        {
+            $('#imgid').val(id);
+            $('#mark').val(mark);
+            $('#markModel').modal('show');
         }
 
         var LocsS = [
