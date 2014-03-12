@@ -42,7 +42,7 @@
         #gmap {
             display: block;
             width: 600px;
-            height: 400px;
+            height: 350px;
 
         }
     </style>
@@ -164,16 +164,13 @@
                                 <label  class="col-md-2 control-label">地点类型</label>
                                 <div class="col-md-6">
                                     <label class="radio-inline">
-                                        <input type="radio" id="type1" name="place.type" value="1" checked>城市
+                                        <input type="radio" id="type2" name="place.type" value="1" checked>景点
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" id="type2" name="place.type" value="2">景点
+                                        <input type="radio" id="type3" name="place.type" value="2">酒店
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" id="type3" name="place.type" value="3">酒店
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" id="type4" name="place.type" value="4">餐厅
+                                        <input type="radio" id="type4" name="place.type" value="3">餐厅
                                     </label>
                                 </div>
                             </div>
@@ -194,9 +191,9 @@
                         <div id="gmap" style=""></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="savePlace">保存</button>
+                <div class="modal-footer" style="margin-top: -20px;height: 40px;">
+                    <button type="button" class="btn btn-default" style="margin-top: -10px;" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" style="margin-top: -10px;" id="savePlace">保存</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->

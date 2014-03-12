@@ -112,24 +112,43 @@
                     <div class="col col-md-12">
                         <div class="thumbnail">
                             <img src="<%=path%>${img.imgpath}" alt="">
-                            <p style="text-align: center;" id="mark_${img.id}">${img.mark}</p>
-                            <div style="text-align: center">
-                                <c:if test="${userid == trip.userid}">
-                                <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
-                                    设为封面
-                                </button>
-                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
-                                    删除
-                                </button>
-                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onMark(${img.id},'${img.mark}')">
-                                    修改描述
-                                </button>
-                                </c:if>
-                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
-                                    喜欢
-                                </button>
-                                <p>添加日期:${img.adddate}</p>
+
+                            <div class="row" style="margin-left: 15px;">
+                                <div class="col-md-12">
+                                    <p  id="mark_${img.id}">${img.mark}</p>
+                                </div>
                             </div>
+                            <div class="row" style="margin-left: 15px;">
+
+                                <div class="col-md-6">
+                                    <label style="width: 200px;">时间:${img.adddate}</label>
+                                    <label>地点:成都</label>
+                                </div>
+
+                                <div class="col-md-6" style="text-align: right;">
+                                    <c:if test="${userid == trip.userid}">
+                                        <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
+                                            设为封面
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
+                                            删除
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onMark(${img.id})">
+                                            修改描述
+                                        </button>
+                                    </c:if>
+                                    <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                        喜欢
+                                    </button>
+                                    <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                        评论
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <hr/>
                         </div>
                     </div>
                 </div>
@@ -239,44 +258,6 @@
 
         </div>
     </div><!--/row-->
-
-
-    <br/>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                合作伙伴:
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-            </div>
-
-            <div class="col-md-12">
-                <p>友情链接
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-
-            </div>
-
-            <div class="col-md-12">
-                <p>&copy; 募游网 2013</p>
-            </div>
-        </div>
-    </div>
 
     <!-- flightModel -->
     <div class="modal fade" id="flightModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -485,6 +466,10 @@
     </div><!-- /.modal -->
 
 
+    <jsp:include page="foot.jsp"></jsp:include>
+
+
+
     <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
@@ -669,10 +654,11 @@
 
         }
 
-        function onMark(id,mark)
+        function onMark(id)
         {
+            var divName = "#mark_"+id;
             $('#imgid').val(id);
-            $('#mark').val(mark);
+            $('#mark').val( $(divName).html());
             $('#markModel').modal('show');
         }
 
