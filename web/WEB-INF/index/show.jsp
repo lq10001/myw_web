@@ -44,37 +44,39 @@
     <div class="row">
 
         <div class="col-md-8">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <h3>行程名称：${trip.name}</h3>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <p>${trip.adddate}</p>
                     </div>
-                    <div class="col-md-3">
-                        <p>15天</p>
+                    <div class="col-md-2">
+                        <p> ${trip.days}天</p>
                     </div>
-                    <div class="col-md-3">
-                        <p>浏览100次</p>
+                    <div class="col-md-5">
+                        <p>浏览${trip.visit + 1}次</p>
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6" style="text-align: right">
                 <br/>
                 <br/>
-                <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
-                    喜欢
+                <button class="btn btn-primary btn-lg" onclick="onTripLove()">
+                    喜欢[${trip.love}]
                 </button>
-                <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
+                <button class="btn btn-primary btn-lg" onclick="onTripComment()">
                    评论
                 </button>
+                <!--
                 <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
                     分享
                 </button>
+                -->
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="text-align: center;">
             <br/>
             <br/>
 
@@ -137,14 +139,34 @@
                                             修改描述
                                         </button>
                                     </c:if>
-                                    <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
-                                        喜欢
+                                    <input id="love_${img.id}" type="hidden" value="${img.imgloveid}">
+                                    <button id="btn_love_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onLove(${img.id})">
+                                        喜欢[${img.love}]
                                     </button>
-                                    <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="">
+                                    <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onComment(${img.id})">
                                         评论
                                     </button>
 
                                 </div>
+
+                            </div>
+
+                            <div id="comment_${img.id}" hidden="hidden">
+
+                                <div class="row" style="margin-left: 15px;">
+                                    <div class="col-md-8">
+                                        <input type="text"/>
+                                    </div>
+                                    <idv class="col-md-8">
+                                        <button id="btn_comment_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onComment(${img.id})">
+                                            评论
+                                        </button>
+                                    </idv>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-left: 15px;">
 
                             </div>
 
@@ -156,6 +178,7 @@
         </div>
 
         <div class="col-md-4">
+            <c:if test="${userid == trip.userid}">
             <h3 style="margin-top:0px;">
                 航班&住宿
             </h3>
@@ -175,11 +198,9 @@
 
 
                 <div class="panel-footer" style="text-align: center">
-                    <c:if test="${userid == trip.userid}">
                     <button id="addFlight" class="btn btn-success btn-xs" data-toggle="modal">
                         +添加航班信息
                     </button>
-                    </c:if>
                 </div>
             </div>
 
@@ -198,11 +219,9 @@
                 </ul>
 
                 <div class="panel-footer" style="text-align: center">
-                    <c:if test="${userid == trip.userid}">
                     <button id="addHotel" class="btn btn-success btn-xs" data-toggle="modal">
                         +添加住宿信息
                     </button>
-                    </c:if>
                 </div>
             </div>
 
@@ -222,11 +241,9 @@
                 </ul>
 
                 <div class="panel-footer" style="text-align: center">
-                    <c:if test="${userid == trip.userid}">
                         <button id="addRestaurant" class="btn btn-success btn-xs" data-toggle="modal">
                             +添加餐厅信息
                         </button>
-                    </c:if>
                 </div>
             </div>
 
@@ -246,18 +263,30 @@
                 </ul>
 
                 <div class="panel-footer" style="text-align: center">
-                    <c:if test="${userid == trip.userid}">
                         <button id="addGuide" class="btn btn-success btn-xs" data-toggle="modal">
                             +添加向导信息
                         </button>
-                    </c:if>
                 </div>
             </div>
 
-
-
+            </c:if>
         </div>
+
+
+        <!----------------------------------------------------------行程信息- --------------------------------------------->
+        <div class="col-md-4">
+            <h3 style="margin-top:0px;">
+             线路日程( ${trip.days}天 )
+            </h3>
+        </div>
+
+
+
+
     </div><!--/row-->
+
+
+    <!-- ==================================================== Model ==============================================-->
 
     <!-- flightModel -->
     <div class="modal fade" id="flightModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -604,6 +633,7 @@
             });
 
             $("#markSubmit").on('click',function(event){
+                alert(1);
                 if ($("#mark").val().length > 0 ){
                     $.post("<%=path%>/img/mark", $("#markForm").serialize(),
                             function(data){
@@ -657,9 +687,41 @@
         function onMark(id)
         {
             var divName = "#mark_"+id;
+            alert($(divName).html());
             $('#imgid').val(id);
             $('#mark').val( $(divName).html());
             $('#markModel').modal('show');
+        }
+
+        function onLove(imgId)
+        {
+            var islove = 0;
+            var loveName = "#love_"+imgId;
+            if($(loveName).val() > 0){
+                islove = 0;
+            }else{
+                islove = 1;
+            }
+
+            $.post("<%=path%>/img/love", { id: imgId ,islove : islove},
+                    function(data){
+                        if(data > 0)
+                        {
+                            $(loveName).val(islove);
+                            var divName = "#btn_love_"+imgId;
+                            $(divName).html("喜欢[" + data + "]");
+                        }
+                    },"json");
+        }
+
+        function onTripLove()
+        {
+
+        }
+
+        function onTripComment()
+        {
+
         }
 
         var LocsS = [

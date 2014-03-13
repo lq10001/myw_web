@@ -51,7 +51,7 @@
                         <br/>
                         <br/>
                         <span style="font-size: 21px;">
-                            Dongfangx
+                            <c:out  value="${sessionScope.name}"/>
                         </span>
                         <br/>
                         <span>
@@ -188,11 +188,10 @@
                     </c:when>
                     <c:otherwise>
                         <div class="thumbnail col-md-12" style="text-align: center;">
-                            <h3>没有Follow行程</h1>
+                            <h3>没有Follow行程</h3>
                         </div>
                     </c:otherwise>
                 </c:choose>
-
 
             </div><!--/row-->
 
@@ -224,7 +223,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="thumbnail col-md-12" style="text-align: center;">
-                        <h3>没有创建行程</h1>
+                        <h3>没有创建行程</h3>
                     </div>
                 </c:otherwise>
             </c:choose>
@@ -280,17 +279,37 @@
 
         <h2>照片墙</h2>
 
+
         <div class="row">
 
-            <c:forEach var="img" items="${list_img}">
-                <div class="col-xs-6 col-md-3">
-                        <div class="image-box">
-                              <img src="<%=path%>${img.imgpath}"  style=" vertical-align:middle;width: 260px; " alt="">
-                        </div>
-                </div>
-            </c:forEach>
-        </div><!--/row-->
+            <c:choose>
+                <c:when test="${fn:length(list_img) > 0}">
 
+                    <c:forEach var="img" items="${list_img}">
+                        <div class="col-xs-6 col-md-3">
+                            <a href="<%=path%>/trip/show/${img.tripid}">
+                                <div class="image-box">
+                                    <c:choose>
+                                        <c:when test="${img.imgpath == ''}">
+                                            <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="<%=path%>${img.imgpath}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
+
+                </c:when>
+                <c:otherwise>
+                    <div class="thumbnail col-md-12" style="text-align: center;">
+                        <h3>还没有喜欢的照片</h3>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div><!--/row-->
 
         <br/>
 
