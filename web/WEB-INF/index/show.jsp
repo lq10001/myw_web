@@ -278,6 +278,24 @@
             <h3 style="margin-top:0px;">
              线路日程( ${trip.days}天 )
             </h3>
+
+            <div class="thumbnail">
+
+                <c:forEach items="${list_day}" var="day">
+                    <h5> ${day.tripDate} 第${day.day}天</h5>
+                    <ul id="ul_day_${day.day}" class="list-group">
+                        <script>
+                            $(function(){
+                                getListPlace(${day.day}, '${day.tripDate}');
+                            });
+                        </script>
+                    </ul>
+
+
+                </c:forEach>
+
+            </div>
+
         </div>
 
 
@@ -648,6 +666,35 @@
             });
 
         });
+
+        function getListPlace(day, tripDate)
+        {
+            $.post("<%=path%>/trip/listPlace", { tripDate:tripDate},
+                    function(data){
+                            var uiName = '#ul_day_'+day;
+                            $(data).each(function(){
+                                var typeName;
+                                if(this.type == 1){
+                                    typeName = '景点:';
+                                }else if(this.type == 2)
+                                {
+                                    typeName = '酒店:';
+                                }else if(this.type == 3)
+                                {
+                                    typeName = '餐厅:';
+                                }else if(this.type == 4)
+                                {
+                                    typeName = '导游:';
+                                }
+
+                                var content = '<li class="list-group-item">'+typeName + this.name+'</li>';
+                                $(content).appendTo(uiName);
+                            });
+
+                    },"json");
+
+        }
+
 
 
         function onEditPlace()
