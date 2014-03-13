@@ -5,6 +5,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
 import com.ly.Global;
 import com.ly.model.Img;
 import com.ly.model.Place;
+import com.ly.model.Trip;
 import com.ly.model.Webmenu;
 import com.ly.tool.Dwz;
 
@@ -48,6 +49,8 @@ public class PlaceController extends Controller {
         boolean ok = Place.placeDao.saveOrUpdate(place);
         if (ok)
         {
+            Long days = Place.placeDao.getDays(Integer.parseInt(tripid.toString()));
+            Trip.tripDao.updateDays(tripid,days);
             redirect("/showPlace");
         }
     }

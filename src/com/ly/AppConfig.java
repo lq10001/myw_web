@@ -90,6 +90,8 @@ public class AppConfig extends JFinalConfig {
         arp.addMapping("restaurant",Restaurant.class);
 
         arp.addMapping("follow",Follow.class);
+        arp.addMapping("imglove",ImgLove.class);
+
 
         // 缓存插件
         me.add(new EhCachePlugin());

@@ -18,7 +18,7 @@ public class Img extends Model<Img> {
 
     public List<Img> getListImgByTripid(Integer tripid)
     {
-        return imgDao.find("select * from img where  tripid =" + tripid);
+        return imgDao.find("select img.*,imglove.id  as imgloveid from img  left join imglove on img.id = imglove.imgid where  tripid =" + tripid);
     }
 
     public List<Img> getListImgByPlaceid(Integer placeid)

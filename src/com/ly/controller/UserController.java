@@ -2,6 +2,7 @@ package com.ly.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.ly.Global;
 import com.ly.model.User;
 import com.ly.tool.Dwz;
 
@@ -63,10 +64,8 @@ public class UserController extends Controller {
         User rtnUser = User.userDao.login(user.getStr("email"),user.getStr("password"));
         if (rtnUser != null)
         {
-            System.out.println(rtnUser.getInt("id"));
-
-            getSession().setAttribute("email",user.getStr("email"));
-            getSession().setAttribute("userid",rtnUser.getInt("id"));
+            getSession().setAttribute(Global.USER_NAME,rtnUser.getStr(Global.USER_NAME));
+            getSession().setAttribute(Global.USER_ID,rtnUser.getInt("id"));
             redirect("/my");
         }else{
             redirect("/login");

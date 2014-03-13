@@ -79,4 +79,20 @@ public class Trip extends Model<Trip> {
          return trip.update();
     }
 
+    public boolean updateVisit(Object tripid,int num)
+    {
+        Trip trip = new Trip();
+        trip.set("id",tripid);
+        trip.set("visit",num);
+        return trip.update();
+    }
+
+    public boolean updateDays(Object tripid,Long days)
+    {
+        Trip trip = new Trip();
+        trip.set("id",tripid);
+        trip.set("days",days);
+        return trip.update();
+    }
+
 }

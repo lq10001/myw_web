@@ -64,4 +64,13 @@ public class Place extends Model<Place> {
 //        CacheKit.removeAll("place");
         return ok;
     }
+
+    public Long getDays(int tripid)
+    {
+        Place p =  placeDao.findFirst("select id,  datediff(max(adddate) , min(adddate)) as days from place where tripid = "+tripid);
+        Long days = p.getLong("days");
+        return  days;
+    }
+
+
 }

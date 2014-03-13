@@ -66,7 +66,11 @@ public class TripController extends Controller {
         Integer tripid = Integer.parseInt(getPara(0));
 
         session.setAttribute(Global.TRIP_ID,tripid);
-        setAttr("trip", Trip.tripDao.getTrip(tripid));
+        Trip trip = Trip.tripDao.getTrip(tripid);
+        setAttr("trip",trip);
+        int visit = trip.getInt("visit");
+
+        Trip.tripDao.updateVisit(tripid,visit + 1);
 
         List<Img> list_img = Img.imgDao.getListImgByTripid(tripid);
         setAttr("list_img",list_img);

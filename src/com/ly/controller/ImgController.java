@@ -8,6 +8,7 @@ import com.jfinal.upload.UploadFile;
 import com.ly.Global;
 import com.ly.model.Hotel;
 import com.ly.model.Img;
+import com.ly.model.ImgLove;
 import com.ly.model.Trip;
 import com.ly.tool.Dwz;
 import com.ly.vo.FileUploadInfo;
@@ -106,10 +107,6 @@ public class ImgController extends Controller {
             fileInfos.add(fileInfo);
         }
 
-
-        System.out.println(" ---- " + files.size() + "        " + JSON.toJSONString(fileInfos));
-
-
         StringBuffer sb = new StringBuffer();
         sb.append("{\"files\":");
         sb.append(JSON.toJSONString(fileInfos));
@@ -139,20 +136,38 @@ public class ImgController extends Controller {
 
     public void mark()
     {
-        /*
-        int id = getParaToInt("id");
-        String mark = getPara("img.mark");
-        Img img = new Img();
-        img.set("id",id);
-        img.set("mark",mark);
-        */
-
-//        Img.imgDao.saveOrUpdate(img);
-//
         Img img = getModel(Img.class);
         Boolean ok = Img.imgDao.saveOrUpdate(img);
         renderJson(ok ? "1" : "0");
+    }
 
+    public void love()
+    {
+        HttpSession session = getSession();
+        Object userid = session.getAttribute(Global.USER_ID);
+
+
+        int imgid = getParaToInt("id");
+        Integer islove = getParaToInt("islove");
+
+        Img img = Img.imgDao.findById(imgid);
+        int num = 0;
+
+        if (islove > 0)
+        {
+            ImgLove imgLove = new ImgLove();
+            imgLove.set("userid",userid);
+            imgLove.set("imgid",imgid);
+            ImgLove.imgLoveDao.saveOrUpdate(imgLove);
+            num = img.getInt("love") + 1;
+        }else{
+            ImgLove imgLove = ImgLove.imgLoveDao.getImgLove(userid,imgid);
+            imgLove.delete();
+            num = img.getInt("love") - 1;
+        }
+        img.set("love",num);
+        Boolean ok = Img.imgDao.saveOrUpdate(img);
+        renderJson(ok ? num : "0");
     }
 
 }
