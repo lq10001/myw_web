@@ -45,7 +45,6 @@ public class PlaceController extends Controller {
         place.set("userid",userid);
         place.set("tripid",tripid);
         place.set("adddate",new Date());
-        System.out.println("--------   "+place.get("name"));
         boolean ok = Place.placeDao.saveOrUpdate(place);
         if (ok)
         {

@@ -4,6 +4,7 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.ly.tool.Cnd;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,10 +23,31 @@ public class Place extends Model<Place> {
         return placeDao.find("select * from place where userid =" + userid);
     }
 
+    public List<Place> getPlaceDate(Integer tripid)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append("select  DISTINCT tripdate from place where tripid =");
+        sb.append(tripid);
+        sb.append(" order by tripdate");
+        return placeDao.find(sb.toString());
+    }
+
 
     public List<Place> getListPlaceByTripid(Integer tripid)
     {
         return placeDao.find("select * from place where tripid =" + tripid);
+    }
+
+    public List<Place> getListPlaceByDate(Integer tripid,String tripDate)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from place where tripid =");
+        sb.append(tripid);
+        sb.append(" and tripdate ='");
+        sb.append(tripDate);
+        sb.append("'");
+        System.out.println(sb.toString());
+        return placeDao.find(sb.toString());
     }
 
 

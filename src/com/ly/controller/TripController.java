@@ -1,13 +1,18 @@
 package com.ly.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.ly.Global;
 import com.ly.model.*;
 import com.ly.tool.Dwz;
+import com.ly.vo.FileUploadInfo;
+import com.ly.vo.TripDay;
+import com.ly.vo.TripInfo;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -72,6 +77,35 @@ public class TripController extends Controller {
 
         Trip.tripDao.updateVisit(tripid,visit + 1);
 
+        List<Place> listDate = Place.placeDao.getPlaceDate(tripid);
+        int i = 0;
+        Date minDate = null;
+        List<TripDay> listDay = new LinkedList<TripDay>();
+        for (Place place: listDate)
+        {
+            TripDay tripDay = new TripDay();
+            System.out.println(place.getDate("tripdate"));
+            Date tripdate =  place.getDate("tripdate");
+            if (i  < 1)
+            {
+                minDate = tripdate;
+                tripDay.setDay(1L);
+                tripDay.setTripDate(tripdate);
+            }else{
+                // 86400000 =  24*60*60*1000
+                Long day = (tripdate.getTime() - minDate.getTime()) /  86400000;
+                System.out.println(day);
+                tripDay.setDay(day + 1);
+                tripDay.setTripDate(tripdate);
+
+
+            }
+            listDay.add(tripDay);
+            i++;
+        }
+        setAttr("list_day",listDay);
+
+
         List<Img> list_img = Img.imgDao.getListImgByTripid(tripid);
         setAttr("list_img",list_img);
 
@@ -104,6 +138,32 @@ public class TripController extends Controller {
         follow.set("userid",userid);
         boolean ok =  Follow.followDao.saveOrUpdate(follow);
         renderJson(ok ? "1" : "0");
+    }
+
+    public void listPlace()
+    {
+        HttpSession session = getSession();
+        Object o_tripid = session.getAttribute(Global.TRIP_ID);
+        Integer tripid = Integer.parseInt(o_tripid.toString());
+
+        String tripDtae  = getPara("tripDate");
+        List<TripInfo> infos = new LinkedList<TripInfo>();
+        List<Place> placeList = Place.placeDao.getListPlaceByDate(tripid, tripDtae);
+        for (Place place : placeList)
+        {
+            TripInfo info = new TripInfo();
+            info.setType(place.getInt("type"));
+            info.setName(place.getStr("name"));
+            infos.add(info);
+        }
+
+        List<Hotel> hotel_list = Hotel.hotelDao.getListHotelByTrip(tripid);
+        setAttr("hotel_list",hotel_list);
+
+
+        System.out.println(JSON.toJSONString(infos));
+
+        renderJson(JSON.toJSONString(infos));
     }
 
 }
