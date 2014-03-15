@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <%
     String path = request.getContextPath();
@@ -19,6 +21,11 @@
     <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
+    <script src="<%=path%>/js/bootstrap3-validation.js"></script>
+
+
+    <link href="<%=path%>/css/carousel.css" rel="stylesheet">
+
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 </head>
 
@@ -26,59 +33,6 @@
 
 
 <jsp:include page="top.jsp"></jsp:include>
-
-
-
-    <!-- Carousel
- ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="<%=path%>/img/slider_1.jpg" alt="First slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>客户端下载</h1>
-                        <p>iOS android 客户端下载，随时随地都能更新旅游信息。</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">下载</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="<%=path%>/img/slider_2.jpg" alt="Second slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>推荐路线</h1>
-                        <p>加入旅游达人制定的路线，跟随旅游达人一起旅行。</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">点击进入</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <img src="<%=path%>/img/slider_3.jpg" alt="Third slide">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>客户端下载</h1>
-                        <p>iOS android 客户端下载，随时随地都能更新旅游信息。</p>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">下载</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-
-
-
-    </div><!-- /.carousel -->
-
-    <div class="container">
 
         <div class="container">
 
@@ -88,36 +42,34 @@
                 <div class="col-md-8">
 
                     <div class="row">
+                            <button id="addBaike" type="button"  class="btn btn-success" style="margin-left: 10px;">添加百科</button>
+                            <button id="myBaike" type="button"  class="btn btn-success" style="margin-left: 10px;">我的百科</button>
+                            <button id="allBaike" type="button"  class="btn btn-success" style="margin-left: 10px;">所有百科</button>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-12">
                             <h2>慕友百科</h2>
                         </div>
                     </div>
 
-                    <div class="row" style="font-size: 18px;">
+
+                    <c:choose>
+                        <c:when test="${fn:length(listBaike) > 0}">
                             <ol>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Consectetur adipiscing elit</li>
-                                <li>Integer molestie lorem at massa</li>
-                                <li>Facilisis in pretium nisl aliquet</li>
-                                <li>Nulla volutpat aliquam velit</li>
-                                <li>Faucibus porta lacus fringilla vel</li>
-                                <li>Aenean sit amet erat nunc</li>
-                                <li>Eget porttitor lorem</li>
-                                <li>Nulla volutpat aliquam velit</li>
-                                <li>Faucibus porta lacus fringilla vel</li>
-                                <li>Aenean sit amet erat nunc</li>
-                                <li>Eget porttitor lorem</li>
-
-                                <li>Nulla volutpat aliquam velit</li>
-                                <li>Faucibus porta lacus fringilla vel</li>
-                                <li>Aenean sit amet erat nunc</li>
-                                <li>Eget porttitor lorem</li>
-
+                            <c:forEach var="baike" items="${listBaike}">
+                                <li style="font-size: 18px;">
+                                    <a href="<%=path%>/baikeInfo/${baike.id}"> ${baike.title}</a>
+                                </li>
+                            </c:forEach>
                             </ol>
-                    </div><!--/row-->
-
-
-
+                        </c:when>
+                        <c:otherwise>
+                            <div class="thumbnail col-md-12" style="text-align: center;">
+                                <h3>还没有创建行程</h3>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
 
                 <!--left-->
@@ -131,9 +83,6 @@
                             <img src="<%=path%>/img/21.jpg" alt="">
                         </div>
                     </div>
-
-
-
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -151,29 +100,108 @@
         </div>
 
 
-    </div>
 
     <br/>
 
     <jsp:include page="foot.jsp"></jsp:include>
+
+    <!-- BaikeModal -->
+    <div class="modal fade" id="baikeModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <form class="form-horizontal" method="post" id="baikeForm" action="<%=path%>/baike/save" role="form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加百科信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="title" class="col-md-2 control-label">名称</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="baike.title" class="form-control" id="title" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <!--
+                                <div class="form-group">
+                                    <label for="baikePhone" class="col-md-2 control-label">百科图片</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="baike.phone" class="form-control" id="baikePhone" placeholder="" check-type="phone">
+                                    </div>
+                                </div>
+                                -->
+
+                                <div class="form-group">
+                                    <label for="info" class="col-md-2 control-label">百科内容</label>
+                                    <div class="col-md-10">
+                                        <textarea id="info" name="baike.info" rows="6" class="col-md-12"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" id="baikeSubmit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
 </body>
 
 <script src="<%=path%>/js/offcanvas.js"></script>
 
+<script>
 
-<script type="text/javascript">
-    function onLogin()
-    {
-        location.href='<%=path%>/login';
-    }
+    $(function(){
 
-    function onRigister()
-    {
-        location.href='<%=path%>/register';
-    }
+        $("#addBaike").on('click',function(event){
+            if($("#userid").val().length == 0)
+            {
+                location.href='<%=path%>/login';
+                return;
+            }
+            $("#title").val("");
+            $("#info").val("");
+            $("#baikeForm").validation();
+            $('#baikeModel').modal('show');
+        });
+
+        $("#myBaike").on('click',function(event){
+            if($("#userid").val().length == 0)
+            {
+                location.href='<%=path%>/login';
+                return;
+            }
+            location.href = '<%=path%>/myBaike';
+        });
+
+        $("#allBaike").on('click',function(event){
+            location.href = '<%=path%>/showBaike';
+        });
+
+        //Guide
+        $("#baikeForm").validation();
+        $("#baikeSubmit").on('click',function(event){
+            if ($("#baikeForm").valid()==false){
+                $("#error-text").text("填写信息不完整。")
+                return false;
+            }else{
+                $("#baikeForm").submit();
+            }
+        });
+
+
+    });
 </script>
+
 
 
 </html>

@@ -115,7 +115,7 @@
 
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button"  class="btn btn-default ">登陆</button>
+                                        <button type="button" id="loginBtn"  class="btn btn-default ">登陆</button>
 
                                     </div>
 
@@ -148,6 +148,14 @@
 </div>
 
     <script src="<%=path%>/js/offcanvas.js"></script>
+
+    <script>
+        $(function(){
+            $("#loginBtn").on('click',function(event){
+                location.href='<%=path%>/login';
+            });
+        });
+    </script>
 
 
 </body>

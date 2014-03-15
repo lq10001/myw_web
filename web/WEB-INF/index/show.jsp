@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <%
     String path = request.getContextPath();
@@ -38,6 +40,7 @@
 
 <jsp:include page="top.jsp"></jsp:include>
 
+<input type="hidden" id="userid" value="${userid}">
 
 <div class="container" style="margin-top: 20;">
 
@@ -51,7 +54,7 @@
                         <p>${trip.adddate}</p>
                     </div>
                     <div class="col-md-2">
-                        <p> ${trip.days}天</p>
+                        <p> ${trip.days + 1}天</p>
                     </div>
                     <div class="col-md-5">
                         <p>浏览${trip.visit + 1}次</p>
@@ -62,13 +65,14 @@
             <div class="col-md-6" style="text-align: right">
                 <br/>
                 <br/>
-                <button class="btn btn-primary btn-lg" onclick="onTripLove()">
+                <button id="btn_love_trip" class="btn btn-primary btn-lg" onclick="onTripLove(${trip.id})">
                     喜欢[${trip.love}]
                 </button>
+                <!--
                 <button class="btn btn-primary btn-lg" onclick="onTripComment()">
                    评论
                 </button>
-                <!--
+
                 <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
                     分享
                 </button>
@@ -108,73 +112,86 @@
             </div>
             <br/>
 
+            <c:choose>
+                <c:when test="${fn:length(list_img) > 0}">
+                    <c:forEach var="img" items="${list_img}">
+                        <div id="img_${img.id}" class="row">
+                            <div class="col col-md-12">
+                                <div class="thumbnail">
+                                    <img src="<%=path%>${img.imgpath}" alt="">
 
-            <c:forEach var="img" items="${list_img}">
-                <div id="img_${img.id}" class="row">
-                    <div class="col col-md-12">
-                        <div class="thumbnail">
-                            <img src="<%=path%>${img.imgpath}" alt="">
-
-                            <div class="row" style="margin-left: 15px;">
-                                <div class="col-md-12">
-                                    <p  id="mark_${img.id}">${img.mark}</p>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-left: 15px;">
-
-                                <div class="col-md-6">
-                                    <label style="width: 200px;">时间:${img.adddate}</label>
-                                    <label>地点:成都</label>
-                                </div>
-
-                                <div class="col-md-6" style="text-align: right;">
-                                    <c:if test="${userid == trip.userid}">
-                                        <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
-                                            设为封面
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
-                                            删除
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onMark(${img.id})">
-                                            修改描述
-                                        </button>
-                                    </c:if>
-                                    <input id="love_${img.id}" type="hidden" value="${img.imgloveid}">
-                                    <button id="btn_love_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onLove(${img.id})">
-                                        喜欢[${img.love}]
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onComment(${img.id})">
-                                        评论
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                            <div id="comment_${img.id}" hidden="hidden">
-
-                                <div class="row" style="margin-left: 15px;">
-                                    <div class="col-md-8">
-                                        <input type="text"/>
+                                    <div class="row" style="margin-left: 15px;">
+                                        <div class="col-md-12">
+                                            <p  id="mark_${img.id}">${img.mark}</p>
+                                        </div>
                                     </div>
-                                    <idv class="col-md-8">
-                                        <button id="btn_comment_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onComment(${img.id})">
-                                            评论
-                                        </button>
-                                    </idv>
+                                    <div class="row" style="margin-left: 15px;">
+
+                                        <div class="col-md-6">
+                                            <label style="width: 200px;">时间:${img.adddate}</label>
+                                            <label>地点:成都</label>
+                                        </div>
+
+                                        <div class="col-md-6" style="text-align: right;">
+                                            <c:if test="${userid == trip.userid}">
+                                                <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
+                                                    设为封面
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
+                                                    删除
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onMark(${img.id})">
+                                                    修改描述
+                                                </button>
+                                            </c:if>
+
+                                            <button id="btn_love_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onImgLove(${img.id})">
+                                                喜欢[${img.love}]
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onComment(${img.id})">
+                                                评论
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div id="comment_${img.id}" style="margin-left: 15px;display: none;">
+                                        <hr/>
+                                        <div class="row" >
+                                            <form class="form-horizontal"  id="commentForm_${img.id}" action="<%=path%>/imgcomment/save" role="form">
+                                                <input type="hidden" name="imgComment.imgid"  value="${img.id}">
+                                                <div class="col-md-10">
+                                                     <input type="text" class="col-md-12"  id="comment_content_${img.id}" name="imgComment.content" placeholder="请输入评论信息" check-type="required">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="button" class="btn btn-success btn-xs" onclick="onImgComment(${img.id})">
+                                                        评论
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div id="commment_row_${img.id}" class="row" style="margin-top:5px;">
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
-
-                            <div class="row" style="margin-left: 15px;">
-
-                            </div>
-
-                            <hr/>
                         </div>
+                    </c:forEach>
+
+
+                </c:when>
+                <c:otherwise>
+                    <div class="thumbnail col-md-12" style="text-align: center;">
+                        <h3>还没有添加旅游照片</h3>
                     </div>
-                </div>
-            </c:forEach>
+                </c:otherwise>
+            </c:choose>
+
+
+
         </div>
 
         <div class="col-md-4">
@@ -276,7 +293,7 @@
         <!----------------------------------------------------------行程信息- --------------------------------------------->
         <div class="col-md-4">
             <h3 style="margin-top:0px;">
-             线路日程( ${trip.days}天 )
+             线路日程( ${trip.days + 1}天 )
             </h3>
 
             <div class="thumbnail">
@@ -431,6 +448,12 @@
                                         <input type="text" name="guide.name" class="form-control" id="guideName" placeholder="" check-type="required">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="gdate" class="col-md-2 control-label">讲解时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="guide.tripdate" class="form-control" id="gdate" placeholder="" check-type="required">
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="guidePhone" class="col-md-2 control-label">向导电话</label>
@@ -470,6 +493,12 @@
                                         <input type="text" name="restaurant.name" class="form-control" id="restaurantName" placeholder="" check-type="required">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="rdate" class="col-md-2 control-label">就餐时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="restaurant.tripdate" class="form-control" id="rdate" placeholder="" check-type="required">
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="restaurantPrice" class="col-md-2 control-label">消费金额</label>
@@ -477,6 +506,7 @@
                                         <input type="text" name="restaurant.price" class="form-control" id="restaurantPrice" placeholder="" check-type="number">
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -490,7 +520,7 @@
     </div><!-- /.modal -->
 
 
-    <!-- RestaurantModal -->
+    <!-- MarkModal -->
     <div class="modal fade" id="markModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 600px;height: 400px;">
             <div class="modal-content">
@@ -534,6 +564,12 @@
             $('#todate').datepicker({
                 format: 'yyyy-mm-dd'
             });
+            $('#gdate').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $('#rdate').datepicker({
+                format: 'yyyy-mm-dd'
+            });
 
             $("#addFlight").on('click',function(event){
                 $("#fname").val("");
@@ -556,6 +592,7 @@
             $("#addGuide").on('click',function(event){
                 $("#guideName").val("");
                 $("#guidePhone").val("");
+                $("#gdate").val("");
                 $("#guideForm").validation();
                 $('#guideModel').modal('show');
             });
@@ -563,6 +600,7 @@
             $("#addRestaurant").on('click',function(event){
                 $("#restaurantName").val("");
                 $("#restaurantPrice").val("");
+                $("#rdate").val("");
                 $("#restaurantForm").validation();
                 $('#restaurantModel').modal('show');
             });
@@ -651,7 +689,6 @@
             });
 
             $("#markSubmit").on('click',function(event){
-                alert(1);
                 if ($("#mark").val().length > 0 ){
                     $.post("<%=path%>/img/mark", $("#markForm").serialize(),
                             function(data){
@@ -685,6 +722,8 @@
                                 }else if(this.type == 4)
                                 {
                                     typeName = '导游:';
+                                }else{
+                                    typeName = '航班:';
                                 }
 
                                 var content = '<li class="list-group-item">'+typeName + this.name+'</li>';
@@ -734,42 +773,143 @@
         function onMark(id)
         {
             var divName = "#mark_"+id;
-            alert($(divName).html());
             $('#imgid').val(id);
             $('#mark').val( $(divName).html());
             $('#markModel').modal('show');
         }
 
-        function onLove(imgId)
+        function onImgLove(imgId)
         {
-            var islove = 0;
-            var loveName = "#love_"+imgId;
-            if($(loveName).val() > 0){
-                islove = 0;
-            }else{
-                islove = 1;
+            if($("#userid").val().length == 0)
+            {
+                location.href='<%=path%>/login';
+                return;
             }
 
-            $.post("<%=path%>/img/love", { id: imgId ,islove : islove},
+            $.post("<%=path%>/img/love", { id: imgId},
                     function(data){
-                        if(data > 0)
+                        if(data > -1)
                         {
-                            $(loveName).val(islove);
                             var divName = "#btn_love_"+imgId;
                             $(divName).html("喜欢[" + data + "]");
                         }
                     },"json");
         }
 
-        function onTripLove()
+        function onTripLove(tripid)
         {
-
+            if($("#userid").val().length == 0)
+            {
+                location.href='<%=path%>/login';
+                return;
+            }
+            $.post("<%=path%>/trip/love", { id: tripid},
+                    function(data){
+                        if(data > -1)
+                        {
+                            $("#btn_love_trip").html("喜欢[" + data + "]");
+                        }
+                    },"json");
         }
 
-        function onTripComment()
+        function onComment(imgid)
         {
+            var divname = "#comment_"+imgid;
+            if($(divname).css("display") == "none")
+            {
+                var cname = "#comment_content_"+imgid
+                $(cname).val();
+                $(divname).show();
+                $.post("<%=path%>/imgcomment/list", { id: imgid},
+                        function(data){
+                            var rowname = "#commment_row_" + imgid;
+                            $(rowname).empty();
+                            var userid = $("#userid").val();
+                            $(data).each(function(){
+                                var str = '<div class="col-md-10">'
+                                        + '<p class="col-md-10">'+this.name+' :'+this.content+'</p>'
+                                        + '</div>'
+                                        +  '<div class="col-md-2">';
 
+                                if(userid == this.userId)
+                                {
+                                    str +=  '<button  type="button" class="btn btn-success btn-xs" onclick="onImgCommentDel('+this.imgId+')">'
+                                    +   '删除 </button>';
+                                }
+                                str +=   '</div>';
+                                $(str).appendTo(rowname);
+                            });
+                        },"json");
+            }
+            else{
+                $(divname).hide();
+            }
         }
+
+        function onImgComment(imgid)
+        {
+            if($("#userid").val().length == 0)
+            {
+                location.href='<%=path%>/login';
+                return;
+            }
+
+            var cname = "#comment_content_"+imgid
+            if($(cname).val().length < 1)
+            {
+                alert("请输入评论!")
+                return;
+            }
+            var fname = "#commentForm_"+imgid;
+            $.post("<%=path%>/imgcomment/save", $(fname).serialize(),
+                    function(data){
+                        $(cname).val('')
+                        var rowname = "#commment_row_" + imgid;
+                        $(rowname).empty();
+                        var userid = $("#userid").val();
+                        $(data).each(function(){
+                            var str = '<div class="col-md-10">'
+                                    + '<p class="col-md-10">'+this.name+' :'+this.content+'</p>'
+                                    + '</div>'
+                                    +  '<div class="col-md-2">';
+
+                            if(userid == this.userId )
+                            {
+                                str +=  '<button  type="button" class="btn btn-success btn-xs" onclick="onImgCommentDel('+this.imgId+')">'
+                                        +   '删除 </button>';
+                            }
+                            str +=   '</div>';
+                            $(str).appendTo(rowname);
+                        });
+                    },"json");
+        }
+
+        function onImgCommentDel(imgid)
+        {
+            $.post("<%=path%>/imgcomment/del", { id: imgid},
+                    function(data){
+                        var rowname = "#commment_row_" + imgid;
+                        $(rowname).empty();
+                        var userid = $("#userid").val();
+                        $(data).each(function(){
+                            var str = '<div class="col-md-10">'
+                                    + '<p class="col-md-10">'+this.name+' :'+this.content+'</p>'
+                                    + '</div>'
+                                    +  '<div class="col-md-2">';
+
+                            if(userid == this.userId )
+                            {
+                                str +=  '<button  type="button" class="btn btn-success btn-xs" onclick="onImgCommentDel('+this.imgId+')">'
+                                        +   '删除 </button>';
+                            }
+                            str +=   '</div>';
+                            $(str).appendTo(rowname);
+                        });
+                    },"json");
+        }
+
+
+
 
         var LocsS = [
             <c:forEach var="place1" items="${place_list}">

@@ -23,7 +23,12 @@
 
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="12341234" data-redirecturi="http://115.28.2.33/myw" charset="utf-8" ></script>
+
+
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
+
+
 
 
     <script type="text/javascript">
@@ -77,10 +82,10 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
 
-                            <div class="checkbox">
-                                <label><input type="checkbox"> 十天内免登陆</label>
-                                &nbsp;&nbsp; <label class="right">忘记密码</label>
-                            </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> 自动登陆</label>
+                                    &nbsp;&nbsp; <label class="right">忘记密码</label>
+                                </div>
                                 </div>
                          </div>
 
@@ -92,7 +97,7 @@
 
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button"  class="btn btn-default ">注册</button>
+                                        <button type="button" id="registerBtn"  class="btn btn-default ">注册</button>
 
                                     </div>
 
@@ -113,6 +118,20 @@
                 </div>
 
             </div>
+
+            <!-- other Login -->
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+                    <span id="qqLoginBtn" ></span>
+
+
+                </div>
+
+
+
+            </div>
+
         </div>
 
 
@@ -125,6 +144,22 @@
 </div>
 
 <script src="<%=path%>/js/offcanvas.js"></script>
+
+<script>
+
+    QC.Login({
+        btnId : "qqLoginBtn",//插入按钮的html标签id
+        size : "A_XL",//按钮尺寸
+        scope : "get_user_info",//展示授权，全部可用授权可填 all
+        display : "pc"//应用场景，可选
+    });
+
+    $(function(){
+        $("#rigisterBtn").on('click',function(event){
+            location.href='<%=path%>/login';
+        });
+    });
+</script>
 
 
 </body>
