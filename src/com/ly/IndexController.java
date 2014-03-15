@@ -1,11 +1,8 @@
 package com.ly;
 
 import com.jfinal.core.Controller;
-import com.ly.model.Img;
-import com.ly.model.Place;
-import com.ly.model.Trip;
+import com.ly.model.*;
 import com.ly.tool.MenuTree;
-import com.ly.model.Webmenu;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -142,12 +139,41 @@ public class IndexController extends Controller {
         render("index/show.jsp");
     }
 
-    public void baike()
+    public void showBaike()
     {
         getMenu();
         setAttr("selmenu","baike");
+
+        List<Baike> baikes = Baike.baikeDao.getListBaike();
+        setAttr("listBaike",baikes);
         render("index/baike.jsp");
     }
+
+    public void myBaike()
+    {
+        getMenu();
+        setAttr("selmenu","baike");
+
+        HttpSession session = getSession();
+        Object o_userid = session.getAttribute(Global.USER_ID);
+
+        List<Baike> baikes = Baike.baikeDao.getListBaike(o_userid);
+        setAttr("listBaike",baikes);
+        render("index/baike.jsp");
+    }
+
+    public void baikeInfo()
+    {
+        getMenu();
+        setAttr("selmenu","baike");
+
+        Integer baikeid = Integer.parseInt(getPara(0));
+        Baike baike = Baike.baikeDao.findById(baikeid);
+        setAttr("baike",baike);
+        render("index/baikeInfo.jsp");
+    }
+
+
 
     public void loginOut()
     {
@@ -155,8 +181,33 @@ public class IndexController extends Controller {
         HttpSession session = getSession();
         session.removeAttribute(Global.USER_ID);
         Object userid = session.getAttribute(Global.USER_ID);
-        System.out.println(" ---- "+userid);
-        render("index/index.jsp");
+        redirect("/index");
+    }
+
+    public void search()
+    {
+        getMenu();
+        String name = getPara("sname");
+        List<Trip> listTrip = null;
+        if (name.trim().length() > 0)
+        {
+            listTrip = Trip.tripDao.getListTripByName(name);
+        }
+        setAttr("list_trip",listTrip);
+        render("index/search.jsp");
+    }
+
+    public void search2()
+    {
+        getMenu();
+        String name = getPara("sname2");
+        List<Trip> listTrip = null;
+        if (name.trim().length() > 0)
+        {
+            listTrip = Trip.tripDao.getListTripByName(name);
+        }
+        setAttr("list_trip",listTrip);
+        render("index/search.jsp");
     }
 
 

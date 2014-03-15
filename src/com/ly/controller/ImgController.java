@@ -146,22 +146,28 @@ public class ImgController extends Controller {
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
 
+        if (userid == null)
+        {
+            renderJson("-1");
+            return;
+        }
 
         int imgid = getParaToInt("id");
-        Integer islove = getParaToInt("islove");
 
         Img img = Img.imgDao.findById(imgid);
+
+        ImgLove imgLove = ImgLove.imgLoveDao.getImgLove(userid,imgid);
+
         int num = 0;
 
-        if (islove > 0)
+        if (imgLove == null)
         {
-            ImgLove imgLove = new ImgLove();
-            imgLove.set("userid",userid);
-            imgLove.set("imgid",imgid);
-            ImgLove.imgLoveDao.saveOrUpdate(imgLove);
+            ImgLove iLove = new ImgLove();
+            iLove.set("userid",userid);
+            iLove.set("imgid",imgid);
+            ImgLove.imgLoveDao.saveOrUpdate(iLove);
             num = img.getInt("love") + 1;
         }else{
-            ImgLove imgLove = ImgLove.imgLoveDao.getImgLove(userid,imgid);
             imgLove.delete();
             num = img.getInt("love") - 1;
         }

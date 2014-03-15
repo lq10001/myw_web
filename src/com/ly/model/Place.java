@@ -26,12 +26,11 @@ public class Place extends Model<Place> {
     public List<Place> getPlaceDate(Integer tripid)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append("select  DISTINCT tripdate from place where tripid =");
+        sb.append("select  DISTINCT tripdate from placeview where tripid =");
         sb.append(tripid);
         sb.append(" order by tripdate");
         return placeDao.find(sb.toString());
     }
-
 
     public List<Place> getListPlaceByTripid(Integer tripid)
     {
@@ -41,7 +40,7 @@ public class Place extends Model<Place> {
     public List<Place> getListPlaceByDate(Integer tripid,String tripDate)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append("select * from place where tripid =");
+        sb.append("select * from placeview where tripid =");
         sb.append(tripid);
         sb.append(" and tripdate ='");
         sb.append(tripDate);

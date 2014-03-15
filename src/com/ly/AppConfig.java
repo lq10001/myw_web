@@ -45,6 +45,9 @@ public class AppConfig extends JFinalConfig {
         me.add("/guide",GuideController.class);
         me.add("/restaurant",RestaurantController.class);
 
+        me.add("/imgcomment",ImgCommentController.class);
+        me.add("/baike",BaikeController.class);
+
 //        AutoBindRoutes routes = new AutoBindRoutes();
 //        me.add(routes);
     }
@@ -91,6 +94,9 @@ public class AppConfig extends JFinalConfig {
 
         arp.addMapping("follow",Follow.class);
         arp.addMapping("imglove",ImgLove.class);
+        arp.addMapping("triplove",TripLove.class);
+        arp.addMapping("imgcomment",ImgComment.class);
+        arp.addMapping("baike",Baike.class);
 
 
         // 缓存插件

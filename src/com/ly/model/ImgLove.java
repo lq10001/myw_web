@@ -48,7 +48,13 @@ public class ImgLove extends Model<ImgLove> {
 
     public ImgLove getImgLove(Object userid,Integer imgid)
     {
-        return imgLoveDao.findFirst("select * from imglove where userid="+userid + " and imgid = "+imgid);
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from imglove where userid=");
+        sb.append(userid);
+        sb.append(" and imgid = ");
+        sb.append(imgid);
+        System.out.println(sb.toString());
+        return imgLoveDao.findFirst(sb.toString());
     }
 
     public Page<ImgLove> getListImgLove(int pageNum,int pageSize,ImgLove imgLove)

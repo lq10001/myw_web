@@ -23,6 +23,17 @@ public class Trip extends Model<Trip> {
         return tripDao.find("select * from trip  where trip.userid =" + userid);
     }
 
+    public List<Trip> getListTripByName(String name)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from trip  where name like '%");
+        sb.append(name);
+        sb.append("%'");
+
+        System.out.println(sb.toString());
+        return tripDao.find(sb.toString());
+    }
+
 
     public List<Trip> getListFollowTripByUser(Integer userid)
     {
@@ -94,5 +105,6 @@ public class Trip extends Model<Trip> {
         trip.set("days",days);
         return trip.update();
     }
+
 
 }

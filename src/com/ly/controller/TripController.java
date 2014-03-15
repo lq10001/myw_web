@@ -73,6 +73,7 @@ public class TripController extends Controller {
         session.setAttribute(Global.TRIP_ID,tripid);
         Trip trip = Trip.tripDao.getTrip(tripid);
         setAttr("trip",trip);
+
         int visit = trip.getInt("visit");
 
         Trip.tripDao.updateVisit(tripid,visit + 1);
@@ -164,6 +165,41 @@ public class TripController extends Controller {
         System.out.println(JSON.toJSONString(infos));
 
         renderJson(JSON.toJSONString(infos));
+    }
+
+    public void love()
+    {
+        HttpSession session = getSession();
+        Object userid = session.getAttribute(Global.USER_ID);
+
+        if (userid == null)
+        {
+            renderJson("-1");
+            return;
+        }
+
+        int tripid = getParaToInt("id");
+        Trip trip = Trip.tripDao.findById(tripid);
+
+        TripLove tripLove = TripLove.tripLoveDao.getTripLove(userid,tripid);
+
+        int num = 0;
+
+        if (tripLove == null)
+        {
+            TripLove tlove = new TripLove();
+
+            tlove.set("userid",userid);
+            tlove.set("tripid",tripid);
+            TripLove.tripLoveDao.saveOrUpdate(tlove);
+            num = trip.getInt("love") + 1;
+        }else{
+            tripLove.delete();
+            num = trip.getInt("love") - 1;
+        }
+        trip.set("love",num);
+        Boolean ok = Trip.tripDao.saveOrUpdate(trip);
+        renderJson(ok ? num : "0");
     }
 
 }
