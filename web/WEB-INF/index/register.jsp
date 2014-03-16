@@ -87,11 +87,21 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="phone" class="col-sm-2 control-label">电话号码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="phone" name="user.phone" check-type="required number" minlength="6">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="name" name="user.name" check-type="required" required-message="请填写你的大名。">
                             </div>
                         </div>
+
+
 
                         <div class="form-group">
                             <label for="pw1" class="col-sm-2 control-label">密码</label>

@@ -31,7 +31,7 @@
 
     <!-- Carousel
  ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" style="margin-top:-20px;" data-ride="carousel">
 
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -78,7 +78,7 @@
 
     </div><!-- /.carousel -->
 
-    <div class="container">
+    <div class="container" style="margin-top: -20px;">
 
         <div class="row">
             <div class="container">

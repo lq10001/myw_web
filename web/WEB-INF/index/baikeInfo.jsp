@@ -50,6 +50,19 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>作者: </h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>添加时间: ${baike.adddate}</h4>
+                        </div>
+                    </div>
+
+
                     <div class="row" style="font-size: 21px;">
                         <div class="col-md-12">
                             <p>${baike.info} </p>

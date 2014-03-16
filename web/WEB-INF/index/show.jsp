@@ -128,7 +128,7 @@
                                     <div class="row" style="margin-left: 15px;">
 
                                         <div class="col-md-6">
-                                            <label style="width: 200px;">时间:${img.adddate}</label>
+                                            <label style="width: 200px;">时间:${img.createdate}</label>
                                             <label>地点:成都</label>
                                         </div>
 

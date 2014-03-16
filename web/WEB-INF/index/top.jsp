@@ -9,7 +9,7 @@
 <div class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<%=path%>/">募游网</a>
+            <a class="navbar-brand" href="<%=path%>/">慕游网</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -33,7 +33,19 @@
                         <button type="button" class="btn btn-success" onclick="onLogin()">登录</button>
                     </c:when>
                     <c:otherwise>
-                        <button type="button" class="btn btn-success" onclick="onLoginOut()">注销</button>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                ${name} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="<%=path%>/my">我的行程</a></li>
+                                <li><a href="#">我的消息</a></li>
+                                <li><a href="#">设置</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" onclick="onLoginOut()">注销</a></li>
+                            </ul>
+                        </div>
                     </c:otherwise>
                 </c:choose>
 

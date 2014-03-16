@@ -65,15 +65,14 @@
 
                     <form class="form-horizontal"  id="form1" action="<%=path%>/user/login" role="form">
                         <div class="form-group">
-                            <label for="mail" class="col-sm-2 control-label">Email</label>
+                            <label for="mail" class="col-sm-3 control-label">邮箱或号码</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="mail" name="user.email" placeholder="xxxx@qq.com" check-type="mail required">
+                                <input type="text" class="form-control" id="mail" name="user.email" placeholder="邮箱或电话号码" check-type="required">
                             </div>
                         </div>
 
-
                         <div class="form-group">
-                            <label for="pw1" class="col-sm-2 control-label">密码</label>
+                            <label for="pw1" class="col-sm-3 control-label">密码</label>
                             <div class="col-sm-6">
                                 <input type="password" class="form-control" id="pw1" name="user.password" check-type="required" minlength="6">
                             </div>

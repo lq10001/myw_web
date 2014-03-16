@@ -29,10 +29,11 @@
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 </head>
 
-<body class="">
+<body>
 
 
 <jsp:include page="top.jsp"></jsp:include>
+<input type="hidden" id="userid" value="${userid}">
 
         <div class="container">
 
@@ -125,14 +126,12 @@
                                     </div>
                                 </div>
 
-                                <!--
                                 <div class="form-group">
                                     <label for="baikePhone" class="col-md-2 control-label">百科图片</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="baike.phone" class="form-control" id="baikePhone" placeholder="" check-type="phone">
+                                        <input type="text" name="baike.imgurl" class="form-control" id="baikePhone" placeholder="">
                                     </div>
                                 </div>
-                                -->
 
                                 <div class="form-group">
                                     <label for="info" class="col-md-2 control-label">百科内容</label>
