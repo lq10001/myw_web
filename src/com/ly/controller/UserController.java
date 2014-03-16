@@ -50,7 +50,9 @@ public class UserController extends Controller {
         boolean ok = User.userDao.saveOrUpdate(user);
         if (ok)
         {
-            redirect("/index");
+            getSession().setAttribute(Global.USER_NAME,user.getStr(Global.USER_NAME));
+            getSession().setAttribute(Global.USER_ID,user.getInt("id"));
+            redirect("/my");
         }else{
             redirect("/register");
         }

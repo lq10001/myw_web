@@ -43,7 +43,11 @@ public class User extends Model<User> {
 
     public  User login(String email,String pwd)
     {
-        List<User> list =  userDao.find("select * from user where email = '"+email+"' and password = '"+pwd+"' order by id");
-        return list.size() > 0 ? list.get(0) : null;
+        User u = userDao.findFirst("select * from user where email = '"+email+"' and password = '"+pwd+"' order by id");
+        if (u == null)
+        {
+            u = userDao.findFirst("select * from user where phone = '"+email+"' and password = '"+pwd+"' order by id");
+        }
+        return u;
     }
 }

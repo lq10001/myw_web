@@ -88,6 +88,9 @@ public class IndexController extends Controller {
         }else{
             Integer userid = Integer.parseInt(o_userid.toString());
 
+            Trip trip = Trip.tripDao.getTripVisit(userid);
+            setAttr("myVisit",trip.getLong("visit"));
+
 
             List<Trip> listFollow = Trip.tripDao.getListFollowTripByUser(userid);
             setAttr("list_follow",listFollow);

@@ -23,6 +23,11 @@ public class Trip extends Model<Trip> {
         return tripDao.find("select * from trip  where trip.userid =" + userid);
     }
 
+    public Trip getTripVisit(Integer userid)
+    {
+        return tripDao.findFirst("select count(visit) as visit from trip  where userid  =" + userid);
+    }
+
     public List<Trip> getListTripByName(String name)
     {
         StringBuffer sb = new StringBuffer();

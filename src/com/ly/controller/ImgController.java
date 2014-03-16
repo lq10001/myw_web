@@ -1,6 +1,14 @@
 package com.ly.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+import com.drew.metadata.exif.ExifReader;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.ehcache.CacheKit;
@@ -17,6 +25,7 @@ import org.nutz.lang.Files;
 import org.nutz.lang.random.StringGenerator;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.HTML;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -50,7 +59,7 @@ public class ImgController extends Controller {
         render("img.jsp");
     }
 
-    public void save() throws IOException {
+    public void save() throws IOException, ImageProcessingException {
 
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
@@ -70,6 +79,31 @@ public class ImgController extends Controller {
             FileUploadInfo fileInfo = new FileUploadInfo();
 
             File f = uploadFile.getFile();
+
+            //exif
+            String lat = "";
+            String lon = "";
+            String createDate = "";
+            Metadata metadata = ImageMetadataReader.readMetadata(f);
+            for (Directory directory : metadata.getDirectories()) {
+                for (Tag tag : directory.getTags()) {
+                    String tagName = tag.getTagName();
+                    String desc = tag.getDescription();
+
+                    System.out.println(tagName + "  " + desc);
+
+                    if(tagName.equals("Date/Time Original")) {
+                        createDate = desc;
+                    } else if (tagName.equals("GPS Latitude")) {
+                        lat = desc;
+                    } else if (tagName.equals("GPS Longitude")) {
+                        lon = desc;
+                    }
+                }
+            }
+
+
+
             String type = Files.getSuffixName(f);
 
             StringGenerator sg = new StringGenerator(5);
@@ -78,11 +112,12 @@ public class ImgController extends Controller {
             String s_fileName = name + "_200_200." + type;
 
             Thumbnails.of(f).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + s_fileName);
-
             Files.rename(f, fileName);
 
             String url = "/upload/"+fileName;
             String s_url  = "/upload/"+s_fileName;
+
+
 
             Img img = new Img();
             img.set("userid",userid);
@@ -91,6 +126,15 @@ public class ImgController extends Controller {
             img.set("adddate",new Date());
             img.set("imgpath",url);
             img.set("smallimgpath",s_url);
+            img.set("lat",lat);
+            img.set("lon",lon);
+            if (createDate.equals(""))
+            {
+                img.set("createdate",new Date());
+            }else{
+                img.set("createdate",createDate);
+            }
+
 
             Img.imgDao.saveOrUpdate(img);
 
