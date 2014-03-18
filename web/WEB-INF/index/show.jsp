@@ -299,7 +299,7 @@
             <div class="thumbnail">
 
                 <c:forEach items="${list_day}" var="day">
-                    <h5> ${day.tripDate} 第${day.day}天</h5>
+                    <h5>${day.tripDate} 第${day.day}天</h5>
                     <ul id="ul_day_${day.day}" class="list-group">
                         <script>
                             $(function(){
