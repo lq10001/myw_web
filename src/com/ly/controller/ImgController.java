@@ -70,7 +70,7 @@ public class ImgController extends Controller {
         String contextPath = pk.getWebRootPath();
         String path = "/upload";
         String pathUrl = contextPath + path;
-        int maxSize = 200 * 1024 * 1024;              //10M
+        int maxSize = 20 * 1024 * 1024;              //20M
 
         List<FileUploadInfo> fileInfos = new LinkedList<FileUploadInfo>();
         List<UploadFile> files = getFiles(pathUrl, maxSize, "utf-8");
@@ -90,9 +90,8 @@ public class ImgController extends Controller {
                     String tagName = tag.getTagName();
                     String desc = tag.getDescription();
 
-                    System.out.println(tagName + "  " + desc);
-
-                    if(tagName.equals("Date/Time Original")) {
+                    int tagType = tag.getTagType();
+                    if(tagType == 306 || tagName.equals("Date/Time Original") || tagName.equals("Date/Time")) {
                         createDate = desc;
                     } else if (tagName.equals("GPS Latitude")) {
                         lat = desc;

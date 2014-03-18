@@ -9,7 +9,8 @@ public class TripDay {
 
     private Long day;
 
-    private Date tripDate;
+    private String tripDate;
+
 
 
     public Long getDay() {
@@ -20,11 +21,11 @@ public class TripDay {
         this.day = day;
     }
 
-    public Date getTripDate() {
+    public String getTripDate() {
         return tripDate;
     }
 
-    public void setTripDate(Date tripDate) {
+    public void setTripDate(String tripDate) {
         this.tripDate = tripDate;
     }
 }

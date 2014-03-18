@@ -11,6 +11,8 @@ import com.ly.vo.TripDay;
 import com.ly.vo.TripInfo;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,26 +80,35 @@ public class TripController extends Controller {
 
         Trip.tripDao.updateVisit(tripid,visit + 1);
 
-        List<Place> listDate = Place.placeDao.getPlaceDate(tripid);
+        List<Img> listDate = Img.imgDao.getListImgDate(tripid);
         int i = 0;
         Date minDate = null;
         List<TripDay> listDay = new LinkedList<TripDay>();
-        for (Place place: listDate)
+        for (Img img: listDate)
         {
             TripDay tripDay = new TripDay();
-            System.out.println(place.getDate("tripdate"));
-            Date tripdate =  place.getDate("tripdate");
+            System.out.println(img.getTimestamp("createdate"));
+            Timestamp tt =  img.getTimestamp("createdate");
+            if (tt == null)
+            {
+                continue;
+            }
+
+
+            Date tripdate = new Date(tt.getTime());
+            SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+            String a1=dateFormat.format(tripdate);
             if (i  < 1)
             {
                 minDate = tripdate;
                 tripDay.setDay(1L);
-                tripDay.setTripDate(tripdate);
+                tripDay.setTripDate(a1);
             }else{
                 // 86400000 =  24*60*60*1000
                 Long day = (tripdate.getTime() - minDate.getTime()) /  86400000;
                 System.out.println(day);
                 tripDay.setDay(day + 1);
-                tripDay.setTripDate(tripdate);
+                tripDay.setTripDate(a1);
 
 
             }

@@ -21,6 +21,16 @@ public class Img extends Model<Img> {
         return imgDao.find("select img.*,imglove.id  as imgloveid from img  left join imglove on img.id = imglove.imgid where  tripid =" + tripid);
     }
 
+    public List<Img> getListImgDate(Integer tripid)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append("select distinct createdate from img where tripid = ");
+        sb.append(tripid);
+        sb.append(" order by createdate");
+        System.out.println(sb.toString());
+        return imgDao.find(sb.toString());
+    }
+
     public List<Img> getListImgByPlaceid(Integer placeid)
     {
         return imgDao.find("select * from img where placeid = " + placeid);
