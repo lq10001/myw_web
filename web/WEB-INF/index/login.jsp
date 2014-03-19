@@ -16,10 +16,9 @@
 
     <title>CMS</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
+    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 

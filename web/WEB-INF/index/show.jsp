@@ -87,7 +87,7 @@
             <c:choose>
                 <c:when test="${userid == trip.userid}">
                     <button class="btn btn-primary btn-lg" type="button" onclick="onEditPlace()">
-                        编辑行程
+                        上传照片
                     </button>
                 </c:when>
                 <c:when test="${userid > 0}">
@@ -134,6 +134,9 @@
 
                                         <div class="col-md-6" style="text-align: right;">
                                             <c:if test="${userid == trip.userid}">
+                                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onEditImg(${img.id})">
+                                                    编辑信息
+                                                </button>
                                                 <button id="btnDefault_${img.id}" type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDefaultImg(${img.id})">
                                                     设为封面
                                                 </button>
@@ -543,6 +546,64 @@
     </div><!-- /.modal -->
 
 
+    <!-- EditModal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 800px;height: 600px;">
+            <div class="modal-content">
+
+                <form class="form-horizontal" method="post" id="placeForm" action="<%=path%>/img/save" role="form">
+
+                    <input id="lat" type="hidden" name="img.lat" value="">
+                    <input id="lon" type="hidden" name="img.lon" value="">
+                    <input id="editImgid" type="hidden" name="img.id" value="">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">编辑图片信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="name" class="col-md-2 control-label">地点名称</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="img.name" class="form-control" id="name" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tripdate" class="col-md-2 control-label">旅游时间</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="img.tripdate" class="form-control span2" id="tripdate" placeholder=""  data-date-format="yyyy-mm-dd" check-type="required">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gps" class="col-md-2 control-label">GPS</label>
+                                    <div class="col-md-6">
+                                        <input type="text" readonly="readonly" name="img.gps" class="form-control" id="gps" placeholder="" check-type="required">
+                                        <label>请点击地图确定GPS位置</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                        <div id="mapdiv" class="container" style="margin-left: 50px;">
+                            <div id="editmap" style=""></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="margin-top: -20px;height: 40px;">
+                        <button type="button" class="btn btn-default" style="margin-top: -10px;" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" style="margin-top: -10px;" id="savePlace">保存</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
     <jsp:include page="foot.jsp"></jsp:include>
 
 
@@ -738,7 +799,7 @@
 
         function onEditPlace()
         {
-            location.href = '<%=path%>/showPlace';
+            location.href = '<%=path%>/upload';
         }
 
         function onFollowTrip(tripid)
@@ -776,6 +837,12 @@
             $('#imgid').val(id);
             $('#mark').val( $(divName).html());
             $('#markModel').modal('show');
+        }
+
+        function onEditImg(id)
+        {
+
+
         }
 
         function onImgLove(imgId)

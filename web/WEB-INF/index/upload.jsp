@@ -1,6 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <%
     String path = request.getContextPath();
@@ -15,8 +17,7 @@
     <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support and progress bar for jQuery. Supports cross-domain, chunked and resumable file uploads. Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap styles -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
 
     <link rel="stylesheet" href="<%=path%>/fileupload/css/jquery.fileupload.css">
 
@@ -29,8 +30,7 @@
 
 <div class="container">
 
-    <h3>行程名称：</h3>
-    <h3>拍摄地点：</h3>
+    <h3>行程名称：${trip.name}</h3>
 
     <!-- The fileinput-button span is used to style the file input field as button -->
     <span class="btn btn-success fileinput-button">
@@ -44,26 +44,29 @@
         查看行程
     </button>
 
-    <button type="button" class="btn btn-primary" onclick="onEditPlace()">
-        编辑行程
-    </button>
-
-
     <br>
     <br>
 
-
-    <div id="listfile" class="row">
-        <c:forEach var="img" items="${list_img}">
-            <div id="img_${img.id}" class="col-md-3" style="text-align: center;height: 260px;">
-                <div class="image-box">
-                    <img style=" vertical-align:middle;width: 260px; " alt="" src="<%=path%>${img.imgpath}" alt="">
+    <div id="listfile" class="row thumbnail">
+        <c:choose>
+            <c:when test="${fn:length(list_img) > 0}">
+                <c:forEach var="img" items="${list_img}">
+                    <div id="img_${img.id}" class="col-md-3" style="text-align: center;height: 260px;">
+                        <div class="image-box">
+                            <img style=" vertical-align:middle;width: 260px; " alt="" src="<%=path%>${img.imgpath}" alt="">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
+                            删除
+                        </button>
+                    </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <div id="noImgDiv" class="col-md-12" style="text-align: center;">
+                    <h3>还没有上传照片</h3>
                 </div>
-                <button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
-                    删除
-                </button>
-            </div>
-        </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </div><!--/row-->
 
     <!-- The global progress bar -->
@@ -75,8 +78,15 @@
     <!-- The container for the uploaded files -->
     <div id="files" class="files"></div>
     <br>
+
+
 </div>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<jsp:include page="foot.jsp"></jsp:include>
+
+
+<script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="<%=path%>/fileupload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
@@ -84,8 +94,7 @@
 <!-- The basic File Upload plugin -->
 <script src="<%=path%>/fileupload/js/jquery.fileupload.js"></script>
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
 
 <script>
@@ -94,17 +103,22 @@
         location.href = '<%=path%>/trip/show/${tripid}';
     }
 
-    function onEditPlace()
-    {
-        location.href = '<%=path%>/showPlace';
-    }
-
     function onDelImg(imgId)
     {
         $.post("<%=path%>/img/del", { id: imgId },
                 function(data){
-                    var divName = "#img_"+imgId;
-                    $(divName).remove();
+                    if(data > -1)
+                    {
+                        var divName = "#img_"+imgId;
+                        $(divName).remove();
+                        if(data == 0)
+                        {
+                            var content = '<div id="noImgDiv" class="col-md-12" style="text-align: center;">'
+                                    + ' <h3>还没有上传照片</h3>'
+                                    + '</div>';
+                            $(content).appendTo('#listfile');
+                        }
+                    }
                 },"json");
     }
 
@@ -118,6 +132,7 @@
             done: function (e, data) {
 
                 $.each(data.result.files, function (index, file) {
+                    $('#noImgDiv').remove();
                     var content = '<div id="img_'+file.deleteUrl+'" class="col-md-3" style="text-align: center;height: 260px;">'
                             + '<div class="image-box">'
                             +  '<img style="vertical-align:middle;width: 260px;" src="<%=path%>'+file.url+'" alt="">'
