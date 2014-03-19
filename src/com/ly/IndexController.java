@@ -126,12 +126,11 @@ public class IndexController extends Controller {
     {
         getMenu();
         HttpSession session = getSession();
-        Integer placeid = Integer.parseInt(getPara(0));
 
-        session.setAttribute(Global.PLACE_ID,placeid);
+        Object oTripid = session.getAttribute(Global.TRIP_ID);
+        setAttr("trip",Trip.tripDao.findById(oTripid));
 
-        setAttr(Global.TRIP_ID, session.getAttribute(Global.TRIP_ID));
-        List<Img> list_img = Img.imgDao.getListImgByPlaceid(placeid);
+        List<Img> list_img = Img.imgDao.getListImgByTripid(oTripid);
         setAttr("list_img",list_img);
         render("index/upload.jsp");
     }

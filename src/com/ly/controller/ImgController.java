@@ -11,6 +11,7 @@ import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifReader;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.upload.UploadFile;
 import com.ly.Global;
@@ -165,7 +166,8 @@ public class ImgController extends Controller {
     {
         int id = getParaToInt("id");
         boolean ok =  Img.imgDao.deleteById(id);
-        renderJson(ok ? "1" : "0");
+        Object oTripid = getSession().getAttribute(Global.TRIP_ID);
+        renderJson(ok ? Img.imgDao.count(oTripid) : "-1");
     }
 
     public void defaultImg()

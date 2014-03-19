@@ -6,7 +6,6 @@ import com.jfinal.plugin.ehcache.CacheKit;
 import com.ly.Global;
 import com.ly.model.*;
 import com.ly.tool.Dwz;
-import com.ly.vo.FileUploadInfo;
 import com.ly.vo.TripDay;
 import com.ly.vo.TripInfo;
 
@@ -52,8 +51,9 @@ public class TripController extends Controller {
         boolean ok = Trip.tripDao.saveOrUpdate(trip);
         if (ok)
         {
-            session.setAttribute("tripid",trip.get("id"));
-            redirect("/showPlace");
+            Integer tripid = trip.getInt("id");
+            session.setAttribute(Global.TRIP_ID,tripid);
+            redirect("/upload");
         }
     }
 
@@ -66,11 +66,16 @@ public class TripController extends Controller {
 
     public void show()
     {
+        Integer tripid = Integer.parseInt(getPara(0));
+        showImg(tripid);
+    }
+
+    private void showImg(Integer tripid)
+    {
         List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
         setAttr("webmenu_list",list_menu);
 
         HttpSession session = getSession();
-        Integer tripid = Integer.parseInt(getPara(0));
 
         session.setAttribute(Global.TRIP_ID,tripid);
         Trip trip = Trip.tripDao.getTrip(tripid);
@@ -118,7 +123,7 @@ public class TripController extends Controller {
         setAttr("list_day",listDay);
 
 
-        List<Img> list_img = Img.imgDao.getListImgByTripid(tripid);
+        List<Img> list_img = Img.imgDao.getListImgLoveByTripid(tripid);
         setAttr("list_img",list_img);
 
         List<Flight> flight_list = Flight.flightDao.getListFlightByTrip(tripid);

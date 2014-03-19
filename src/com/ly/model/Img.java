@@ -1,5 +1,6 @@
 package com.ly.model;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.ly.tool.Cnd;
@@ -16,7 +17,7 @@ public class Img extends Model<Img> {
         return imgDao.find("select * from img");
     }
 
-    public List<Img> getListImgByTripid(Integer tripid)
+    public List<Img> getListImgLoveByTripid(Integer tripid)
     {
         return imgDao.find("select img.*,imglove.id  as imgloveid from img  left join imglove on img.id = imglove.imgid where  tripid =" + tripid);
     }
@@ -27,14 +28,24 @@ public class Img extends Model<Img> {
         sb.append("select distinct createdate from img where tripid = ");
         sb.append(tripid);
         sb.append(" order by createdate");
-        System.out.println(sb.toString());
         return imgDao.find(sb.toString());
+    }
+
+    public List<Img> getListImgByTripid(Object tripid)
+    {
+        return imgDao.find("select * from img where  tripid =" + tripid);
+    }
+
+    public Long count(Object tripid)
+    {
+        return Db.queryLong("select count(id) from img where tripid = " + tripid);
     }
 
     public List<Img> getListImgByPlaceid(Integer placeid)
     {
         return imgDao.find("select * from img where placeid = " + placeid);
     }
+
 
     public List<Img> getListImgByUserId(Integer userid)
     {
