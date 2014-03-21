@@ -197,6 +197,8 @@
 
         </div>
 
+        <!-------------------------------------- 航班旅店信息 -------------------------------------->
+
         <div class="col-md-4">
             <c:if test="${userid == trip.userid}">
             <h3 style="margin-top:0px;">
@@ -551,7 +553,7 @@
         <div class="modal-dialog" style="width: 800px;height: 600px;">
             <div class="modal-content">
 
-                <form class="form-horizontal" method="post" id="placeForm" action="<%=path%>/img/save" role="form">
+                <form class="form-horizontal" method="post" id="editForm" action="<%=path%>/img/save" role="form">
 
                     <input id="lat" type="hidden" name="img.lat" value="">
                     <input id="lon" type="hidden" name="img.lon" value="">
@@ -567,18 +569,20 @@
                             <div class="col-md-12">
 
                                 <div class="form-group">
-                                    <label for="name" class="col-md-2 control-label">地点名称</label>
+                                    <label for="createdate" class="col-md-2 control-label">旅游时间</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="img.name" class="form-control" id="name" placeholder="" check-type="required">
+                                        <input type="text" name="img.createdate" class="form-control span2" id="createdate" placeholder=""  data-date-format="yyyy-mm-dd" check-type="required">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tripdate" class="col-md-2 control-label">旅游时间</label>
+                                    <label for="gpsname" class="col-md-2 control-label">地点名称</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="img.tripdate" class="form-control span2" id="tripdate" placeholder=""  data-date-format="yyyy-mm-dd" check-type="required">
+                                        <input type="text" readonly="readonly" name="img.gpsname" class="form-control" id="gpsname" placeholder="" check-type="required">
+                                        <label>请点击地图确定GPS位置</label>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="gps" class="col-md-2 control-label">GPS</label>
                                     <div class="col-md-6">
@@ -591,12 +595,12 @@
                             </div>
                         </div>
                         <div id="mapdiv" class="container" style="margin-left: 50px;">
-                            <div id="editmap" style=""></div>
+                            <div id="editmap" style="display: block;width: 600px;height: 350px;"></div>
                         </div>
                     </div>
                     <div class="modal-footer" style="margin-top: -20px;height: 40px;">
                         <button type="button" class="btn btn-default" style="margin-top: -10px;" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" style="margin-top: -10px;" id="savePlace">保存</button>
+                        <button type="button" class="btn btn-primary" style="margin-top: -10px;" id="editSubmit">保存</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -631,6 +635,10 @@
             $('#rdate').datepicker({
                 format: 'yyyy-mm-dd'
             });
+            $('#createdate').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+
 
             $("#addFlight").on('click',function(event){
                 $("#fname").val("");
@@ -749,6 +757,7 @@
                 }
             });
 
+            //mark
             $("#markSubmit").on('click',function(event){
                 if ($("#mark").val().length > 0 ){
                     $.post("<%=path%>/img/mark", $("#markForm").serialize(),
@@ -763,6 +772,21 @@
                 }
             });
 
+
+            $("#editForm").validation();
+            $("#editSubmit").on('click',function(event){
+                if ($("#editForm").valid()==false){
+                    $("#error-text").text("填写信息不完整。")
+                    return false;
+                }else{
+                    $('#createdate').val($('#createdate').val()+' 00:00:00');
+                    $.post("<%=path%>/img/imgGps", $("#editForm").serialize(),
+                            function(data){
+                                $('#editModal').modal('hide');
+                                alert('11  '+data);
+                            },"json");
+                }
+            });
         });
 
         function getListPlace(day, tripDate)
@@ -841,8 +865,11 @@
 
         function onEditImg(id)
         {
-
-
+            $('#editImgid').val(id);
+            $('#createdate').val('');
+            $('#gps').val('');
+            $('#gpsname').val('');
+            $('#editModal').modal('show');
         }
 
         function onImgLove(imgId)
@@ -994,6 +1021,49 @@
             type: 'polyline',
             controls_on_map: false
         }).Load();
+
+
+        var map;
+        var myCenter=new google.maps.LatLng(39.92, 116.46);
+        var marker=new google.maps.Marker({
+            position:myCenter
+        });
+
+        function initialize() {
+            var mapProp = {
+                center:myCenter,
+                zoom: 14,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            map=new google.maps.Map(document.getElementById("editmap"),mapProp);
+            marker.setMap(map);
+
+            google.maps.event.addListener(map, 'click', function(e) {
+                var point = e.latLng;
+                $("#gps").val(e.latLng);
+                $("#lat").val(e.latLng.lat());
+                $("#lon").val(e.latLng.lng());
+                $("#gpsname").val('chengdu');
+
+
+                if (marker) {
+                    marker.setAnimation(google.maps.Animation.DROP);
+                    marker.setPosition(e.latLng);
+                } else {
+                    marker = new google.maps.Marker({
+                        position: e.latLng,
+                        animation: google.maps.Animation.DROP,
+                        map: map});
+                }
+            });
+        };
+
+        $("#editModal").on("shown.bs.modal", function () {
+            initialize();
+            google.maps.event.trigger(map, "resize");
+        });
+
 
     </script>
 

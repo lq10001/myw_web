@@ -230,7 +230,6 @@
             $("#lat").val(e.latLng.lat());
             $("#lon").val(e.latLng.lng());
 
-
             if (marker) {
                 marker.setAnimation(google.maps.Animation.DROP);
                 marker.setPosition(e.latLng);
