@@ -186,6 +186,13 @@ public class ImgController extends Controller {
         renderJson(ok ? "1" : "0");
     }
 
+    public void imgGps()
+    {
+        Img img = getModel(Img.class);
+        Boolean ok = Img.imgDao.saveOrUpdate(img);
+        renderJson(ok ? "1" : "0");
+    }
+
     public void love()
     {
         HttpSession session = getSession();
