@@ -92,15 +92,11 @@ public class TripController extends Controller {
         for (Img img: listDate)
         {
             TripDay tripDay = new TripDay();
-            System.out.println(img.getTimestamp("createdate"));
-            Timestamp tt =  img.getTimestamp("createdate");
-            if (tt == null)
+            Date tripdate = img.getDate("createdate");
+            if (tripdate == null)
             {
                 continue;
             }
-
-
-            Date tripdate = new Date(tt.getTime());
             SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
             String a1=dateFormat.format(tripdate);
             if (i  < 1)

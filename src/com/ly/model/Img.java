@@ -25,9 +25,10 @@ public class Img extends Model<Img> {
     public List<Img> getListImgDate(Integer tripid)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append("select distinct createdate from img where tripid = ");
+        sb.append("select distinct date(createdate) as createdate from img where tripid = ");
         sb.append(tripid);
         sb.append(" order by createdate");
+        System.out.println(sb.toString());
         return imgDao.find(sb.toString());
     }
 
@@ -50,6 +51,11 @@ public class Img extends Model<Img> {
     public List<Img> getListImgByUserId(Integer userid)
     {
         return imgDao.find("select * from img where userid = " + userid + " limit 10");
+    }
+
+    public List<Img> getListLoveImgByUserId(Integer userid)
+    {
+        return imgDao.find("select img.* from imglove inner join  img on img.id = imglove.imgid where img.userid = " + userid + " limit 10");
     }
 
 

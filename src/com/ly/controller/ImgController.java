@@ -9,6 +9,7 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import com.drew.metadata.exif.ExifReader;
+import com.drew.metadata.exif.GpsDirectory;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -86,6 +87,14 @@ public class ImgController extends Controller {
             String lon = "";
             String createDate = "";
             Metadata metadata = ImageMetadataReader.readMetadata(f);
+
+            GpsDirectory directory1 = metadata.getDirectory(GpsDirectory.class);
+            for (Tag tag : directory1.getTags())
+            {
+                System.out.println(tag.getTagName() + "   " + tag.getDescription());
+
+            }
+
             for (Directory directory : metadata.getDirectories()) {
                 for (Tag tag : directory.getTags()) {
                     String tagName = tag.getTagName();
@@ -96,8 +105,10 @@ public class ImgController extends Controller {
                         createDate = desc;
                     } else if (tagName.equals("GPS Latitude")) {
                         lat = desc;
+                        System.out.println("lat    "+desc);
                     } else if (tagName.equals("GPS Longitude")) {
                         lon = desc;
+                        System.out.println("lon    "+desc);
                     }
                 }
             }

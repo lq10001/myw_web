@@ -99,7 +99,7 @@ public class IndexController extends Controller {
             setAttr("list_trip",listTrip);
 
 
-            List<Img> listImg = Img.imgDao.getListImgByUserId(userid);
+            List<Img> listImg = Img.imgDao.getListLoveImgByUserId(userid);
             setAttr("list_img",listImg);
             render("index/my.jsp");
         }

@@ -20,6 +20,8 @@
     <title>CMS</title>
 
     <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
+    <link type="text/css" rel="stylesheet" href="<%=path%>/bootstrap-select/bootstrap-select.css">
+
     <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
@@ -31,6 +33,9 @@
     <script type="text/javascript" src="<%=path%>/js/maplace.min.js"></script>
 
     <script src="<%=path%>/datepicker/js/bootstrap-datepicker-zh_CN.js"></script>
+    <script src="<%=path%>/bootstrap-select/bootstrap-select.min.js"></script>
+
+
     <link href="<%=path%>/datepicker/css/datepicker.css" rel="stylesheet">
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
@@ -73,7 +78,7 @@
                    评论
                 </button>
 
-                <button class="btn btn-primary btn-lg" onclick="onEditPlace()">
+                <button class="btn btn-primary btn-lg" onclick="onUploadFile()">
                     分享
                 </button>
                 -->
@@ -86,7 +91,7 @@
 
             <c:choose>
                 <c:when test="${userid == trip.userid}">
-                    <button class="btn btn-primary btn-lg" type="button" onclick="onEditPlace()">
+                    <button class="btn btn-primary btn-lg" type="button" onclick="onUploadFile()">
                         上传照片
                     </button>
                 </c:when>
@@ -125,11 +130,20 @@
                                             <p  id="mark_${img.id}">${img.mark}</p>
                                         </div>
                                     </div>
+
+                                    <div class="row" style="margin-left: 15px;">
+                                        <div class="col-md-4">
+                                            <label style="width: 200px;">时间:${img.createdate}</label>
+                                        </div>
+
+                                        <div class="col-md-8" style="text-align: right;">
+                                            <label>地点:${img.gpsname}</label>
+                                        </div>
+                                    </div>
                                     <div class="row" style="margin-left: 15px;">
 
                                         <div class="col-md-6">
-                                            <label style="width: 200px;">时间:${img.createdate}</label>
-                                            <label>地点:成都</label>
+
                                         </div>
 
                                         <div class="col-md-6" style="text-align: right;">
@@ -363,7 +377,13 @@
                                 <div class="form-group">
                                     <label for="todate" class="col-md-2 control-label">航班日期</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="flight.todate" class="form-control" id="todate" placeholder="" check-type="required">
+                                        <select id="todate" name="flight.todate" class="selectpicker form-control" check-type="required">
+                                            <c:forEach items="${list_day}" var="day">
+                                                <option value="${day.tripDate}">
+                                                        ${day.tripDate} 第${day.day}天
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -403,16 +423,16 @@
                                 <div class="form-group">
                                     <label for="date1" class="col-md-2 control-label">入住时间</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="hotel.date1" class="form-control" id="date1" placeholder="" check-type="required">
+                                        <select id="date1" name="hotel.date1" class="selectpicker form-control" check-type="required">
+                                            <c:forEach items="${list_day}" var="day">
+                                                <option value="${day.tripDate}">
+                                                        ${day.tripDate} 第${day.day}天
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="date2" class="col-md-2 control-label">离开时间</label>
-                                    <div class="col-md-6">
-                                        <input type="text" name="hotel.date2" class="form-control" id="date2" placeholder="" check-type="required">
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="price" class="col-md-2 control-label">价格</label>
@@ -455,8 +475,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="gdate" class="col-md-2 control-label">讲解时间</label>
+
                                     <div class="col-md-6">
-                                        <input type="text" name="guide.tripdate" class="form-control" id="gdate" placeholder="" check-type="required">
+                                        <select id="gdate" name="guide.tripdate" class="selectpicker form-control" check-type="required">
+                                            <c:forEach items="${list_day}" var="day">
+                                                <option value="${day.tripDate}">
+                                                        ${day.tripDate} 第${day.day}天
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -501,7 +528,13 @@
                                 <div class="form-group">
                                     <label for="rdate" class="col-md-2 control-label">就餐时间</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="restaurant.tripdate" class="form-control" id="rdate" placeholder="" check-type="required">
+                                        <select id="rdate" name="restaurant.tripdate" class="selectpicker form-control" check-type="required">
+                                            <c:forEach items="${list_day}" var="day">
+                                                <option value="${day.tripDate}">
+                                                        ${day.tripDate} 第${day.day}天
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -567,19 +600,20 @@
                         <div class="row">
 
                             <div class="col-md-12">
-
+                                <!--
                                 <div class="form-group">
                                     <label for="createdate" class="col-md-2 control-label">旅游时间</label>
                                     <div class="col-md-6">
                                         <input type="text" name="img.createdate" class="form-control span2" id="createdate" placeholder=""  data-date-format="yyyy-mm-dd" check-type="required">
                                     </div>
                                 </div>
+                                -->
 
                                 <div class="form-group">
                                     <label for="gpsname" class="col-md-2 control-label">地点名称</label>
                                     <div class="col-md-6">
                                         <input type="text" readonly="readonly" name="img.gpsname" class="form-control" id="gpsname" placeholder="" check-type="required">
-                                        <label>请点击地图确定GPS位置</label>
+                                        <label>请点击地图获取地点和GPS信息</label>
                                     </div>
                                 </div>
 
@@ -587,7 +621,6 @@
                                     <label for="gps" class="col-md-2 control-label">GPS</label>
                                     <div class="col-md-6">
                                         <input type="text" readonly="readonly" name="img.gps" class="form-control" id="gps" placeholder="" check-type="required">
-                                        <label>请点击地图确定GPS位置</label>
                                     </div>
                                 </div>
                             </div>
@@ -619,22 +652,12 @@
     <script type="text/javascript">
 
         $(function(){
+
+            $('.selectpicker').selectpicker({
+                'selectedText': 'cat'
+            });
+
             window.prettyPrint && prettyPrint();
-            $('#date1').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-            $('#date2').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-            $('#todate').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-            $('#gdate').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-            $('#rdate').datepicker({
-                format: 'yyyy-mm-dd'
-            });
             $('#createdate').datepicker({
                 format: 'yyyy-mm-dd'
             });
@@ -644,15 +667,12 @@
                 $("#fname").val("");
                 $("#start").val("");
                 $("#arrival").val("");
-                $("#todate").val("");
                 $("#flightForm").validation();
                 $('#flightModel').modal('show');
             });
 
             $("#addHotel").on('click',function(event){
                 $("#name").val("");
-                $("#date1").val("");
-                $("#date2").val("");
                 $("#price").val("");
                 $("#hotelForm").validation();
                 $('#hotelModel').modal('show');
@@ -661,7 +681,6 @@
             $("#addGuide").on('click',function(event){
                 $("#guideName").val("");
                 $("#guidePhone").val("");
-                $("#gdate").val("");
                 $("#guideForm").validation();
                 $('#guideModel').modal('show');
             });
@@ -669,7 +688,6 @@
             $("#addRestaurant").on('click',function(event){
                 $("#restaurantName").val("");
                 $("#restaurantPrice").val("");
-                $("#rdate").val("");
                 $("#restaurantForm").validation();
                 $('#restaurantModel').modal('show');
             });
@@ -779,6 +797,7 @@
                     $("#error-text").text("填写信息不完整。")
                     return false;
                 }else{
+                    alert('1');
                     $('#createdate').val($('#createdate').val()+' 00:00:00');
                     $.post("<%=path%>/img/imgGps", $("#editForm").serialize(),
                             function(data){
@@ -821,7 +840,7 @@
 
 
 
-        function onEditPlace()
+        function onUploadFile()
         {
             location.href = '<%=path%>/upload';
         }
@@ -869,6 +888,7 @@
             $('#createdate').val('');
             $('#gps').val('');
             $('#gpsname').val('');
+            $("#editForm").validation();
             $('#editModal').modal('show');
         }
 
@@ -1032,7 +1052,7 @@
         function initialize() {
             var mapProp = {
                 center:myCenter,
-                zoom: 14,
+                zoom: 4,
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             };
 
@@ -1044,8 +1064,15 @@
                 $("#gps").val(e.latLng);
                 $("#lat").val(e.latLng.lat());
                 $("#lon").val(e.latLng.lng());
-                $("#gpsname").val('chengdu');
 
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'latLng':point},function(result,status){
+                    var pos='';
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        pos =  result[0].formatted_address.split(' ')[0];
+                    }
+                    $('#gpsname').val(pos);
+                });
 
                 if (marker) {
                     marker.setAnimation(google.maps.Animation.DROP);

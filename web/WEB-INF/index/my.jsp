@@ -135,10 +135,7 @@
                                 <a href="#">行程<c:out value="${fn:length(list_trip)}"></c:out></a>
                             </li>
                             <li class="col-md-2">
-                                <a href="#">喜欢</a>
-                            </li>
-                            <li class="col-md-2">
-                                <a href="#">收藏</a>
+                                <a href="#">喜欢<c:out value="${fn:length(list_img)}"></c:out></a>
                             </li>
                         </ul>
                     </div>

@@ -23,7 +23,7 @@
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="12341234" data-redirecturi="http://115.28.2.33/myw" charset="utf-8" ></script>
-
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=" type="text/javascript" charset="utf-8"></script>
 
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
@@ -122,12 +122,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <span id="qqLoginBtn" ></span>
-
-
+                    <span id="wb_connect_btn" ></span>
                 </div>
-
-
-
             </div>
 
         </div>
@@ -156,6 +152,19 @@
         $("#rigisterBtn").on('click',function(event){
             location.href='<%=path%>/login';
         });
+    });
+
+    WB2.anyWhere(function(W){
+        W.widget.connectButton({
+            id: "wb_connect_btn",
+            type:"1,2",
+            callback : {
+                login:function(o){	//登录后的回调函数
+                },
+                logout:function(){	//退出后的回调函数
+                }
+            }
+        })
     });
 </script>
 
