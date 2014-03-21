@@ -7,3 +7,8 @@
 *.DS_Store
 /out/*
 */classes/*
+.idea/artifacts/myw.xml
+.idea/workspace.xml
+myw_web.iml
+src/config.txt
+web/WEB-INF/classes/config.txt
