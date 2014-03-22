@@ -23,6 +23,14 @@ import com.ly.model.Trip;
 import com.ly.tool.Dwz;
 import com.ly.vo.FileUploadInfo;
 import net.coobird.thumbnailator.Thumbnails;
+import org.apache.sanselan.ImageReadException;
+import org.apache.sanselan.Sanselan;
+import org.apache.sanselan.common.IImageMetadata;
+import org.apache.sanselan.formats.jpeg.JpegImageMetadata;
+import org.apache.sanselan.formats.tiff.TiffField;
+import org.apache.sanselan.formats.tiff.TiffImageMetadata;
+import org.apache.sanselan.formats.tiff.constants.TagConstantsUtils;
+import org.apache.sanselan.formats.tiff.constants.TiffTagConstants;
 import org.nutz.lang.Files;
 import org.nutz.lang.random.StringGenerator;
 
@@ -32,6 +40,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -61,7 +71,7 @@ public class ImgController extends Controller {
         render("img.jsp");
     }
 
-    public void save() throws IOException, ImageProcessingException {
+    public void save() throws IOException,ImageReadException,ParseException {
 
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
@@ -86,34 +96,28 @@ public class ImgController extends Controller {
             String lat = "";
             String lon = "";
             String createDate = "";
-            Metadata metadata = ImageMetadataReader.readMetadata(f);
 
-            GpsDirectory directory1 = metadata.getDirectory(GpsDirectory.class);
-            for (Tag tag : directory1.getTags())
-            {
-                System.out.println(tag.getTagName() + "   " + tag.getDescription());
 
-            }
+            final IImageMetadata metadata = Sanselan.getMetadata(f);
+            if (metadata instanceof JpegImageMetadata) {
+                final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
+                final TiffField field = jpegMetadata.findEXIFValue(TiffTagConstants.TIFF_TAG_DATE_TIME);
+                if (field != null) {
+                    String a1  = field.getValueDescription();
+                    createDate = a1.substring(1,a1.length() - 1);
+                }
 
-            for (Directory directory : metadata.getDirectories()) {
-                for (Tag tag : directory.getTags()) {
-                    String tagName = tag.getTagName();
-                    String desc = tag.getDescription();
-
-                    int tagType = tag.getTagType();
-                    if(tagType == 306 || tagName.equals("Date/Time Original") || tagName.equals("Date/Time")) {
-                        createDate = desc;
-                    } else if (tagName.equals("GPS Latitude")) {
-                        lat = desc;
-                        System.out.println("lat    "+desc);
-                    } else if (tagName.equals("GPS Longitude")) {
-                        lon = desc;
-                        System.out.println("lon    "+desc);
+                final TiffImageMetadata exifMetadata = jpegMetadata.getExif();
+                if (null != exifMetadata) {
+                    final TiffImageMetadata.GPSInfo gpsInfo = exifMetadata.getGPS();
+                    if (null != gpsInfo) {
+                        final double longitude = gpsInfo.getLongitudeAsDegreesEast();
+                        final double latitude = gpsInfo.getLatitudeAsDegreesNorth();
+                        lon = String.valueOf(longitude);
+                        lat = String.valueOf(latitude);
                     }
                 }
             }
-
-
 
             String type = Files.getSuffixName(f);
 
@@ -143,7 +147,10 @@ public class ImgController extends Controller {
             {
                 img.set("createdate",new Date());
             }else{
-                img.set("createdate",createDate);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+                Date myDate = sdf.parse(createDate);
+                SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                img.set("createdate", df2.format(myDate));
             }
 
 

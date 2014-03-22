@@ -55,7 +55,7 @@
                         </span>
                         <br/>
                         <span>
-                            关注 100 | 访问 ${myVisit}
+                            访问 ${myVisit} | 喜欢 <c:out value="${fn:length(list_img)}"></c:out>
                         </span>
 
                     </div>
@@ -227,7 +227,7 @@
 
         </div><!--/row-->
 
-        <h2>照片墙</h2>
+        <h2>喜欢的照片</h2>
 
 
         <div class="row">

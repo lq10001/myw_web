@@ -3,10 +3,12 @@ package com.ly;
 import com.jfinal.core.Controller;
 import com.ly.model.*;
 import com.ly.tool.MenuTree;
+import com.ly.vo.HotVo;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class IndexController extends Controller {
@@ -33,8 +35,35 @@ public class IndexController extends Controller {
         List<Trip> listTrip = Trip.tripDao.getListTripTop10();
         setAttr("list_trip",listTrip);
 
+        List<Hot> listHot1 = Hot.hotDao.getListHotDefault(1);
+        setAttr("listHot1",getListHotVo(listHot1));
+
+        List<Hot> listHot2 = Hot.hotDao.getListHotDefault(2);
+        setAttr("listHot2",getListHotVo(listHot2));
+
+        List<Hot> listHot3 = Hot.hotDao.getListHotDefault(3);
+        setAttr("listHot3",getListHotVo(listHot3));
         setAttr("selmenu","mudi");
         render("index/mudi.jsp");
+    }
+
+    private List<HotVo> getListHotVo(List<Hot> hots)
+    {
+        List<HotVo> hotVos = new LinkedList<HotVo>();
+
+        int i =0;
+        int count = hots.size();
+        for (i = 0;i < count;)
+        {
+            Hot hot = hots.get(i);
+            Hot hot2 = hots.get(i+1);
+            HotVo hotVo = new HotVo();
+            hotVo.setName1(hot.getStr("name"));
+            hotVo.setName2(hot2.getStr("name"));
+            i += 2;
+            hotVos.add(hotVo);
+        }
+        return hotVos;
     }
 
     public void down() {

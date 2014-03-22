@@ -173,31 +173,13 @@
 
             <!-- Table -->
             <table class="table">
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
-                <tr>
-                    <td>韩国</td>
-                    <td>美国</td>
-                </tr>
 
+                <c:forEach var="hot" items="${listHot1}">
+                    <tr>
+                        <td>${hot.name1}</td>
+                        <td>${hot.name2}</td>
+                    </tr>
+                </c:forEach>
             </table>
         </div>
 
@@ -207,100 +189,42 @@
 
                 <!-- Table -->
                 <table class="table">
-                    <tr>
-                        <td>厦门</td>
-                        <td>成都</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-                    <tr>
-                        <td>韩国</td>
-                        <td>美国</td>
-                    </tr>
-
+                    <c:forEach var="hot" items="${listHot2}">
+                        <tr>
+                            <td>${hot.name1}</td>
+                            <td>${hot.name2}</td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </div>
 
 
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">微博介绍信息</h3>
-                </div>
-                <div class="panel-body">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">热门景点</div>
 
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">微博地址：</span>********** </h4>
-                    </div>
+                <!-- Table -->
+                <table class="table">
+                    <c:forEach var="hot" items="${listHot3}">
+                        <tr>
+                            <td>${hot.name1}</td>
+                            <td>${hot.name2}</td>
+                        </tr>
+                    </c:forEach>
 
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">联系电话：</span>189888888 </h4>
-                    </div>
 
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">联系QQ：&nbsp;</span>8888888</h4>
-                    </div>
-
-                    <div style="height:28px;">
-                        <h4 style="font-size: 14px;"><span style="width:160px;">联系Email：</span>8888888@qq.com </h4>
-                    </div>
-                </div>
+                </table>
             </div>
+
 
 
 
         </div><!--/span-->
     </div><!--/row-->
 
-    <div class="footer">
-        <div class="row">
-
-
-            <div class="col-md-12">
-                合作伙伴:
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-                <span style="margin-left: 20px;">青年旅行社</span>
-            </div>
-
-            <div class="col-md-12">
-                <p>友情链接
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-                    <span style="margin-left: 20px;">人民网</span>
-                    <span style="margin-left: 20px;">CCTV</span>
-
-            </div>
-
-            <div class="col-md-12">
-                <p>&copy; 募游网 2013</p>
-            </div>
-        </div>
-    </div>
 </div>
+
+<jsp:include page="foot.jsp"></jsp:include>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
