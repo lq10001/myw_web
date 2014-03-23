@@ -55,15 +55,47 @@ public class IndexController extends Controller {
         int count = hots.size();
         for (i = 0;i < count;)
         {
-            Hot hot = hots.get(i);
-            Hot hot2 = hots.get(i+1);
             HotVo hotVo = new HotVo();
+
+            Hot hot = hots.get(i);
+            hotVo.setHotid1(hot.getInt("id"));
             hotVo.setName1(hot.getStr("name"));
+
+            Hot hot2 = hots.get(i+1);
+            hotVo.setHotid2(hot2.getInt("id"));
             hotVo.setName2(hot2.getStr("name"));
             i += 2;
             hotVos.add(hotVo);
         }
         return hotVos;
+    }
+
+    public void mudiInfo()
+    {
+        getMenu();
+        Integer hotid = getParaToInt(0);
+
+        Hot hot = Hot.hotDao.findById(hotid);
+        List<Img> listImg = Img.imgDao.getListImgByHotname(hot.getStr("name"));
+        System.out.println(listImg);
+        setAttr("list_img",listImg);
+
+        setAttr("selmenu","mudi");
+        render("index/mudiInfo.jsp");
+
+    }
+
+    public void mudiInfo2()
+    {
+        getMenu();
+        String name = getPara(0);
+        List<Img> listImg = Img.imgDao.getListImgByHotname(name);
+        System.out.println(listImg);
+        setAttr("list_img",listImg);
+
+        setAttr("selmenu","mudi");
+        render("index/mudiInfo.jsp");
+
     }
 
     public void down() {

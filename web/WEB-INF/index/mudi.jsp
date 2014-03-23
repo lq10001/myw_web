@@ -42,13 +42,13 @@
             <div class="row">
                 <div class="col-xs-4 col-md-4">
                     <h4>国际</h4>
-                    <a href="#" class="thumbnail">
+                    <a href="#" class="thumbnail" onclick="onGuowai()">
                         <img src="<%=path%>/img/1.jpg" alt="">
                     </a>
                 </div>
                 <div class="col-xs-4 col-md-4">
                     <h4>国内</h4>
-                    <a href="#" class="thumbnail">
+                    <a href="#" class="thumbnail" onclick="onGuonei()">
                         <img src="<%=path%>/img/2.jpg" alt="">
                     </a>
                 </div>
@@ -176,8 +176,8 @@
 
                 <c:forEach var="hot" items="${listHot1}">
                     <tr>
-                        <td>${hot.name1}</td>
-                        <td>${hot.name2}</td>
+                        <td><a href="<%=path%>/mudiInfo/${hot.hotid1}">${hot.name1}</a></td>
+                        <td><a href="<%=path%>/mudiInfo/${hot.hotid2}">${hot.name2}</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -191,8 +191,8 @@
                 <table class="table">
                     <c:forEach var="hot" items="${listHot2}">
                         <tr>
-                            <td>${hot.name1}</td>
-                            <td>${hot.name2}</td>
+                            <td><a href="<%=path%>/mudiInfo/${hot.hotid1}">${hot.name1}</a></td>
+                            <td><a href="<%=path%>/mudiInfo/${hot.hotid2}">${hot.name2}</a></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -207,12 +207,10 @@
                 <table class="table">
                     <c:forEach var="hot" items="${listHot3}">
                         <tr>
-                            <td>${hot.name1}</td>
-                            <td>${hot.name2}</td>
+                            <td><a href="<%=path%>/mudiInfo/${hot.hotid1}">${hot.name1}</a></td>
+                            <td><a href="<%=path%>/mudiInfo/${hot.hotid2}">${hot.name2}</a></td>
                         </tr>
                     </c:forEach>
-
-
                 </table>
             </div>
 
@@ -222,7 +220,100 @@
         </div><!--/span-->
     </div><!--/row-->
 
+
+    <!-- RestaurantModal -->
+    <div class="modal fade" id="guowaiModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">请选择地点</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Table -->
+                            <table class="table">
+                                <tr>
+                                    <td colspan="4">亚洲</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="<%=path%>/mudiInfo2/中国">中国</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/香港">香港</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/日本">日本</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/泰国">泰国</a></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4">欧洲</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="<%=path%>/mudiInfo2/德国">德国</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/英国">英国</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/西班牙">西班牙</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/希腊">希腊</a></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="height: 50px;">
+                    <button type="button" class="btn btn-default" style="margin-top: -10px;" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- RestaurantModal -->
+    <div class="modal fade" id="guoneiModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;height: 400px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">请选择地点</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Table -->
+                            <table class="table">
+                                <tr>
+                                    <td colspan="4">直辖市</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="<%=path%>/mudiInfo2/北京市">北京市</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/天津市">天津市</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/上海市">上海市</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/重庆市">重庆市</a></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4">四川省</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="<%=path%>/mudiInfo2/成都市">成都市</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/乐山市">乐山市</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/绵阳市">绵阳市</a></td>
+                                    <td><a href="<%=path%>/mudiInfo2/泸州市">泸州市</a></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="height: 50px;">
+                    <button type="button" class="btn btn-default" style="margin-top: -10px;" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 </div>
+
+
+
 
 <jsp:include page="foot.jsp"></jsp:include>
 
@@ -232,6 +323,21 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=path%>/js/offcanvas.js"></script>
+
+   <script>
+       function onGuowai()
+       {
+           $('#guowaiModel').modal('show');
+
+       }
+
+       function onGuonei()
+       {
+           $('#guoneiModel').modal('show');
+       }
+
+
+   </script>
 
 
 </body>

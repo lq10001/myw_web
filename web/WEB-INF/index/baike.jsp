@@ -110,7 +110,7 @@
     <div class="modal fade" id="baikeModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 600px;height: 400px;">
             <div class="modal-content">
-                <form class="form-horizontal" method="post" id="baikeForm" action="<%=path%>/baike/save" role="form">
+                <form class="form-horizontal" method="post" id="baikeForm" action="<%=path%>/baike/save" role="form" enctype="multipart/form-data">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">添加百科信息</h4>
@@ -129,7 +129,7 @@
                                 <div class="form-group">
                                     <label for="baikePhone" class="col-md-2 control-label">百科图片</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="baike.imgurl" class="form-control" id="baikePhone" placeholder="">
+                                        <input type="file" name="baike.imgurl" class="form-control" id="baikePhone" placeholder="">
                                     </div>
                                 </div>
 

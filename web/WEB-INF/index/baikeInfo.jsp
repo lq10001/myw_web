@@ -52,7 +52,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>作者: </h4>
+                            <h4>作者: ${authorname}</h4>
                         </div>
                     </div>
 
@@ -61,6 +61,13 @@
                             <h4>添加时间: ${baike.adddate}</h4>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="<%=path%>${baike.imgurl}" alt="" style="width: 600px;height: 300px;">
+                        </div>
+                    </div>
+
 
 
                     <div class="row" style="font-size: 21px;">

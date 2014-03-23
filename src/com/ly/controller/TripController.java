@@ -128,9 +128,6 @@ public class TripController extends Controller {
         List<Hotel> hotel_list = Hotel.hotelDao.getListHotelByTrip(tripid);
         setAttr("hotel_list",hotel_list);
 
-        List<Place> place_list = Place.placeDao.getListPlaceByTripid(tripid);
-        setAttr("place_list",place_list);
-
         List<Guide> guide_list = Guide.guideDao.getListGuideByTrip(tripid);
         setAttr("guide_list",guide_list);
 

@@ -5,9 +5,29 @@ package com.ly.vo;
  */
 public class HotVo {
 
+    private Integer hotid1;
+
+    private Integer hotid2;
+
     private String name1;
 
     private String name2;
+
+    public Integer getHotid1() {
+        return hotid1;
+    }
+
+    public void setHotid1(Integer hotid1) {
+        this.hotid1 = hotid1;
+    }
+
+    public Integer getHotid2() {
+        return hotid2;
+    }
+
+    public void setHotid2(Integer hotid2) {
+        this.hotid2 = hotid2;
+    }
 
     public String getName1() {
         return name1;

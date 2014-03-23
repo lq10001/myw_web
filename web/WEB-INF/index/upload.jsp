@@ -53,7 +53,7 @@
                 <c:forEach var="img" items="${list_img}">
                     <div id="img_${img.id}" class="col-md-3" style="text-align: center;height: 260px;">
                         <div class="image-box">
-                            <img style=" vertical-align:middle;width: 260px; " alt="" src="<%=path%>${img.imgpath}" alt="">
+                            <img style=" vertical-align:middle;width: 260px; " alt="" src="<%=path%>${img.smallimgpath}" alt="">
                         </div>
                         <button type="button" class="btn btn-primary btn-xs" style="margin-top: 3px;" onclick="onDelImg(${img.id})">
                             删除

@@ -58,6 +58,17 @@ public class Img extends Model<Img> {
         return imgDao.find("select img.* from imglove inner join  img on img.id = imglove.imgid where img.userid = " + userid + " limit 10");
     }
 
+    public List<Img> getListImgByHotname(String name)
+    {
+        StringBuffer sb = new StringBuffer("select * from img where gpsname like ");
+        sb.append("'%");
+        sb.append(name);
+        sb.append("%' limit 20");
+        System.out.println(sb.toString());
+        return imgDao.find(sb.toString());
+
+    }
+
 
     public Img getImg(Integer id)
     {

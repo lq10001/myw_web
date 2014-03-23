@@ -97,7 +97,7 @@ public class AppConfig extends JFinalConfig {
         arp.addMapping("triplove",TripLove.class);
         arp.addMapping("imgcomment",ImgComment.class);
         arp.addMapping("baike",Baike.class);
-        arp.addMapping("Hot",Hot.class);
+        arp.addMapping("hot",Hot.class);
 
 
         // 缓存插件

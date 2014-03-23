@@ -123,7 +123,7 @@
                         <div id="img_${img.id}" class="row">
                             <div class="col col-md-12">
                                 <div class="thumbnail">
-                                    <img src="<%=path%>${img.imgpath}" alt="">
+                                    <img src="<%=path%>${img.imgpath800}" alt="">
 
                                     <div class="row" style="margin-left: 15px;">
                                         <div class="col-md-12">
@@ -797,12 +797,10 @@
                     $("#error-text").text("填写信息不完整。")
                     return false;
                 }else{
-                    alert('1');
                     $('#createdate').val($('#createdate').val()+' 00:00:00');
                     $.post("<%=path%>/img/imgGps", $("#editForm").serialize(),
                             function(data){
                                 $('#editModal').modal('hide');
-                                alert('11  '+data);
                             },"json");
                 }
             });
@@ -1026,12 +1024,14 @@
 
 
         var LocsS = [
-            <c:forEach var="place1" items="${place_list}">
+            <c:forEach var="img" items="${list_img}">
+            <c:if test="${img.lat != '' }">
             {
-                lat: ${place1.lat},
-                lon: ${place1.lon},
+                lat: ${img.lat},
+                lon: ${img.lon},
                 zoom:8
             },
+            </c:if>
             </c:forEach>
         ];
 

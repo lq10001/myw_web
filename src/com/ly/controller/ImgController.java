@@ -90,7 +90,7 @@ public class ImgController extends Controller {
         {
             FileUploadInfo fileInfo = new FileUploadInfo();
 
-            File f = uploadFile.getFile();
+            File uploadFile1 = uploadFile.getFile();
 
             //exif
             String lat = "";
@@ -98,7 +98,7 @@ public class ImgController extends Controller {
             String createDate = "";
 
 
-            final IImageMetadata metadata = Sanselan.getMetadata(f);
+            final IImageMetadata metadata = Sanselan.getMetadata(uploadFile1);
             if (metadata instanceof JpegImageMetadata) {
                 final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
                 final TiffField field = jpegMetadata.findEXIFValue(TiffTagConstants.TIFF_TAG_DATE_TIME);
@@ -119,18 +119,25 @@ public class ImgController extends Controller {
                 }
             }
 
-            String type = Files.getSuffixName(f);
+            String type = Files.getSuffixName(uploadFile1);
 
             StringGenerator sg = new StringGenerator(5);
             String name = sg.next() + System.currentTimeMillis();
             String fileName = name + "." + type;
-            String s_fileName = name + "_200_200." + type;
 
-            Thumbnails.of(f).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + s_fileName);
-            Files.rename(f, fileName);
+            String filename200 = name + "_200_200." + type;
+            String filename800 = name + "_800_800." + type;
+
+
+            Thumbnails.of(uploadFile1).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + filename200);
+            Thumbnails.of(uploadFile1).size(800,800).toFile(uploadFile.getSaveDirectory() + "/" + filename800);
+
+            Files.rename(uploadFile1, fileName);
+
 
             String url = "/upload/"+fileName;
-            String s_url  = "/upload/"+s_fileName;
+            String s_url  = "/upload/"+filename200;
+            String url_800 = "/upload/"+filename800;
 
 
 
@@ -141,6 +148,7 @@ public class ImgController extends Controller {
             img.set("adddate",new Date());
             img.set("imgpath",url);
             img.set("smallimgpath",s_url);
+            img.set("imgpath800",url_800);
             img.set("lat",lat);
             img.set("lon",lon);
             if (createDate.equals(""))
@@ -165,7 +173,7 @@ public class ImgController extends Controller {
             fileInfo.setThumbnailUrl(s_url);
             fileInfo.setDeleteType("DELETE");
             fileInfo.setDeleteUrl(img.getInt("id").toString());
-            fileInfo.setSize( df.format((double) f.getTotalSpace() / 1024) + "K");
+            fileInfo.setSize( df.format((double) uploadFile1.getTotalSpace() / 1024) + "K");
             fileInfos.add(fileInfo);
         }
 
