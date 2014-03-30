@@ -42,26 +42,32 @@ public class TripController extends Controller {
 
     public void save()
     {
+        Trip trip = getModel(Trip.class);
+        Integer id = trip.getInt("id");
+
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
-        Trip trip = getModel(Trip.class);
         trip.set("userid",userid);
         trip.set("adddate",new Date());
+        trip.set("type",1);
         System.out.println(trip.get("name"));
         boolean ok = Trip.tripDao.saveOrUpdate(trip);
         if (ok)
         {
-            Integer tripid = trip.getInt("id");
-            session.setAttribute(Global.TRIP_ID,tripid);
-            redirect("/upload");
+            if (id == null) {
+                Integer tripid = trip.getInt("id");
+                session.setAttribute(Global.TRIP_ID, tripid);
+                redirect("/upload");
+            }else{
+                 redirect("/my");
+            }
         }
     }
 
     public void del()
     {
         boolean ok =  Trip.tripDao.deleteById(getParaToInt());
-        CacheKit.removeAll("trip");
-        renderJson(Dwz.jsonRtn(ok,"trip",""));
+        redirect("/my");
     }
 
     public void show()
@@ -75,12 +81,14 @@ public class TripController extends Controller {
         List<Webmenu> list_menu = Webmenu.webmenuDao.getListMenu();
         setAttr("webmenu_list",list_menu);
 
+        Date firstDate = null;
         HttpSession session = getSession();
 
         session.setAttribute(Global.TRIP_ID,tripid);
         Trip trip = Trip.tripDao.getTrip(tripid);
         setAttr("trip",trip);
 
+        Date tripDate = trip.getDate("adddate");
         int visit = trip.getInt("visit");
 
         Trip.tripDao.updateVisit(tripid,visit + 1);
@@ -97,6 +105,7 @@ public class TripController extends Controller {
             {
                 continue;
             }
+            firstDate = tripdate;
             SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
             String a1=dateFormat.format(tripdate);
             if (i  < 1)
@@ -117,7 +126,7 @@ public class TripController extends Controller {
             i++;
         }
         setAttr("list_day",listDay);
-
+        setAttr("firstDate", (firstDate == null ? tripDate  : firstDate));
 
         List<Img> list_img = Img.imgDao.getListImgLoveByTripid(tripid);
         setAttr("list_img",list_img);
@@ -139,15 +148,29 @@ public class TripController extends Controller {
 
     public void follow()
     {
-        int id = getParaToInt("id");
-
+        int id = Integer.parseInt(getPara(0));
         HttpSession session = getSession();
         Object userid = session.getAttribute(Global.USER_ID);
-        Follow follow = new Follow();
-        follow.set("tripid",id);
-        follow.set("userid",userid);
-        boolean ok =  Follow.followDao.saveOrUpdate(follow);
-        renderJson(ok ? "1" : "0");
+
+        Trip trip = Trip.tripDao.findById(id);
+        trip.set("id",null);
+        trip.set("type",2);
+        trip.set("userid",userid);
+        trip.set("visit",0);
+        trip.set("love",0);
+        Trip.tripDao.saveOrUpdate(trip);
+        Integer tid = trip.getInt("id");
+
+        List<Img> imgs = Img.imgDao.getListImgByTripid(id);
+        for (Img img : imgs)
+        {
+            img.set("id",null);
+            img.set("userid",userid);
+            img.set("tripid",tid);
+            Img.imgDao.saveOrUpdate(img);
+        }
+
+        showImg(tid);
     }
 
     public void listPlace()

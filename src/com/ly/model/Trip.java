@@ -5,6 +5,9 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.ly.tool.Cnd;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,7 +23,7 @@ public class Trip extends Model<Trip> {
 
     public List<Trip> getListTripByUser(Integer userid)
     {
-        return tripDao.find("select * from trip  where trip.userid =" + userid);
+        return tripDao.find("select * from trip  where type = 1 and trip.userid =" + userid);
     }
 
     public Trip getTripVisit(Integer userid)
@@ -34,28 +37,61 @@ public class Trip extends Model<Trip> {
         sb.append("select * from trip  where name like '%");
         sb.append(name);
         sb.append("%'");
-
-        System.out.println(sb.toString());
         return tripDao.find(sb.toString());
     }
 
 
     public List<Trip> getListFollowTripByUser(Integer userid)
     {
-        return tripDao.find("select trip.*,follow.userid fuserid from follow inner join trip on follow.tripid = trip.id where follow.userid=" + userid);
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from trip  where  type = 2 and userid = ");
+        sb.append(userid.toString());
+        return tripDao.find(sb.toString());
     }
-
-
-
 
     public List<Trip> getListTripTop10()
     {
-        return tripDao.find("select * from trip LIMIT 10 ");
+        return tripDao.find("select * from trip order by visit desc  LIMIT 12 ");
     }
+
+    public List<Trip> getListTripHot()
+    {
+        return tripDao.find("select * from trip order by love desc  LIMIT 20 ");
+    }
+
 
     public List<Trip> getListMyTrip10(Integer userid)
     {
         return tripDao.find("select * from trip join img where trip.id = img.tripid and trip.userid =" + userid);
+    }
+
+    public List<Trip> getListTripEnd()
+    {
+        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from trip where enddate < '");
+        sb.append(df2.format(new Date()));
+        sb.append("' order by love desc,visit desc limit 12 ");
+        return tripDao.find(sb.toString());
+    }
+
+    public List<Trip> getListTripNow()
+    {
+        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+        StringBuffer sb = new StringBuffer();
+        sb.append("select * from trip where enddate >= '");
+        sb.append(df2.format(new Date()));
+        sb.append("' order by love desc,visit desc limit 12 ");
+        return tripDao.find(sb.toString());
+    }
+
+    public Integer getLoveCount(Object userid)
+    {
+        StringBuffer sb = new StringBuffer("select sum(love)  as love from trip where userid = ");
+        sb.append(userid);
+        Trip trip = tripDao.findFirst(sb.toString());
+        BigDecimal love = trip.getBigDecimal("love");
+        return love == null ? 0 : love.intValue();
     }
 
     public Trip getTrip(Integer id)

@@ -5,6 +5,9 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.ly.tool.Cnd;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -69,6 +72,12 @@ public class Img extends Model<Img> {
 
     }
 
+    public List<Img> getListImgLove()
+    {
+        String sql = "select * from img order by love desc limit 20";
+        return  imgDao.find(sql);
+    }
+
 
     public Img getImg(Integer id)
     {
@@ -85,6 +94,16 @@ public class Img extends Model<Img> {
         	return imgDao.paginateByCache("img", "page_img_" + pageNum, pageNum, pageSize, "select *", "from img order by id desc");
         }
     }
+
+    public Date getEndDate(Object tripid) throws ParseException {
+        StringBuffer sb = new StringBuffer("select max(createdate) as createdate from img where tripid = ");
+        sb.append(tripid);
+        Img img = imgDao.findFirst(sb.toString());
+        String strDate = img.getTimestamp("createdate").toString();
+        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return df2.parse(strDate);
+    }
+
 
     public boolean saveOrUpdate(Img img)
     {

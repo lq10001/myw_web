@@ -13,7 +13,7 @@ public class Baike extends Model<Baike> {
 
     public List<Baike> getListBaike()
     {
-        return baikeDao.find("select * from baike  order by id desc");
+        return baikeDao.find("select baike.*,`user`.`name` from baike inner join user on baike.userid = user.id  order by id desc");
     }
 
 

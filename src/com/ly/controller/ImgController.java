@@ -1,6 +1,9 @@
 package com.ly.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.imaging.jpeg.JpegMetadataReader;
@@ -36,9 +39,10 @@ import org.nutz.lang.random.StringGenerator;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.text.html.HTML;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -115,6 +119,7 @@ public class ImgController extends Controller {
                         final double latitude = gpsInfo.getLatitudeAsDegreesNorth();
                         lon = String.valueOf(longitude);
                         lat = String.valueOf(latitude);
+//                        geocodeAddr(latitude,longitude);
                     }
                 }
             }
@@ -164,10 +169,16 @@ public class ImgController extends Controller {
 
             Img.imgDao.saveOrUpdate(img);
 
-            Trip.tripDao.updateDefalutImg(tripid,s_url);
+            Date endDate = Img.imgDao.getEndDate(tripid);
+
+
+            Trip trip = Trip.tripDao.findById(tripid);
+            trip.set("id",tripid);
+            trip.set("defaultimg",s_url);
+            trip.set("enddate",endDate);
+            Trip.tripDao.saveOrUpdate(trip);
 
             DecimalFormat df = new DecimalFormat("#.00");
-
             fileInfo.setName(fileName);
             fileInfo.setUrl(url);
             fileInfo.setThumbnailUrl(s_url);
@@ -252,6 +263,78 @@ public class ImgController extends Controller {
         img.set("love",num);
         Boolean ok = Img.imgDao.saveOrUpdate(img);
         renderJson(ok ? num : "0");
+    }
+    private JSONObject geocodeAddr(double lat, double lng) {
+
+
+//        String str = getRequestByUrl("http://ditu.google.com/maps/api/geocode/json?latlng=31.1899209667,121.3918055000&sensor=false&&language=zh-CN");
+
+//        String urlString = "http://ditu.google.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=false&&language=zh-CN";
+          String urlString = "http://ditu.google.com/maps/api/geocode/json?latlng=30.628621111111112,104.05973694444444&sensor=false&&language=zh-CN";
+        StringBuilder sTotalString = new StringBuilder();
+        try {
+
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            HttpURLConnection httpConnection = (HttpURLConnection) connection;
+
+            InputStream urlStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(urlStream));
+
+            String sCurrentLine = "";
+            while ((sCurrentLine = bufferedReader.readLine()) != null) {
+                sTotalString.append(sCurrentLine);
+            }
+            bufferedReader.close();
+            httpConnection.disconnect(); // 关闭http连接
+
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        System.out.println(sTotalString.toString());
+
+        return null;
+    }
+
+    public static void main(String[] args)
+    {
+        getAddressByLatLng("");
+    }
+
+    public static String getAddressByLatLng(String latLng){
+        String address = "";
+        BufferedReader in= null;
+        try {
+            String urlString = "http://ditu.google.cn/maps/api/geocode/json?latlng=30.628621111111112,104.05973694444444&sensor=false&&language=zh-CN";
+
+            URL url = new URL(urlString);
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setDoInput(true);
+            in = new BufferedReader(new InputStreamReader(httpConn.getInputStream(),"UTF-8"));
+            String line;
+            String result="";
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+            in.close();
+            JSONObject jsonObject =JSONObject.parseObject(result);
+            System.out.println(result);
+            System.out.println(jsonObject);
+            JSONArray array = JSONArray.parseArray(result);
+
+
+
+        }catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return address;
     }
 
 }

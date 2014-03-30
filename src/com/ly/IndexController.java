@@ -32,7 +32,7 @@ public class IndexController extends Controller {
     public void mudi() {
         getMenu();
 
-        List<Trip> listTrip = Trip.tripDao.getListTripTop10();
+        List<Trip> listTrip = Trip.tripDao.getListTripHot();
         setAttr("list_trip",listTrip);
 
         List<Hot> listHot1 = Hot.hotDao.getListHotDefault(1);
@@ -105,8 +105,9 @@ public class IndexController extends Controller {
     public void travel() {
         setAttr("selmenu","xing");
         getMenu();
-        List<Trip> listTrip = Trip.tripDao.getListTripTop10();
-        setAttr("list_trip",listTrip);
+        setAttr("list_tripend",Trip.tripDao.getListTripEnd());
+        setAttr("list_tripnow",Trip.tripDao.getListTripNow());
+
         render("index/xing.jsp");
     }
 
@@ -149,16 +150,16 @@ public class IndexController extends Controller {
         }else{
             Integer userid = Integer.parseInt(o_userid.toString());
 
+            setAttr("loveCount",Trip.tripDao.getLoveCount(o_userid));
+
             Trip trip = Trip.tripDao.getTripVisit(userid);
             setAttr("myVisit",trip.getLong("visit"));
-
 
             List<Trip> listFollow = Trip.tripDao.getListFollowTripByUser(userid);
             setAttr("list_follow",listFollow);
 
             List<Trip> listTrip = Trip.tripDao.getListTripByUser(userid);
             setAttr("list_trip",listTrip);
-
 
             List<Img> listImg = Img.imgDao.getListLoveImgByUserId(userid);
             setAttr("list_img",listImg);
@@ -233,6 +234,7 @@ public class IndexController extends Controller {
         Integer baikeid = Integer.parseInt(getPara(0));
         Baike baike = Baike.baikeDao.findById(baikeid);
         setAttr("baike",baike);
+        setAttr("user",User.userDao.findById(baike.getInt("userid")));
         render("index/baikeInfo.jsp");
     }
 
@@ -271,6 +273,17 @@ public class IndexController extends Controller {
         }
         setAttr("list_trip",listTrip);
         render("index/search.jsp");
+    }
+
+    public void enjoy()
+    {
+        getMenu();
+        setAttr("selmenu","enjoy");
+
+        List<Img> list_img = Img.imgDao.getListImgLove();
+        setAttr("list_img",list_img);
+        render("index/enjoy.jsp");
+
     }
 
 
