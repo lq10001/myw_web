@@ -17,10 +17,9 @@
 
     <title>CMS</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
+    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
@@ -109,10 +108,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h2>热门线路</h2>
+                    <h2>热门目的地</h2>
                 </div>
             </div>
-
 
             <div class="row">
                 <c:forEach var="trip" items="${list_trip}">
@@ -133,34 +131,6 @@
                     </div>
                 </c:forEach>
             </div><!--/row-->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>推荐线路</h2>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <c:forEach var="trip" items="${list_trip}">
-                    <div class="col-xs-6 col-md-3">
-                        <a href="<%=path%>/trip/show/${trip.id}">
-                            <div class="image-box-a">
-                                <c:choose>
-                                    <c:when test="${trip.defaultimg == ''}">
-                                        <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                            <p style="text-align: center;">${trip.name}</p>
-                        </a>
-                    </div>
-                </c:forEach>
-            </div><!--/row-->
-
         </div><!--/span-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">

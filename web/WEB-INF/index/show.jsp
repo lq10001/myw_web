@@ -56,7 +56,7 @@
                 <h3>行程名称：${trip.name}</h3>
                 <div class="row">
                     <div class="col-md-5">
-                        <p>${trip.adddate}</p>
+                        <p>${firstDate}</p>
                     </div>
                     <div class="col-md-2">
                         <p> ${trip.days + 1}天</p>
@@ -228,6 +228,8 @@
                         <li class="list-group-item">
                             <p>${flight.todate} ${flight.start} -> ${flight.arrival}</p>
                             <p>${flight.name}</p>
+                            <p>价格：${flight.price}</p>
+
                         </li>
                     </c:forEach>
                 </ul>
@@ -250,6 +252,7 @@
                         <li class="list-group-item">
                             <p>${hotel.date1} -> ${hotel.date2}</p>
                             <p>${hotel.name}</p>
+                            <p>价格：${hotel.price}</p>
                         </li>
                     </c:forEach>
                 </ul>
@@ -270,7 +273,7 @@
 
                     <c:forEach var="restaurant" items="${restaurant_list}">
                         <li class="list-group-item">
-                            <p>${restaurant.name}</p>
+                            <p>${restaurant.tripdate} &nbsp;${restaurant.name}</p>
                             <p>消费金额: ${restaurant.price} &nbsp;人民币</p>
                         </li>
                     </c:forEach>
@@ -292,8 +295,10 @@
 
                     <c:forEach var="guide" items="${guide_list}">
                         <li class="list-group-item">
+                            <p>${guide.tripdate} &nbsp;${guide.content} </p>
                             <p>姓名：${guide.name} </p>
                             <p>电话：${guide.phone}</p>
+                            <p>电话：${guide.price}</p>
                         </li>
                     </c:forEach>
                 </ul>
@@ -314,9 +319,7 @@
             <h3 style="margin-top:0px;">
              线路日程( ${trip.days + 1}天 )
             </h3>
-
             <div class="thumbnail">
-
                 <c:forEach items="${list_day}" var="day">
                     <h5>${day.tripDate} 第${day.day}天</h5>
                     <ul id="ul_day_${day.day}" class="list-group">
@@ -326,22 +329,12 @@
                             });
                         </script>
                     </ul>
-
-
                 </c:forEach>
-
             </div>
-
         </div>
-
-
-
-
     </div><!--/row-->
 
-
     <!-- ==================================================== Model ==============================================-->
-
     <!-- flightModel -->
     <div class="modal fade" id="flightModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width: 600px;height: 400px;">
@@ -384,6 +377,12 @@
                                                 </option>
                                             </c:forEach>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fprice" class="col-md-2 control-label">价格</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="flight.price" class="form-control" id="fprice" placeholder="" check-type="number">
                                     </div>
                                 </div>
                             </div>
@@ -468,11 +467,18 @@
                             <div class="col-md-12">
 
                                 <div class="form-group">
-                                    <label for="guideName" class="col-md-2 control-label">向导名称</label>
+                                    <label for="guideName" class="col-md-2 control-label">向导姓名</label>
                                     <div class="col-md-6">
                                         <input type="text" name="guide.name" class="form-control" id="guideName" placeholder="" check-type="required">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="guideContent" class="col-md-2 control-label">讲解内容</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="guide.content" class="form-control" id="guideContent" placeholder="" check-type="required">
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="gdate" class="col-md-2 control-label">讲解时间</label>
 
@@ -493,6 +499,14 @@
                                         <input type="text" name="guide.phone" class="form-control" id="guidePhone" placeholder="" check-type="phone">
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="gPrice" class="col-md-2 control-label">价格</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="guide.price" class="form-control" id="gPrice" placeholder="" check-type="number">
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -667,6 +681,7 @@
                 $("#fname").val("");
                 $("#start").val("");
                 $("#arrival").val("");
+                $("#fprice").val("");
                 $("#flightForm").validation();
                 $('#flightModel').modal('show');
             });
@@ -681,6 +696,8 @@
             $("#addGuide").on('click',function(event){
                 $("#guideName").val("");
                 $("#guidePhone").val("");
+                $("#gPrice").val("");
+                $("#guideContent").val("");
                 $("#guideForm").validation();
                 $('#guideModel').modal('show');
             });
@@ -845,9 +862,7 @@
 
         function onFollowTrip(tripid)
         {
-            $.post("<%=path%>/trip/follow", { id: tripid },
-                    function(data){
-                    },"json");
+            location.href = '<%=path%>/trip/follow/'+tripid;
         }
 
 

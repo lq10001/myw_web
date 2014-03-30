@@ -57,13 +57,23 @@
 
                     <c:choose>
                         <c:when test="${fn:length(listBaike) > 0}">
-                            <ol>
-                            <c:forEach var="baike" items="${listBaike}">
-                                <li style="font-size: 18px;">
-                                    <a href="<%=path%>/baikeInfo/${baike.id}"> ${baike.title}</a>
-                                </li>
-                            </c:forEach>
-                            </ol>
+                            <table class="table col-md-12">
+                                <tr style="font-size: 16px;">
+                                    <th class="col-md-6">标题</th>
+                                    <th class="col-md-2">作者</th>
+                                    <th class="col-md-4">添加时间</th>
+
+                                </tr>
+                                    <c:forEach var="baike" items="${listBaike}">
+                                        <tr style="font-size: 16px;">
+                                            <td><a href="<%=path%>/baikeInfo/${baike.id}"> ${baike.title}</a></td>
+                                            <td>${baike.name}</td>
+                                            <td>${baike.adddate}</td>
+                                        </tr>
+                                    </c:forEach>
+                            </table>
+
+
                         </c:when>
                         <c:otherwise>
                             <div class="thumbnail col-md-12" style="text-align: center;">

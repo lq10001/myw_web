@@ -19,18 +19,19 @@
     <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
-    <script src="<%=path%>/js/bootstrap3-validation.js"></script>
-
-
-    <link href="<%=path%>/css/carousel.css" rel="stylesheet">
-
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 </head>
 
 <body class="">
 
-<input type="hidden" id="userid" value="${userid}">
+
 <jsp:include page="top.jsp"></jsp:include>
+
+
+
+
+    <div class="container" style="margin-top: -20px;">
+
 
         <div class="container">
 
@@ -40,43 +41,28 @@
                 <div class="col-md-8">
 
                     <div class="row">
-                        <button id="rtnBaike" type="button"  class="btn btn-success" style="margin-left: 10px;">返回百科列表</button>
-                    </div>
-                    <hr/>
-
-                    <div class="row">
                         <div class="col-md-12">
-                            <h4>标题: ${baike.title}</h3>
+                            <h2>风景欣赏</h2>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <h4>作者:${user.name}</h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>添加时间: ${baike.adddate}</h4>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="<%=path%>${baike.imgurl}" alt="" style="width: 600px;height: 300px;">
-                        </div>
-                    </div>
-
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>内容：</h4>
-                            <p>${baike.info} </p>
-                        </div>
+                        <c:forEach var="img" items="${list_img}">
+                            <div class="col-md-3">
+                                <a href="<%=path%>/trip/show/${img.tripid}">
+                                    <div class="image-box-a">
+                                           <img src="<%=path%>${img.smallimgpath}"  style=" vertical-align:middle;width: 180px; " alt="">
+                                    </div>
+                                </a>
+                            </div>
+                        </c:forEach>
                     </div><!--/row-->
 
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <p>加载更多...</p>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -92,6 +78,9 @@
                         </div>
                     </div>
 
+
+
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">广告2</h3>
@@ -101,6 +90,14 @@
                         </div>
                     </div>
 
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">广告3</h3>
+                        </div>
+                        <div class="panel-body">
+                            <img src="<%=path%>/img/21.jpg" alt="">
+                        </div>
+                    </div>
 
                 </div>
 
@@ -108,6 +105,7 @@
         </div>
 
 
+    </div>
 
     <br/>
 
@@ -118,18 +116,18 @@
 
 <script src="<%=path%>/js/offcanvas.js"></script>
 
-<script>
 
-    $(function(){
-        $("#rtnBaike").on('click',function(event){
-           location.href = '<%=path%>/showBaike';
-        });
+<script type="text/javascript">
+    function onLogin()
+    {
+        location.href='<%=path%>/login';
+    }
 
-
-
-    });
+    function onRigister()
+    {
+        location.href='<%=path%>/register';
+    }
 </script>
-
 
 
 </html>

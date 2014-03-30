@@ -17,10 +17,9 @@
 
     <title>CMS</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
+    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
@@ -85,7 +84,7 @@
             <h2>随我行</h2>
         <div class="row">
 
-            <c:forEach var="trip" items="${list_trip}">
+            <c:forEach var="trip" items="${list_tripend}">
                 <div class="col-xs-6 col-md-3">
                     <a href="<%=path%>/trip/show/${trip.id}">
                         <div class="image-box">
@@ -109,7 +108,7 @@
 
         <div class="row">
 
-            <c:forEach var="trip" items="${list_trip}">
+            <c:forEach var="trip" items="${list_tripnow}">
                 <div class="col-xs-6 col-md-3">
                     <a href="<%=path%>/trip/show/${trip.id}">
                         <div class="image-box">
@@ -173,7 +172,6 @@
         </div>
     </div>
 
-    <script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=path%>/js/offcanvas.js"></script>
 

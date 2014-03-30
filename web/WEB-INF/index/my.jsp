@@ -55,7 +55,7 @@
                         </span>
                         <br/>
                         <span>
-                            访问 ${myVisit} | 喜欢 <c:out value="${fn:length(list_img)}"></c:out>
+                            访问 ${myVisit} | 喜欢 <c:out value="${loveCount}"></c:out>
                         </span>
 
                     </div>
@@ -71,58 +71,13 @@
                     <div class="col-md-1">
                         <br/>
                         <br/>
-                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" onclick="onAddTrip()">
                             +创建我的行程
                         </button>
                          <!--
                         <button type="button" class="btn btn-success" onclick="onCreate()"> +创建我的行程</button>
                         -->
                     </div>
-
-
-                    <!-- Button trigger modal -->
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-
-                                <form class="form-horizontal" method="post" id="form1" action="<%=path%>/trip/save" role="form">
-
-
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">创建新的旅程</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-
-                                        <div class="col-md-2">
-                                        </div>
-                                        <div class="col-md-8">
-
-                                                <div class="form-group">
-                                                    <label for="name">旅程名称</label>
-                                                    <input type="text" name="trip.name" class="form-control" id="name" placeholder="" check-type="required">
-                                                </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="submit" class="btn btn-primary">保存</button>
-                                </div>
-
-                                </form>
-
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-
                 </div>
 
                 <div class="row">
@@ -166,8 +121,9 @@
 
                         <c:forEach var="trip" items="${list_follow}">
                             <div class="col-xs-6 col-md-3">
-                                <a href="<%=path%>/trip/show/${trip.id}">
-                                    <div class="image-box">
+                                <div class="image-box">
+                                    <a href="<%=path%>/trip/show/${trip.id}">
+
                                         <c:choose>
                                             <c:when test="${trip.defaultimg == ''}">
                                                 <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
@@ -176,9 +132,23 @@
                                                 <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
                                             </c:otherwise>
                                         </c:choose>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <a href="<%=path%>/trip/show/${trip.id}">
+                                            <label>${trip.name}</label>
+                                        </a>
                                     </div>
-                                    <p style="text-align: center;">${trip.name}</p>
-                                </a>
+                                    <div class="col-md-5" style="text-align: right;">
+                                        <button type="button" class="btn btn-success btn-xs" onclick="onEditTrip(${trip.id},'${trip.name}')">
+                                            编辑
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-xs"  onclick="onDelTrip(${trip.id})">
+                                            删除
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </c:forEach>
 
@@ -201,8 +171,9 @@
 
                     <c:forEach var="trip" items="${list_trip}">
                         <div class="col-xs-6 col-md-3">
-                            <a href="<%=path%>/trip/show/${trip.id}">
                                 <div class="image-box">
+                                    <a href="<%=path%>/trip/show/${trip.id}">
+
                                     <c:choose>
                                         <c:when test="${trip.defaultimg == ''}">
                                             <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
@@ -211,9 +182,26 @@
                                             <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
                                         </c:otherwise>
                                     </c:choose>
+                                     </a>
                                 </div>
-                                <p style="text-align: center;">${trip.name}</p>
-                            </a>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <a href="<%=path%>/trip/show/${trip.id}">
+                                            <label>${trip.name}</label>
+                                        </a>
+
+                                    </div>
+                                    <div class="col-md-5" style="text-align: right;">
+                                        <button type="button" class="btn btn-success btn-xs" onclick="onEditTrip(${trip.id},'${trip.name}')">
+                                            编辑
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-xs"  onclick="onDelTrip(${trip.id})">
+                                            删除
+                                        </button>
+                                    </div>
+
+                                </div>
+
                         </div>
                     </c:forEach>
 
@@ -267,6 +255,47 @@
 
     </div><!--/row-->
 
+<!-- Modal -->
+<div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form class="form-horizontal" method="post" id="form1" action="<%=path%>/trip/save" role="form">
+
+                <input id="tripid" type="hidden" name="trip.id" value="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">创建新的旅程</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+
+                            <div class="form-group">
+                                <label for="name">旅程名称</label>
+                                <input type="text" name="trip.name" class="form-control" id="name" placeholder="" maxlength="20" check-type="required">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+
+            </form>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <jsp:include page="foot.jsp"></jsp:include>
 
@@ -280,8 +309,24 @@
 
 
 <script type="text/javascript">
-    function onCreate()
+
+    function onAddTrip()
     {
-        location.href = '<%=path%>/';
+        $('#tripid').val('');
+        $('#name').val('');
+        $('#tripModal').modal('show');
     }
+
+    function onEditTrip(tripid,tripname)
+    {
+        $('#tripid').val(tripid);
+        $('#name').val(tripname);
+        $('#tripModal').modal('show');
+    }
+
+    function onDelTrip(tripid)
+    {
+        location.href= '<%=path%>/trip/del/'+tripid;
+    }
+
 </script>
