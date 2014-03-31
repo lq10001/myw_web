@@ -2,9 +2,16 @@ package com.ly.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.upload.UploadFile;
 import com.ly.Global;
 import com.ly.model.User;
 import com.ly.tool.Dwz;
+import net.coobird.thumbnailator.Thumbnails;
+import org.nutz.lang.Files;
+import org.nutz.lang.random.StringGenerator;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class UserController extends Controller {
@@ -28,11 +35,26 @@ public class UserController extends Controller {
         render("user.jsp");
     }
 
-    public void save()
-    {
+    public void save() throws IOException {
+
+        UploadFile uploadFile = getFile();
         User user = getModel(User.class);
+
+        if (uploadFile != null)
+        {
+            File f = uploadFile.getFile();
+
+            String type = Files.getSuffixName(f);
+            StringGenerator sg = new StringGenerator(5);
+            String name = sg.next() + System.currentTimeMillis();
+            String filename200 = name + "_200_200." + type;
+
+            Thumbnails.of(f).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + filename200);
+
+        }
+
         boolean ok = User.userDao.saveOrUpdate(user);
-        renderJson(Dwz.jsonRtn(ok,"user","closeCurrent"));
+        redirect("/my");
     }
 
 
@@ -42,6 +64,7 @@ public class UserController extends Controller {
         CacheKit.removeAll("user");
         renderJson(Dwz.jsonRtn(ok,"user",""));
     }
+
 
 
     public void register()

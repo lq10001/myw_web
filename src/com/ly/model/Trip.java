@@ -40,6 +40,16 @@ public class Trip extends Model<Trip> {
         return tripDao.find(sb.toString());
     }
 
+    public List<Trip> getListTripHotname(String name)
+    {
+        StringBuffer sb = new StringBuffer("select * from trip where name like ");
+        sb.append("'%");
+        sb.append(name);
+        sb.append("%' limit 40");
+        return tripDao.find(sb.toString());
+
+    }
+
 
     public List<Trip> getListFollowTripByUser(Integer userid)
     {
@@ -71,7 +81,7 @@ public class Trip extends Model<Trip> {
         StringBuffer sb = new StringBuffer();
         sb.append("select * from trip where enddate < '");
         sb.append(df2.format(new Date()));
-        sb.append("' order by love desc,visit desc limit 12 ");
+        sb.append("' order by enddate desc,love desc, visit desc limit 12 ");
         return tripDao.find(sb.toString());
     }
 
@@ -81,7 +91,7 @@ public class Trip extends Model<Trip> {
         StringBuffer sb = new StringBuffer();
         sb.append("select * from trip where enddate >= '");
         sb.append(df2.format(new Date()));
-        sb.append("' order by love desc,visit desc limit 12 ");
+        sb.append("' order by enddate desc,love desc,visit desc limit 12 ");
         return tripDao.find(sb.toString());
     }
 

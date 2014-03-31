@@ -49,7 +49,6 @@ public class TripController extends Controller {
         Object userid = session.getAttribute(Global.USER_ID);
         trip.set("userid",userid);
         trip.set("adddate",new Date());
-        trip.set("type",1);
         System.out.println(trip.get("name"));
         boolean ok = Trip.tripDao.saveOrUpdate(trip);
         if (ok)
@@ -95,6 +94,7 @@ public class TripController extends Controller {
 
         List<Img> listDate = Img.imgDao.getListImgDate(tripid);
         int i = 0;
+        Long dayCount = 1L;
         Date minDate = null;
         List<TripDay> listDay = new LinkedList<TripDay>();
         for (Img img: listDate)
@@ -105,27 +105,27 @@ public class TripController extends Controller {
             {
                 continue;
             }
-            firstDate = tripdate;
+
             SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
             String a1=dateFormat.format(tripdate);
             if (i  < 1)
             {
                 minDate = tripdate;
+                firstDate = tripdate;
                 tripDay.setDay(1L);
                 tripDay.setTripDate(a1);
+                dayCount = 1L;
             }else{
                 // 86400000 =  24*60*60*1000
                 Long day = (tripdate.getTime() - minDate.getTime()) /  86400000;
-                System.out.println(day);
                 tripDay.setDay(day + 1);
                 tripDay.setTripDate(a1);
-
-
+                dayCount = day + 1L;
             }
             listDay.add(tripDay);
-            i++;
         }
         setAttr("list_day",listDay);
+        setAttr("dayCount",dayCount);
         setAttr("firstDate", (firstDate == null ? tripDate  : firstDate));
 
         List<Img> list_img = Img.imgDao.getListImgLoveByTripid(tripid);
@@ -143,6 +143,7 @@ public class TripController extends Controller {
         List<Restaurant> res_list = Restaurant.restaurantDao.getListRestaurantByTrip(tripid);
         setAttr("restaurant_list",res_list);
 
+        i++;
         render("/WEB-INF/index/show.jsp");
     }
 

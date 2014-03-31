@@ -76,9 +76,8 @@ public class IndexController extends Controller {
         Integer hotid = getParaToInt(0);
 
         Hot hot = Hot.hotDao.findById(hotid);
-        List<Img> listImg = Img.imgDao.getListImgByHotname(hot.getStr("name"));
-        System.out.println(listImg);
-        setAttr("list_img",listImg);
+        List<Trip> listTrip = Trip.tripDao.getListTripHotname(hot.getStr("name"));
+        setAttr("list_trip",listTrip);
 
         setAttr("selmenu","mudi");
         render("index/mudiInfo.jsp");
@@ -89,13 +88,11 @@ public class IndexController extends Controller {
     {
         getMenu();
         String name = getPara(0);
-        List<Img> listImg = Img.imgDao.getListImgByHotname(name);
-        System.out.println(listImg);
-        setAttr("list_img",listImg);
+        List<Trip> listTrip = Trip.tripDao.getListTripHotname(name);
+        setAttr("list_trip",listTrip);
 
         setAttr("selmenu","mudi");
         render("index/mudiInfo.jsp");
-
     }
 
     public void down() {
@@ -142,6 +139,7 @@ public class IndexController extends Controller {
     public void my()
     {
         getMenu();
+        setAttr("selmenu","my");
         HttpSession session = getSession();
         Object o_userid = session.getAttribute(Global.USER_ID);
         if (o_userid == null)
@@ -149,8 +147,9 @@ public class IndexController extends Controller {
             this.login();
         }else{
             Integer userid = Integer.parseInt(o_userid.toString());
-
             setAttr("loveCount",Trip.tripDao.getLoveCount(o_userid));
+
+            setAttr("user",User.userDao.findById(o_userid));
 
             Trip trip = Trip.tripDao.getTripVisit(userid);
             setAttr("myVisit",trip.getLong("visit"));
@@ -280,10 +279,16 @@ public class IndexController extends Controller {
         getMenu();
         setAttr("selmenu","enjoy");
 
-        List<Img> list_img = Img.imgDao.getListImgLove();
+        List<Img> list_img = Img.imgDao.getListImgLove(0);
         setAttr("list_img",list_img);
         render("index/enjoy.jsp");
+    }
 
+    public void enjoyJson()
+    {
+        int pageNum = getParaToInt(0);
+        List<Img> list_img = Img.imgDao.getListImgLove(pageNum);
+        renderJson(list_img);
     }
 
 

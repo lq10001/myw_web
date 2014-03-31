@@ -63,7 +63,7 @@ public class Img extends Model<Img> {
 
     public List<Img> getListImgByHotname(String name)
     {
-        StringBuffer sb = new StringBuffer("select * from img where gpsname like ");
+        StringBuffer sb = new StringBuffer("select * from trip where name like ");
         sb.append("'%");
         sb.append(name);
         sb.append("%' limit 20");
@@ -72,12 +72,14 @@ public class Img extends Model<Img> {
 
     }
 
-    public List<Img> getListImgLove()
+    public List<Img> getListImgLove(int pageNum)
     {
-        String sql = "select * from img order by love desc limit 20";
-        return  imgDao.find(sql);
+        StringBuffer sb = new StringBuffer("select * from img order by love desc limit ");
+        sb.append( pageNum * 20);
+        sb.append(",20");
+        System.out.println(sb.toString());
+        return  imgDao.find(sb.toString());
     }
-
 
     public Img getImg(Integer id)
     {
