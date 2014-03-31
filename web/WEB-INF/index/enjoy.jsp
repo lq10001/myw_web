@@ -29,7 +29,7 @@
 
 
 
-
+    <input type="hidden" id="pageNum" value="0"/>
     <div class="container" style="margin-top: -20px;">
 
 
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" id="img_row">
                         <c:forEach var="img" items="${list_img}">
                             <div class="col-md-3">
                                 <a href="<%=path%>/trip/show/${img.tripid}">
@@ -60,7 +60,9 @@
 
                     <div class="row">
                         <div class="col-md-12" style="text-align: center;">
-                            <p>加载更多...</p>
+                            <button type="button" class="btn btn-success btn-xs"  onclick="loadMore()">
+                                加载更多...
+                            </button>
                         </div>
                     </div>
 
@@ -126,6 +128,28 @@
     function onRigister()
     {
         location.href='<%=path%>/register';
+    }
+
+    function loadMore()
+    {
+
+        var pageNum = Number($('#pageNum').val()) + 1;
+        alert(pageNum);
+        $('#pageNum').val(pageNum);
+        $.post("<%=path%>/enjoyJson/"+pageNum,{},
+                function(data){
+                    var rowname = $('#img_row');
+                    $(data).each(function() {
+
+                        var str = '<div class="col-md-3">'
+                                + '<a href="<%=path%>/trip/show/'+this.tripid+'">'
+                                + '<div class="image-box-a">'
+                                + '<img src="<%=path%>'+this.smallimgpath+'"  style=" vertical-align:middle;width: 180px; " alt="">'
+                                +  '</div></a> </div>';
+                        $(str).appendTo(rowname);
+                    })
+
+                },"json");
     }
 </script>
 

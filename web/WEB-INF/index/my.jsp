@@ -22,6 +22,8 @@
     <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
+    <script src="<%=path%>/js/bootstrap3-validation.js"></script>
+
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
 </head>
@@ -43,34 +45,53 @@
                     <!--icon-->
                     <div class="col-md-3">
                         <a href="#" class="thumbnail">
-                            <img src="<%=path%>/img/1.jpg" alt="">
+                            <c:choose>
+                                <c:when test="${user.imgpath == ''}">
+                                    <img src="<%=path%>/img/1.jpg" style="width: 160px;height: 160px;" alt="">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="<%=path%>${user.imgpath}" style="width: 160px;height: 160px;" alt="">
+                                </c:otherwise>
+                            </c:choose>
                         </a>
                     </div>
                     <!--name-->
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <br/>
                         <br/>
                         <span style="font-size: 21px;">
-                            <c:out  value="${sessionScope.name}"/>
+                            <c:out  value="${user.name}"/>
                         </span>
                         <br/>
                         <span>
                             访问 ${myVisit} | 喜欢 <c:out value="${loveCount}"></c:out>
                         </span>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" onclick="onEditUser('${user.id}','${user.info}')">
+                            编辑
+                        </button>
+
 
                     </div>
                     <!--留言-->
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <br/>
                         <br/>
                         <blockquote>
-                            <p>爱生活，爱旅游</p>
+                            <c:choose>
+                                <c:when test="${user.info == ''}">
+                                    <p>爱生活，爱旅游</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>${user.info}</p>
+                                </c:otherwise>
+                            </c:choose>
                         </blockquote>
                     </div>
 
                     <div class="col-md-1">
                         <br/>
                         <br/>
+
                         <button class="btn btn-primary btn-lg" data-toggle="modal" onclick="onAddTrip()">
                             +创建我的行程
                         </button>
@@ -141,7 +162,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-5" style="text-align: right;">
-                                        <button type="button" class="btn btn-success btn-xs" onclick="onEditTrip(${trip.id},'${trip.name}')">
+                                        <button type="button" class="btn btn-success btn-xs" onclick="onEditTrip(${trip.id},'${trip.name}','${trip.type}')">
                                             编辑
                                         </button>
                                         <button type="button" class="btn btn-success btn-xs"  onclick="onDelTrip(${trip.id})">
@@ -192,7 +213,7 @@
 
                                     </div>
                                     <div class="col-md-5" style="text-align: right;">
-                                        <button type="button" class="btn btn-success btn-xs" onclick="onEditTrip(${trip.id},'${trip.name}')">
+                                        <button type="button" class="btn btn-success btn-xs" onclick="onEditTrip(${trip.id},'${trip.name}','${trip.type}')">
                                             编辑
                                         </button>
                                         <button type="button" class="btn btn-success btn-xs"  onclick="onDelTrip(${trip.id})">
@@ -263,31 +284,29 @@
             <form class="form-horizontal" method="post" id="form1" action="<%=path%>/trip/save" role="form">
 
                 <input id="tripid" type="hidden" name="trip.id" value="">
+                <input id="triptype" type="hidden" name="trip.type" value="">
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">创建新的旅程</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8">
-
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="name">旅程名称</label>
-                                <input type="text" name="trip.name" class="form-control" id="name" placeholder="" maxlength="20" check-type="required">
+                                <label for="name" class="col-md-2 control-label">旅程名称</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="trip.name" class="form-control" id="name" placeholder="" check-type="required">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-2">
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary" onclick="onSaveTrip()">保存</button>
                 </div>
 
             </form>
@@ -295,6 +314,47 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- UserModal -->
+<div class="modal fade" id="userModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 600px;height: 400px;">
+        <div class="modal-content">
+            <form class="form-horizontal" method="post" id="userForm" action="<%=path%>/user/save" role="form" enctype="multipart/form-data">
+                <input type="hidden" id="userid" name="user.id"/>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">修改用户信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="info" class="col-md-2 control-label">签名</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="user.info" class="form-control" id="info" placeholder="" check-type="required">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="imgpath" class="col-md-2 control-label">头像图片</label>
+                                <div class="col-md-6">
+                                    <input type="file" name="user.imgpath" class="form-control" id="imgpath" placeholder="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" onclick="onSaveUser()" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 
 <jsp:include page="foot.jsp"></jsp:include>
@@ -314,19 +374,52 @@
     {
         $('#tripid').val('');
         $('#name').val('');
+        $('#triptype').val(1);
+        $("#form1").validation();
         $('#tripModal').modal('show');
     }
 
-    function onEditTrip(tripid,tripname)
+    function onEditTrip(tripid,tripname,type)
     {
         $('#tripid').val(tripid);
         $('#name').val(tripname);
+        $('#triptype').val(type);
+        $("#form1").validation();
         $('#tripModal').modal('show');
+    }
+
+    function onSaveTrip()
+    {
+        if ($("#form1").valid()==false){
+            $("#error-text").text("填写信息不完整。")
+            return false;
+        }else{
+            $("#form1").submit();
+        }
     }
 
     function onDelTrip(tripid)
     {
         location.href= '<%=path%>/trip/del/'+tripid;
+    }
+
+    function onEditUser(userid,memo)
+    {
+        $('#userid').val(userid);
+        $('#imgpath').val('');
+        $('#info').val(memo);
+        $("#userForm").validation();
+        $('#userModel').modal('show');
+    }
+
+    function onSaveUser()
+    {
+        if ($("#userForm").valid()==false){
+            $("#error-text").text("填写信息不完整。")
+            return false;
+        }else{
+            $("#userForm").submit();
+        }
     }
 
 </script>

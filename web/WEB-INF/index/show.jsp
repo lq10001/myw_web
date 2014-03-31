@@ -59,7 +59,7 @@
                         <p>${firstDate}</p>
                     </div>
                     <div class="col-md-2">
-                        <p> ${trip.days + 1}天</p>
+                        <p> ${dayCount}天</p>
                     </div>
                     <div class="col-md-5">
                         <p>浏览${trip.visit + 1}次</p>
@@ -298,7 +298,7 @@
                             <p>${guide.tripdate} &nbsp;${guide.content} </p>
                             <p>姓名：${guide.name} </p>
                             <p>电话：${guide.phone}</p>
-                            <p>电话：${guide.price}</p>
+                            <p>价格：${guide.price}</p>
                         </li>
                     </c:forEach>
                 </ul>

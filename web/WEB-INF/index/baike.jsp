@@ -26,7 +26,6 @@
 
     <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 
-    <link href="<%=path%>/css/carousel.css" rel="stylesheet">
 </head>
 
 <body>

@@ -84,23 +84,32 @@
 
     <div class="row">
         <c:choose>
-            <c:when test="${fn:length(list_img) > 0}">
+            <c:when test="${fn:length(list_trip) > 0}">
 
-                <c:forEach var="img" items="${list_img}">
-                    <div class="col-xs-6 col-md-3">
-                        <a href="<%=path%>/trip/show/${img.tripid}">
-                            <div class="image-box">
+                <c:forEach var="trip" items="${list_trip}">
+                    <div class="col-md-3">
+                        <div class="image-box">
+                            <a href="<%=path%>/trip/show/${trip.id}">
+
                                 <c:choose>
-                                    <c:when test="${img.imgpath == ''}">
+                                    <c:when test="${trip.defaultimg == ''}">
                                         <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 260px; " alt="">
                                     </c:when>
                                     <c:otherwise>
-                                        <img src="<%=path%>${img.imgpath}"  style=" vertical-align:middle;width: 260px; " alt="">
+                                        <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 260px; " alt="">
                                     </c:otherwise>
                                 </c:choose>
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <a href="<%=path%>/trip/show/${trip.id}">
+                                    <label>${trip.name}</label>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                     </div>
+
                 </c:forEach>
 
             </c:when>
