@@ -49,7 +49,10 @@ public class TripController extends Controller {
         Object userid = session.getAttribute(Global.USER_ID);
         trip.set("userid",userid);
         trip.set("adddate",new Date());
-        System.out.println(trip.get("name"));
+        if (id == null)
+        {
+            trip.set("defaultimg","/upload/default.jpg");
+        }
         boolean ok = Trip.tripDao.saveOrUpdate(trip);
         if (ok)
         {
@@ -123,6 +126,7 @@ public class TripController extends Controller {
                 dayCount = day + 1L;
             }
             listDay.add(tripDay);
+            i++;
         }
         setAttr("list_day",listDay);
         setAttr("dayCount",dayCount);

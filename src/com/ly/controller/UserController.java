@@ -50,7 +50,7 @@ public class UserController extends Controller {
             String filename200 = name + "_200_200." + type;
 
             Thumbnails.of(f).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + filename200);
-
+            user.set("imgpath","/upload/"+filename200);
         }
 
         boolean ok = User.userDao.saveOrUpdate(user);

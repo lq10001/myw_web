@@ -61,7 +61,16 @@ public class Trip extends Model<Trip> {
 
     public List<Trip> getListTripTop10()
     {
-        return tripDao.find("select * from trip order by visit desc  LIMIT 12 ");
+        return tripDao.find("select * from trip order by visit desc  LIMIT 20 ");
+    }
+
+    public List<Trip> getListTripByLove(int pageNum)
+    {
+        StringBuffer sb = new StringBuffer("select * from trip order by love desc limit ");
+        sb.append( pageNum * 20);
+        sb.append(",20");
+        System.out.println(sb.toString());
+        return  tripDao.find(sb.toString());
     }
 
     public List<Trip> getListTripHot()

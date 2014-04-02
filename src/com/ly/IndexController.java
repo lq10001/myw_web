@@ -22,11 +22,19 @@ public class IndexController extends Controller {
 
     public void index() {
         getMenu();
-        List<Trip> listTrip = Trip.tripDao.getListTripTop10();
+        List<Trip> listTrip = Trip.tripDao.getListTripByLove(0);
         setAttr("list_trip",listTrip);
 
         render("index/index.jsp");
 
+    }
+
+    public void tripJson()
+    {
+        int pageNum = getParaToInt(0);
+        List<Trip> listTrip = Trip.tripDao.getListTripByLove(pageNum);
+        System.out.println(listTrip.size());
+        renderJson(listTrip.size() == 0 ? 0 : listTrip);
     }
 
     public void mudi() {
