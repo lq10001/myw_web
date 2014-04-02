@@ -52,22 +52,22 @@
     <div class="row">
 
         <div class="col-md-8">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h3>行程名称：${trip.name}</h3>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <p>${firstDate}</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <p> ${dayCount}天</p>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <p>浏览${trip.visit + 1}次</p>
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-6" style="text-align: right">
+            <div class="col-md-4" style="text-align: right">
                 <br/>
                 <br/>
                 <button id="btn_love_trip" class="btn btn-primary btn-lg" onclick="onTripLove(${trip.id})">

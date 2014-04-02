@@ -27,10 +27,11 @@
 
 <jsp:include page="top.jsp"></jsp:include>
 
+<input type="hidden" id="pageNum" value="0"/>
 
 
-    <!-- Carousel
- ================================================== -->
+<!-- Carousel
+================================================== -->
     <div id="myCarousel" class="carousel slide" style="margin-top:-20px;" data-ride="carousel">
 
         <!-- Indicators -->
@@ -101,19 +102,12 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div id="trip_row" class="row">
                         <c:forEach var="trip" items="${list_trip}">
                             <div class="col-xs-6 col-md-3">
                                 <a href="<%=path%>/trip/show/${trip.id}">
                                     <div class="image-box-a">
-                                        <c:choose>
-                                            <c:when test="${trip.defaultimg == ''}">
-                                                <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
-                                        </c:when>
-                                            <c:otherwise>
-                                                <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
                                     </div>
                                     <p style="text-align: center;">${trip.name}</p>
                                 </a>
@@ -122,31 +116,12 @@
                     </div><!--/row-->
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <h2>热门城市</h2>
+                        <div class="col-md-12" style="text-align: center;">
+                            <button type="button" class="btn btn-success btn-xs"  onclick="loadMore()">
+                                加载更多...
+                            </button>
                         </div>
                     </div>
-
-
-                    <div class="row">
-                    <c:forEach var="trip" items="${list_trip}">
-                        <div class="col-xs-6 col-md-3">
-                            <a href="<%=path%>/trip/show/${trip.id}">
-                                <div class="image-box-a">
-                                    <c:choose>
-                                        <c:when test="${trip.defaultimg == ''}">
-                                            <img src="<%=path%>/upload/default.jpg"  style=" vertical-align:middle;width: 180px; " alt="">
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="<%=path%>${trip.defaultimg}"  style=" vertical-align:middle;width: 180px; " alt="">
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                                <p style="text-align: center;">${trip.name}</p>
-                            </a>
-                        </div>
-                    </c:forEach>
-                </div><!--/row-->
 
 
 
@@ -163,9 +138,6 @@
                             <img src="<%=path%>/img/21.jpg" alt="">
                         </div>
                     </div>
-
-
-
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -204,15 +176,32 @@
 
 
 <script type="text/javascript">
-    function onLogin()
+    function loadMore()
     {
-        location.href='<%=path%>/login';
+        var pageNum = Number($('#pageNum').val()) + 1;
+        alert(pageNum);
+        $('#pageNum').val(pageNum);
+        $.post("<%=path%>/tripJson/"+pageNum,{},
+                function(data){
+                    alert(data);
+                    var rowname = $('#trip_row');
+                    if(data == 0)
+                    {
+                        return;
+                    }
+                    $(data).each(function() {
+                        var str = '<div class="col-xs-6 col-md-3">'
+                                + '<a href="<%=path%>/trip/show/'+this.id+'">'
+                                + '<div class="image-box-a">'
+                                + '<img src="<%=path%>'+this.defaultimg+'"  style=" vertical-align:middle;width: 180px; " alt="">'
+                                +  '</div><p style="text-align: center;">'+this.name+'</p> </a> </div>';
+                        $(str).appendTo(rowname);
+
+                    });
+                },"json");
     }
 
-    function onRigister()
-    {
-        location.href='<%=path%>/register';
-    }
+
 </script>
 
 

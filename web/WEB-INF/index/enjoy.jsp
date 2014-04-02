@@ -120,21 +120,10 @@
 
 
 <script type="text/javascript">
-    function onLogin()
-    {
-        location.href='<%=path%>/login';
-    }
-
-    function onRigister()
-    {
-        location.href='<%=path%>/register';
-    }
 
     function loadMore()
     {
-
         var pageNum = Number($('#pageNum').val()) + 1;
-        alert(pageNum);
         $('#pageNum').val(pageNum);
         $.post("<%=path%>/enjoyJson/"+pageNum,{},
                 function(data){
