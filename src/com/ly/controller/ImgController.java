@@ -19,10 +19,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.upload.UploadFile;
 import com.ly.Global;
-import com.ly.model.Hotel;
-import com.ly.model.Img;
-import com.ly.model.ImgLove;
-import com.ly.model.Trip;
+import com.ly.model.*;
 import com.ly.tool.Dwz;
 import com.ly.vo.FileUploadInfo;
 import net.coobird.thumbnailator.Thumbnails;
@@ -139,12 +136,9 @@ public class ImgController extends Controller {
 
             Files.rename(uploadFile1, fileName);
 
-
             String url = "/upload/"+fileName;
             String s_url  = "/upload/"+filename200;
             String url_800 = "/upload/"+filename800;
-
-
 
             Img img = new Img();
             img.set("userid",userid);
@@ -193,9 +187,68 @@ public class ImgController extends Controller {
         sb.append(JSON.toJSONString(fileInfos));
         sb.append("}");
 
-        System.out.println(sb.toString());
-
         renderJson(sb.toString());
+
+    }
+
+    public void delFollow()
+    {
+        int id = getParaToInt("id");
+        Img oldImg = Img.imgDao.findById(id);
+        String str1 = oldImg.get("smallimg2path");
+        String str2 = oldImg.get("imgpath2800");
+        oldImg.set("smallimgpath",str1);
+        oldImg.set("imgpath800",str2);
+        oldImg.set("smallimg2path","");
+        oldImg.set("imgpath2800","");
+
+        Boolean ok = Img.imgDao.saveOrUpdate(oldImg);
+        renderJson(ok ? 1 : 0);
+    }
+
+    public void uploadImg() throws IOException {
+
+        int id = getParaToInt(0);
+
+
+        UploadFile uploadFile = getFile();
+        File f = uploadFile.getFile();
+
+        String type = Files.getSuffixName(f);
+        StringGenerator sg = new StringGenerator(5);
+        String name = sg.next() + System.currentTimeMillis();
+        String filename200 = name + "_200_200." + type;
+        String filename800 = name + "_800_800." + type;
+
+
+        Thumbnails.of(f).size(200,200).toFile(uploadFile.getSaveDirectory() + "/" + filename200);
+        Thumbnails.of(f).size(800,800).toFile(uploadFile.getSaveDirectory() + "/" + filename800);
+        String path2  = "/upload/"+filename200;
+        String path8  = "/upload/"+filename800;
+
+        Img oldImg = Img.imgDao.findById(id);
+        oldImg.set("imgpath2800",path8);
+        oldImg.set("smallimg2path",path2);
+        Boolean ok =   Img.imgDao.saveOrUpdate(oldImg);
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        FileUploadInfo fileInfo = new FileUploadInfo();
+        fileInfo.setName(filename800);
+        fileInfo.setUrl(path8);
+        fileInfo.setThumbnailUrl(path2);
+        fileInfo.setDeleteType("DELETE");
+        fileInfo.setDeleteUrl("");
+        fileInfo.setSize( 10 + "K");
+
+        List<FileUploadInfo> fileInfos = new LinkedList<FileUploadInfo>();
+        fileInfos.add(fileInfo);
+
+    StringBuffer sb = new StringBuffer();
+    sb.append("{\"files\":");
+    sb.append(JSON.toJSONString(fileInfos));
+    sb.append("}");
+
+    renderJson(sb.toString());
 
     }
 
