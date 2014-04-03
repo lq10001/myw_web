@@ -93,6 +93,7 @@
 <script src="<%=path%>/fileupload/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
 <script src="<%=path%>/fileupload/js/jquery.fileupload.js"></script>
+
 <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
 <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 

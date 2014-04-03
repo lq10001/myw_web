@@ -179,11 +179,9 @@
     function loadMore()
     {
         var pageNum = Number($('#pageNum').val()) + 1;
-        alert(pageNum);
         $('#pageNum').val(pageNum);
         $.post("<%=path%>/tripJson/"+pageNum,{},
                 function(data){
-                    alert(data);
                     var rowname = $('#trip_row');
                     if(data == 0)
                     {

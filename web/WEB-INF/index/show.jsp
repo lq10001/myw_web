@@ -22,9 +22,15 @@
     <link type="text/css" rel="stylesheet" href="<%=path%>/css/bootstrap.min.css"  >
     <link type="text/css" rel="stylesheet" href="<%=path%>/bootstrap-select/bootstrap-select.css">
 
-    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<%=path%>/fileupload/css/jquery.fileupload.css">
 
+
+    <script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.min.js"></script>
+    <script src="<%=path%>/fileupload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="<%=path%>/fileupload/js/jquery.iframe-transport.js"></script>
+
+    <script src="<%=path%>/fileupload/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="<%=path%>/js/bootstrap.min.js"></script>
 
     <script src="<%=path%>/js/bootstrap3-validation.js"></script>
 
@@ -123,7 +129,19 @@
                         <div id="img_${img.id}" class="row">
                             <div class="col col-md-12">
                                 <div class="thumbnail">
-                                    <img src="<%=path%>${img.imgpath800}" alt="">
+
+                                     <img id="origin_img_${img.id}" src="<%=path%>${img.imgpath800}" alt="">
+
+
+
+                                        <img  id="follow_img_${img.id}" src="<%=path%>${img.imgpath2800}"
+                                        <c:if test="${img.imgpath2800 == ''}">
+                                              style="display:none;"
+                                        </c:if>
+                                              alt="">
+
+
+
 
                                     <div class="row" style="margin-left: 15px;">
                                         <div class="col-md-12">
@@ -142,8 +160,17 @@
                                     </div>
                                     <div class="row" style="margin-left: 15px;">
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" style="text-align: left;">
+                                            <c:if test="${userid == trip.userid && trip.type == 2}">
 
+                                            <span class="btn btn-success btn-xs fileinput-button" style="margin-top: 3px;" onclick="onUploadImg(${img.id})">
+                                                    <span>上传照片...</span>
+                                                    <input id="fileupload_${img.id}" type="file">
+                                             </span>
+                                                <button type="button" class="btn btn-success btn-xs" style="margin-top: 3px;" onclick="onDelFollowImg(${img.id},'${img.imgpath2800}')">
+                                                        删除Follow图片
+                                                </button>
+                                            </c:if>
                                         </div>
 
                                         <div class="col-md-6" style="text-align: right;">
@@ -317,7 +344,7 @@
         <!----------------------------------------------------------行程信息- --------------------------------------------->
         <div class="col-md-4">
             <h3 style="margin-top:0px;">
-             线路日程( ${trip.days + 1}天 )
+             线路日程( ${dayCount}天 )
             </h3>
             <div class="thumbnail">
                 <c:forEach items="${list_day}" var="day">
@@ -342,7 +369,7 @@
                 <form class="form-horizontal" method="post" id="flightForm" action="<%=path%>/flight/save" role="form">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">添加航班信息</h4>
+                        <h4 class="modal-title">添加航班信息</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -850,14 +877,33 @@
                             });
 
                     },"json");
-
         }
-
 
 
         function onUploadFile()
         {
             location.href = '<%=path%>/upload';
+        }
+
+        function onUploadImg(imgId)
+        {
+            var name = '#fileupload_'+imgId;
+            var imgName = '#follow_img_'+imgId;
+            $(name).fileupload({
+                url: '<%=path%>/img/uploadImg/'+imgId,
+                dataType: 'json',
+                done: function (e, data) {
+                    $.each(data.result.files, function (index, file) {
+                        $(imgName).css('display','block');
+                        $(imgName).attr("src",'<%=path%>'+file.url);
+                    });
+                },
+                progressall: function (e, data) {
+                }
+            }).prop('disabled', !$.support.fileInput)
+                    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+
         }
 
         function onFollowTrip(tripid)
@@ -875,6 +921,23 @@
                         var divName = "#img_"+imgId;
                         $(divName).remove();
                     },"json");
+        }
+
+        function onDelFollowImg(imgId,followImgUrl)
+        {
+            if(followImgUrl == '')
+            {
+                onDelImg(imgId);
+            }else{
+                $.post("<%=path%>/img/delFollow", { id: imgId },
+                        function(data){
+                            if(data == 1)
+                            {
+                                var divName = "#img_"+imgId;
+                                $(divName).remove();
+                            }
+                        },"json");
+            }
         }
 
         function onDefaultImg(imgId)
