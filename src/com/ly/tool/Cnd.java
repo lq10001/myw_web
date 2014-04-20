@@ -2,8 +2,8 @@ package com.ly.tool;
 
 
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.TableInfo;
-import com.jfinal.plugin.activerecord.TableInfoMapping;
+import com.jfinal.plugin.activerecord.Table;
+import com.jfinal.plugin.activerecord.TableMapping;
 
 import java.util.Map;
 import java.util.Set;
@@ -16,11 +16,11 @@ public class Cnd {
           {
               return isCnd;
           }
-          sb.append(" from ").append(TableInfoMapping.me().getTableInfo(model.getClass()).getTableName()).append(" where 1=1 ");
+          sb.append(" from ").append(TableMapping.me().getTable(model.getClass()).getName()).append(" where 1=1 ");
 
           final int prime = 31;
           int result = 1;
-          TableInfo tableinfo = TableInfoMapping.me().getTableInfo(model.getClass());
+          Table tableinfo = TableMapping.me().getTable(model.getClass());
 
 
           Set<Map.Entry<String, Object>> attrsEntrySet = model.getAttrsEntrySet();
@@ -34,7 +34,7 @@ public class Cnd {
               {
                   continue;
               }else{
-                  Class<?> clazz = tableinfo.getColType(key);
+                  Class<?> clazz = tableinfo.getColumnType(key);
                   if (clazz == Integer.class
                       || clazz == Short.class
                       || clazz == Long.class
