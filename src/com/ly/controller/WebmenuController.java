@@ -14,7 +14,6 @@ public class WebmenuController extends Controller {
         Webmenu menu= getModel(Webmenu.class);
         setAttr("page", Webmenu.webmenuDao.getListWebmenu(getParaToInt("pageNum", 1), getParaToInt("numPerPage",20),menu));
         setAttr("webmenu", menu);
-        render("user_list.jsp");
         render("webmenu_list.jsp");
     }
 
