@@ -1,5 +1,19 @@
 #慕游网
 
+公众号：全栈程序员之路
+![输入图片说明](https://mp.weixin.qq.com/mp/qrcode?scene=10000004&size=102&__biz=MzIzMTE0NTE5Mg==&mid=2651421365&idx=1&sn=ec2b310f1888fca3560ba504af0077f5&send_time= "在这里输入图片标题")
+
+产品预览图：
+1 首页
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212233_a815d2bf_3018.png "在这里输入图片标题")
+2 行程
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212247_8699a076_3018.png "在这里输入图片标题")
+3 我的主页
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212300_c37e728b_3018.png "在这里输入图片标题")
+4 图片上传
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212311_c1f57006_3018.png "在这里输入图片标题")
+
+
 ## 产品定位
 来一场说走就说的旅行吧，我们为你精选了景点，线路，酒店，机票等，记录你探索世界的轨迹，分享旅途中的点点滴滴。
 
@@ -31,12 +45,3 @@
 1. 图片存储这些，放到七牛，又拍云等第三方平台上，前期专注前端开发，
 2. 图片的缩放/解析等，使用第三方平台接口。
 
-产品预览图：
-1 首页
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212233_a815d2bf_3018.png "在这里输入图片标题")
-2 行程
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212247_8699a076_3018.png "在这里输入图片标题")
-3 我的主页
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212300_c37e728b_3018.png "在这里输入图片标题")
-4 图片上传
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0715/212311_c1f57006_3018.png "在这里输入图片标题")
